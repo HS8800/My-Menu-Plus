@@ -1,0 +1,111 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Navigation.master.cs" Inherits="My_Menu_Plus.Navigation" %>
+
+
+   
+<%: Styles.Render("~/bundles/DefaultStyles") %>
+<%: Scripts.Render("~/bundles/Jquery") %>
+
+
+<div id="navbar" class="select-disable sticky">
+    <li id="navs">
+        <!-- <a href="#">Page 1</a>
+        <a href="#">Page 2</a>
+        <a href="#">Page 3</a> -->
+    </li>
+    <div id="nav-icon">
+        <div id="icon-svg-container">
+            <div class="custom-logo" style="background-image: url('<%=ResolveClientUrl("~/Media/Logo.png")%>');"></div>
+        </div>
+    </div>
+    <div id="nav-menu">
+        <div class="nav-button btn-effect" id="btn-login">
+            <svg id="login-icon"
+                 width="1em"
+                 height="1em"
+                 viewBox="0 0 16 16"
+                 class="bi bi-house"
+                 fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke="white"
+                      stroke-width="1.2"
+                      fill-rule="evenodd"
+                      d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                <path stroke="white"
+                      stroke-width="1.2"
+                      fill-rule="evenodd"
+                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+            </svg>
+            <asp:Label runat="server" id="loginText" Text="Log in"></asp:Label>
+        </div>
+    </div>
+</div>
+
+<div id="notification-container"></div>
+
+<div id="login-popup">
+        <form id="loginForm" runat="server">
+
+            <button id="login-close">×</button>
+
+            <div id="login-top">                                       
+                <div class="custom-logo lg-logo" id="login-logo" style="background-image: url('<%=ResolveClientUrl("~/Media/Logo-Dark.png")%>')"></div>
+                <span id="login-message">Please Login To Continue</span>
+            </div>
+
+            <asp:TextBox runat="server" id="loginEmail" type="email" placeholder="Enter Your Email" Required></asp:TextBox>
+            <asp:TextBox runat="server" id="loginPassword" type="password" placeholder="Enter Password" Required></asp:TextBox>
+        
+            <span id="login-forgot">Forgot Password</span>
+            <asp:Button id="btnLogin" class="btn btn-login" runat="server" Text="Log in" OnClick="btnLogin_Click" ValidationGroup="btnLogin" />
+  
+        </form>
+</div>
+
+<asp:ContentPlaceHolder ID="pageContent" runat="server"></asp:ContentPlaceHolder>
+
+<footer>
+    <div>
+        <div id="social-text">Why not share you experience</div>
+        <div class="social-container">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-instagram"></a>
+        </div>
+    </div>
+    <div>
+
+        <div>
+            <div class="footer-icon">
+                <span>My Menu Plus</span>
+                <div class="icon-svg-container">
+                    <img class="icon-svg" src="@Url.Content("~/Media/logo.svg")" />
+                </div>
+            </div>
+            <p id="footer-desc">My Menu Plus was made by Harrison Smith to provide a digital alternative that aims to streamline the traditional menu by providing modern features not achievable on a paper-based format.</p>
+        </div>
+
+        <div>
+            <h3>Heading 1</h3>
+            <ul class="footer-list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Heading 2</h3>
+            <ul class="footer-list">
+                <li>Item 4</li>
+                <li>Item 5</li>
+                <li>Item 6</li>
+            </ul>
+        </div>
+
+    </div>
+</footer>
+
+<%: Scripts.Render("~/bundles/Notifications") %>
+<%: Scripts.Render("~/bundles/Login") %>
+
