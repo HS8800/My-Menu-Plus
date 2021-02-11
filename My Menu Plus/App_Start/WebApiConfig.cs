@@ -10,7 +10,7 @@ namespace My_Menu_Plus
     {
         public static void Register(HttpConfiguration config)
         {
-            //Send API responses as JSON
+            //Send API responses as JSON.
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             //API route
