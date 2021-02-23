@@ -36,12 +36,10 @@
 	padding: 10px 15px;
 	min-height: 50px;
 	font-size: 16px;
-	background-color: #f2f2f2;
+	color: #495057;
 }
 
-.loginControls > input::placeholder, .formDuelField > input::placeholder {
-	color: #cbcbcb;
-}
+
 
 .loginControls > label {
 	width: 70%;
@@ -56,7 +54,7 @@
 
 
 #login-message {
-	color: #d7d7d7;
+	color: #212529;
 	display: block;
 	margin-bottom: 30px;
 	font-size: 16px;
@@ -105,7 +103,7 @@
 	outline: none;
 	border: none;
 	cursor: pointer;
-	color: #d7d7d7;
+	color: #212529;
 }
 
 .formDuelField {
@@ -135,7 +133,7 @@
 
 .form-message {
 	display: block;
-	color: #d7d7d7;
+	color: #212529;
 	cursor:pointer;	
 }
 

@@ -5,19 +5,19 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 
-namespace My_Menu_Plus.Helpers
+namespace MyMenuPlus.Helpers
 {
     public class MailHelper
     {
 
-        public static void verificationEmail(string toEmail) {
+        public static (bool success, string details) welcomeEmail(string toEmail) {
             try
             {
 
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("noreply@mymenuplus.com");
                 message.To.Add(new MailAddress(toEmail));
-                message.Subject = "Verify";
+                message.Subject = "Welcome to MyMenuPlus";
                 message.IsBodyHtml = true;
                 message.Body = @"
 
@@ -116,12 +116,16 @@ namespace My_Menu_Plus.Helpers
                     smtp.Send(message);
                 }
 
-
+                return (true, "email sent");
             }
             catch (Exception err)
             {
                 Debug.WriteLine(err);
+                return (false, "email failed to send");
             }
+
+
+            
         }
 
     }

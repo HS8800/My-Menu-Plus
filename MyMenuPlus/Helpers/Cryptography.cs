@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 
-namespace My_Menu_Plus.Helpers
+namespace MyMenuPlus.Helpers
 {
     internal sealed class Cryptography
     {
