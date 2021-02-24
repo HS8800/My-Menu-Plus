@@ -17,16 +17,6 @@ function scale() {
 scale();
 window.addEventListener("resize", scale);
 
-$("#btn-show").click(function () {
-  if ($("#main-description").height() == 70) {
-    $("#main-description").animate({
-      height: $("#main-description").get(0).scrollHeight,
-    });
-  } else {
-    $("#main-description").animate({ height: "70px" });
-  }
-});
-
 
 //Scroll to menu section
 $("#select-scroll > div").click(function () {  

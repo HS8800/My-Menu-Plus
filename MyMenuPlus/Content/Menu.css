@@ -9,7 +9,7 @@ body {
 
 #main-top {
     display: flex;
-    padding: 50px 180px 50px 180px;
+    padding: 50px 180px 50px 50px;
     max-width: 1200px;
     margin: auto;
     position: relative;

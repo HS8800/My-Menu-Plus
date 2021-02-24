@@ -74,24 +74,12 @@
     max-width: 1000px;
   }
 
-  #main-scale{   
-    min-height: 416px;
-  }
-
   #main-content {
    
     border-radius: 5px;
     padding: 20px 20px 0px 20px;
   }
 
-  #main-description{
-    height: 70px;
-    overflow: hidden;
-  }
-
-  #btn-show{   
-    display: block;
-  }
 
 }
 
