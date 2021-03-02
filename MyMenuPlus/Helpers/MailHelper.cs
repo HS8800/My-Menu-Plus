@@ -10,6 +10,12 @@ namespace MyMenuPlus.Helpers
     public class MailHelper
     {
 
+
+        /// <summary>
+        /// Send a welcome email
+        /// </summary>
+        /// <param name="toEmail">string based email address of recipient</param>
+        /// <returns>bool success, string details</returns>
         public static (bool success, string details) welcomeEmail(string toEmail) {
             try
             {

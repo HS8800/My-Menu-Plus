@@ -10,7 +10,14 @@ namespace MyMenuPlus.Helpers
 {
     internal sealed class AccountHelper
     {
- 
+        /// <summary>
+        /// Create new account
+        /// </summary>
+        /// <param name="firstname">string of account firstname</param>
+        /// <param name="secondname">string of account secondname</param>
+        /// <param name="email">string of associated email</param>
+        /// <param name="password">string of raw plain text password</param>
+        /// <returns>bool success, string details</returns>
         internal static (bool success,string details) Register(string firstname, string secondname, string email, string password) {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -43,7 +50,12 @@ namespace MyMenuPlus.Helpers
 
         }
 
-
+        /// <summary>
+        /// Attempt to login with supplied credentials
+        /// </summary>
+        /// <param name="email">string of login email</param>
+        /// <param name="rawPassword">string of raw plain text password</param>
+        /// <returns>bool success, string details</returns>
         internal static bool Login(string email,string rawPassword)
         {
            
