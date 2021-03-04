@@ -5,6 +5,11 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+input, textarea {
+    font-family: sans-serif;
+    font-family: "Poppins", sans-serif;
+}
+
 /* --------------------------------------Top Menu--------------------------------- */
 
 #main-top {

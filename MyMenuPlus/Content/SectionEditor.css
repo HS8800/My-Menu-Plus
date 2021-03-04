@@ -1,4 +1,7 @@
-﻿.editor-section {
+﻿
+/*Generic Editor*/
+
+.editor-section {
     min-height: 300px;
     margin: 50px;
     display: flex;
@@ -14,6 +17,8 @@
     width: -webkit-fill-available;
     background: #dbdbdc;
     border-radius: 0px 5px 5px 0px;
+    padding: 10px;
+    overflow-x: hidden;
 }
 
 .section-item {
@@ -26,6 +31,23 @@
     background-color: white;
 }
 
+input {
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+textarea {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+
+/*Create New Item Button*/
 .editor-add {
     margin-left: 25px;
     margin-bottom: 15px;
@@ -50,3 +72,39 @@
     margin-right: 7px;
     display: block;
 }
+
+
+/*Title Section*/
+.section-title {
+    min-height: 100px;
+    margin: 20px;
+    color:white;     
+}
+
+.section-title > .editor-section-content {
+    background-color: #2b2f31;
+}
+
+.section-title > .editor-section-handle {
+    background-color: #1b2023
+}
+
+.section-title-input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    outline: none;
+    border: none;
+    font-size: 40px;
+    color: white;
+    box-shadow: none;
+}
+
+/*Item Section*/
+
+.editor-section-content > input {
+    display: block;
+    margin-bottom: 10px;
+}
+
