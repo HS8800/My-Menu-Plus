@@ -6,9 +6,9 @@
     <title>Menu</title>
 
 
-  
-    @Styles.Render("~/bundles/MenuStyles")
 
+    @Styles.Render("~/bundles/MenuStyles")
+    @Styles.Render("~/bundles/EditorStyles")
 
 
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
@@ -32,28 +32,35 @@
                     <span>Chinese</span><span>•</span><span>First Tag</span><span>•</span><span>Second Tag</span><span>•</span><span>Deal</span><span>•</span><span>Limited Deal</span>
                 </p>
                 <p id="main-address">50 Broadcroft Avenue HA7 1PF Stanmore</p>
-               
+
             </div>
         </div>
 
     </div>
 
 
-    <div style="
-    min-height: 300px;
-    margin: 50px;
-    display: flex;
-">
-        <div style="
-    width: 83px;
-    background: #0d2f40;
-    border-radius: 5px 0px 0px 5px;
-"></div>
-        <div style="
-    width: -webkit-fill-available;
-    background: #dbdbdc;
-    border-radius: 0px 5px 5px 0px;
-"></div>
+    <div class="editor-section">
+        <div class="editor-section-handle"></div>
+        <div class="editor-section-content">
+
+            <div draggable="true" class="editor-section section-item">
+                <div class="editor-section-handle"></div>
+                <div class="editor-section-content">123</div>
+            </div>
+
+            <div draggable="true" class="editor-section section-item">
+                <div class="editor-section-handle"></div>
+                <div class="editor-section-content">456</div>
+            </div>
+
+            <div draggable="true" class="editor-section section-item">
+                <div class="editor-section-handle"></div>
+                <div class="editor-section-content"></div>
+            </div>
+
+            <div class="editor-add">Add Item</div>
+
+        </div>
     </div>
 
 
@@ -61,5 +68,11 @@
 
 
 
-@Scripts.Render("~/bundles/MenuScripts")
+@*@Scripts.Render("~/bundles/MenuScripts")*@
+@Scripts.Render("~/bundles/MenuEditor")
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
 </html>

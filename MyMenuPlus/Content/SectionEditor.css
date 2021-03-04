@@ -1,0 +1,52 @@
+﻿.editor-section {
+    min-height: 300px;
+    margin: 50px;
+    display: flex;
+}
+
+.editor-section-handle {
+    width: 64px;
+    background: #0d2f40;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.editor-section-content {
+    width: -webkit-fill-available;
+    background: #dbdbdc;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.section-item {
+    min-height: 100px;
+    margin: 20px;
+}
+
+
+.section-item > .editor-section-content {
+    background-color: white;
+}
+
+.editor-add {
+    margin-left: 25px;
+    margin-bottom: 15px;
+    display: flex;
+    line-height: 24px;
+    color: #6b6b6f;
+    cursor:pointer;
+}
+
+.editor-add:hover {
+    opacity:0.7;
+}
+
+.editor-add::before {
+    content: "+";
+    border: 1px solid;
+    width: 20px;
+    line-height: 22px;
+    text-align: center;
+    height: 20px;
+    font-size: 20px;
+    margin-right: 7px;
+    display: block;
+}

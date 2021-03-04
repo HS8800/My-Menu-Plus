@@ -197,6 +197,7 @@
     <Content Include="Content\MainScale.css" />
     <Content Include="Content\Notifications.css" />
     <Content Include="Content\Scroll.css" />
+    <Content Include="Content\SectionEditor.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -209,6 +210,7 @@
     <Content Include="Media\spring.png" />
     <Content Include="Scripts\Form.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Scripts\MenuEditor.js" />
     <Content Include="Scripts\MenuScale.js" />
     <Content Include="Scripts\Notifications.js" />
     <Content Include="Scripts\Scroll.js" />

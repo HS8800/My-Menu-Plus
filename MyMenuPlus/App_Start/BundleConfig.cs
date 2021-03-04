@@ -22,6 +22,13 @@ namespace MyMenuPlus
             bundles.Add(new ScriptBundle("~/bundles/Form").Include(
                       "~/Scripts/Form.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/MenuEditor").Include(
+                      "~/Scripts/MenuEditor.js"));
+            
+
+            bundles.Add(new StyleBundle("~/bundles/EditorStyles").Include(
+                        "~/Content/SectionEditor.css"));
+
             bundles.Add(new StyleBundle("~/bundles/MenuStyles").Include(
                         "~/Content/Scroll.css",
                         "~/Content/Menu.css",
