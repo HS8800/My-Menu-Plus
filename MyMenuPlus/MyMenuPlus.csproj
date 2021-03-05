@@ -208,6 +208,7 @@
     <Content Include="Media\logo.svg" />
     <Content Include="Media\menu2.svg" />
     <Content Include="Media\spring.png" />
+    <Content Include="Scripts\Currency.js" />
     <Content Include="Scripts\Form.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
     <Content Include="Scripts\MenuEditor.js" />

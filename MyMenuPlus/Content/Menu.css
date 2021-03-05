@@ -41,7 +41,7 @@ input, textarea {
     color: rgb(246, 246, 246);
     font-weight: 600;
     margin: 0px;
-    padding-top: 30px;
+    padding-top: 0px;
 }
 
 #main-left > p {

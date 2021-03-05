@@ -21,29 +21,22 @@
     overflow-x: hidden;
 }
 
-.section-item {
-    min-height: 100px;
-    margin: 20px;
-}
-
-
-.section-item > .editor-section-content {
-    background-color: white;
-}
 
 input {
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 3px #ddd;
     border-radius: 4px;
-    font-size: 20px;
+    font-size: 18px;
 }
+
+
 
 textarea {
     max-width: 100%;
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 3px #ddd;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 
@@ -103,8 +96,42 @@ textarea {
 
 /*Item Section*/
 
-.editor-section-content > input {
+.section-item {
+    min-height: 100px;
+    margin: 20px;
+}
+
+
+.section-item > .editor-section-content {
+    background-color: white;
+}
+
+
+.editor-section-content > div > input:not(input[type=checkbox]) {
     display: block;
     margin-bottom: 10px;
 }
+
+.section-item > .editor-section-content {
+    display: flex;
+}
+
+.section-item > .editor-section-content > div:first-child { /*Left of item section*/
+    width: 60%;
+    border-right: 2px #84888a solid;
+    padding-right: 25px;
+}
+
+
+
+.section-item > .editor-section-content > div:last-child { /*Right of item section*/
+    width: 40%;
+    padding-left: 10px;
+    margin-left: 15px;
+}
+
+    .section-item > .editor-section-content > div > input:not(input[type=checkbox]),
+    .section-item > .editor-section-content > div > textarea { /*item section divisions inputs*/
+        width: 100%
+    }
 

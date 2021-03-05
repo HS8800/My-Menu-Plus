@@ -23,7 +23,8 @@ namespace MyMenuPlus
                       "~/Scripts/Form.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/MenuEditor").Include(
-                      "~/Scripts/MenuEditor.js"));
+                      "~/Scripts/MenuEditor.js",
+                      "~/Scripts/Currency.js"));
             
 
             bundles.Add(new StyleBundle("~/bundles/EditorStyles").Include(
