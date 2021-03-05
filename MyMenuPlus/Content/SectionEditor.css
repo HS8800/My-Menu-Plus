@@ -2,7 +2,6 @@
 /*Generic Editor*/
 
 .editor-section {
-    min-height: 300px;
     margin: 50px;
     display: flex;
 }
