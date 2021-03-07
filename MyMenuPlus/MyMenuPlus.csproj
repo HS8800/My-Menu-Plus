@@ -174,6 +174,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\MenuSelectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -198,6 +199,7 @@
     <Content Include="Content\Menu.css" />
     <Content Include="Content\MenuNavbar.css" />
     <Content Include="Content\MainScale.css" />
+    <Content Include="Content\MenuSelection.css" />
     <Content Include="Content\Navbar.css" />
     <Content Include="Content\Notifications.css" />
     <Content Include="Content\Scroll.css" />
@@ -240,10 +242,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Views\Shared\DefaultLayout.cshtml" />
+    <Content Include="Views\Shared\MenuLayout.cshtml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <Content Include="Views\MenuEditor\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\MenuSelection\Index.cshtml" />
+    <Content Include="Views\Shared\MainSiteLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

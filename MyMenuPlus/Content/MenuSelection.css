@@ -1,0 +1,107 @@
+
+
+
+
+#logout-li{
+    margin-top: -10px;
+}
+
+.section-banner{
+    background-color: white;
+    min-height: 200px;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 8%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.section-banner > div:first-child{
+    padding: 50px 0px 0px 100px;   
+}
+
+.section-banner > div:last-child{
+    padding-right: 100px; 
+    padding-bottom: 50px;
+}
+
+
+.section-banner > div > .title-small{/*Title comment*/
+    color:grey;
+    line-height: 10px;
+    display: inline;
+}
+
+.title-banner{
+    font-size: 40px;  
+    text-align: left;
+}
+
+.btn-outline{
+    border: #cc3333 1px solid;
+    background-color: white;
+    color: #cc3333;
+    font-size: 17px;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-weight: 200;
+    width: auto;
+    margin-top: 76px;
+    
+}
+
+#menu-container{
+    justify-content: left;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+
+
+#menu-create-new > div:first-child{ /*Quick start text*/
+    margin-top: 47px;
+}
+
+#menu-create-new > div:nth-child(2){/*Quick start content text*/
+    padding: 0px 20px;
+}
+
+
+@media only screen and (max-width: 845px) {
+    .section-banner{
+        flex-direction: column;
+        
+    }
+
+    #btn-banner-create-new{
+        margin: 20px 0px 10px 99px;
+    }
+
+    .section-banner > div{
+        width: 100%;
+    }
+
+
+}
+
+
+@media only screen and (max-width: 628px) {
+ 
+    .section-banner > div:first-child {
+        padding: 50px 0px 0px 0px;
+    }
+
+    .section-banner > div:first-child > div{
+        text-align: center;
+    }
+
+
+    .section-banner > div{
+        text-align: center;
+        padding: 0x;
+    }
+
+    #btn-banner-create-new {
+        margin: 20px auto
+    }
+
+}

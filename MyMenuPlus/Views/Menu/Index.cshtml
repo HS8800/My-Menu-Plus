@@ -1,6 +1,7 @@
-﻿@*@{
-        ViewBag.Title = "Home Page";
-    }*@
+﻿@{
+    Layout = "~/Views/Shared/MenuLayout.cshtml";
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,8 @@
     <title>Menu</title>
 
 
-  
-    @Styles.Render("~/bundles/MenuStyles")
+
+    @Styles.Render("~/bundles/MenuPageStyles")
 
 
 
@@ -35,7 +36,7 @@
                     <span>Chinese</span><span>•</span><span>First Tag</span><span>•</span><span>Second Tag</span><span>•</span><span>Deal</span><span>•</span><span>Limited Deal</span>
                 </p>
                 <p id="main-address">50 Broadcroft Avenue HA7 1PF Stanmore</p>
-               
+
             </div>
         </div>
 
@@ -175,5 +176,5 @@
 
 
 
-@Scripts.Render("~/bundles/MenuScripts")
+@Scripts.Render("~/bundles/MenuPageScripts")
 </html>

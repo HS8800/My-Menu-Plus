@@ -13,27 +13,10 @@
     color: white;
 }
 
-
-#nav > ul > li > a, #nav > ul > li > a:link, #nav > ul > li > a:visited {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
+#login-show {
+    cursor:pointer
 }
 
-    #nav > ul > li > a:hover {
-        opacity: 0.7;
-    }
-
-#nav > ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-#nav > ul > li {
-    display: inline;
-    padding: 10px;
-}
 
 
 
@@ -112,12 +95,10 @@
     line-height: 55px;
 }
 
-#nav {
-    margin: 20px;
-}
+
 
 .logo {
-    background-image: url('./logo.svg');
+    background-image: url('../Media/logo.svg');
     background-repeat: no-repeat;
     background-size: contain;
     height: 51px;
@@ -146,9 +127,7 @@
     margin-left: 546px;
 }
 
-.right {
-    float: right;
-}
+
 
 .section-title {
     font-size: 27px;

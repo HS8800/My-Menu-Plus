@@ -1,25 +1,48 @@
 ﻿
-a, a:link, a:visited {
+
+#nav > ul > li > a, #nav > ul > li > a:link, #nav > ul > li > a:visited {
     color: white;
     text-decoration: none;
     font-weight: 600;
 }
 
-    a:hover {
+    #nav > ul > li > a:hover {
         opacity: 0.7;
     }
 
-ul {
+#nav > ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-li {
+#nav > ul > li:not(.right-nav) {
     display: inline;
-    padding: 10px;
 }
 
-#nav {
-    margin: 20px;
+#nav > ul > li {
+    padding: 10px; 
 }
+
+
+
+.right-nav {
+    float: right;
+}
+
+
+#nav {
+    background-color: #15191b;
+    padding: 20px;
+    margin: 0px;
+}
+
+#logout-li, #login-show {
+    margin-top: -10px;
+    display:none;
+}
+
+#logout-li {
+    display: block
+}
+

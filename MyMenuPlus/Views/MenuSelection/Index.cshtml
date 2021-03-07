@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = "~/Views/Shared/MainSiteLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    @Styles.Render("~/bundles/MenuSelectionPageStyles")
+    
+
+</head>
+<body>
+
+
+
+
+
+    <div class="section-banner">
+
+        <div>
+            <div class="section-title title-bold title-banner">My Menus</div>
+            <div class="section-title title-small">Select a menu to manage, or create a new one</div>
+        </div>
+
+        <div>
+            <button class="btn btn-outline" id="btn-banner-create-new">Create New Menu</button>
+
+        </div>
+    </div>
+
+    <div class="flex-container" id="menu-container">
+
+        <div data-aos="fade-up" data-aos-delay="100"></div>
+        <div data-aos="fade-up" data-aos-delay="200"></div>
+
+        <div data-aos="fade-up" data-aos-delay="300" id="menu-create-new">
+            <div class="section-title title-small">Quick Start</div>
+            <div class="section-title title-bold">Create a new menu for your business</div>
+            <button class="btn btn-article">Get Started</button>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/MenuSelectionPageScripts")
+
+    <script>
+        AOS.init();
+    </script>
+
+    @Html.AntiForgeryToken()
+</body>
+</html>
