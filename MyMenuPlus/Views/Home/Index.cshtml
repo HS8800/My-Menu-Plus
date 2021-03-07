@@ -1,0 +1,227 @@
+﻿
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    @Styles.Render("~/bundles/AosStyles")
+    @Styles.Render("~/bundles/Home")
+
+    @Scripts.Render("~/bundles/Aos")
+
+
+</head>
+<body>
+
+
+    <div id="notification-container"></div>
+    <div id="login-popup">
+
+        <form id="login-form" class="loginControls">
+            <button class="login-close">×</button>
+            <div>
+                <div class="custom-logo lg-logo" style="background-image: url('@Url.Content("~/Media/Logo-Dark.png")')"></div>
+                <span id="login-message">Please Login To Continue</span>
+            </div>
+
+            <input id="login-email" type="email" placeholder="Enter Your Email" Required />
+            <input id="login-password" type="password" placeholder="Enter Password" Required />
+
+            <span class="errorDisplay"></span>
+            <span id="login-forgot">Forgot Password</span>
+
+
+            <button id="btn-login" class="btn btn-login" Text="Log in">Login</button>
+            <span class="form-message">Create An Account</span>
+        </form>
+        <form id="register-form" class="loginControls">
+            <button class="login-close">×</button>
+            <div>
+                <div class="custom-logo lg-logo" style="background-image: url('@Url.Content("~/Media/Logo-Dark.png")')"></div>
+                <span class="login-message">Create An Account</span>
+            </div>
+
+
+            <div class="formDuelField">
+                <input id="registerFirstName" type="text" placeholder="Enter Your Firstname" Required />
+                <input id="registerSecondName" type="text" placeholder="Enter Your Lastname" Required />
+            </div>
+
+            <input id="registerEmail" type="email" placeholder="Enter Your Email" Required />
+
+            <input id="registerPassword" type="password" placeholder="Enter Password" Required />
+            <span class="errorDisplay"></span>
+            <input id="registerPasswordRepeat" type="password" placeholder="Enter Repeat Password" Required />
+
+            <span class="errorDisplay"></span>
+            <button id="btn-register" class="btn btn-login" Text="Register">Create Account</button>
+            <span class="form-message">Already Have An Account</span>
+        </form>
+
+    </div>
+
+
+    <div id="main-large-top">
+
+        <div id="nav">
+            <ul>
+                <li><a href="default.asp">Home</a></li>
+                <li><a href="news.asp">News</a></li>
+                <li><a href="contact.asp">Contact</a></li>
+                <li><a href="about.asp">About</a></li>
+
+                <li class="right"><a id="login-show">Login</a></li>
+            </ul>
+        </div>
+
+        <div class="top-line"></div>
+
+
+        <div id="large-top-text">
+
+            <div>
+                <div id="title"><span style="transform: translateY(-16px);display: inline-block;">M</span>y Menu Plus</div>
+                <div class="logo"></div>
+            </div>
+
+            <div id="description">Create Stunning Looking Menus</div>
+            <button class="btn" id="btn-start">Get Started</button>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="space">
+        <div class="section-title title-small">Quick Start</div>
+        <div class="section-title title-bold">Get you business moving again</div>
+
+        <div class="flex-container">
+            <div data-aos="fade-up" data-aos-offset="400"></div>
+            <div data-aos="fade-up" data-aos-offset="400" data-aos-delay="100"></div>
+        </div>
+
+
+        <div data-aos="fade-right" data-aos-delay="200" data-aos-offset="200" class="double-flex"></div>
+    </div>
+
+
+
+
+    <div data-aos-offset="300" data-aos="zoom-in" class="slanted-section" style="margin-top: 147px;">
+        <div>
+            <div class="slanted-section-content">
+
+                <div class="section-title title-bold slanted-text">Easily create dynamic menus without </br> a single line of code</div>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div data-aos="fade-left">
+        <div class="flex-container">
+            <div></div>
+            <div class="article-content">
+                <div class="section-title">Your Brand</div>
+                <div class="article-text">Create professional looking menus with your own branding that people will recognize.</div>
+                <button class="btn btn-article">Start Using Your Brand</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div data-aos="fade-right">
+        <div class="flex-container">
+            <div class="article-content">
+                <div class="section-title">Flexible Design</div>
+                <div class="article-text">Create professional looking menus with your own branding that people will recognize.</div>
+                <button class="btn btn-article">Get Started</button>
+            </div>
+            <div></div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="space">
+        <div data-aos="fade-up" class="section-title">Managment Tools</div>
+        <div class="flex-container">
+            <div data-aos="fade-up"></div>
+            <div data-aos="fade-up" data-aos-delay="100"></div>
+            <div data-aos="fade-up" data-aos-delay="200"></div>
+        </div>
+    </div>
+
+
+    <footer style="margin-top:105px">
+        <div>
+            <div id="social-text">Why not share you experience</div>
+            <div class="social-container">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-google"></a>
+                <a href="#" class="fa fa-instagram"></a>
+            </div>
+        </div>
+        <div>
+
+            <div>
+                <div class="footer-icon">
+                    <span>My Menu Plus</span>
+                    <div class="icon-svg-container">
+                        <img class="icon-svg" src="@Url.Content("~/Media/logo.svg")" />
+                    </div>
+                </div>
+                <p id="footer-desc">My Menu Plus was made by Harrison Smith to provide a digital alternative that aims to streamline the traditional menu by providing modern features not achievable on a paper-based format.</p>
+            </div>
+
+            <div>
+                <h3>Heading 1</h3>
+                <ul class="footer-list">
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Heading 2</h3>
+                <ul class="footer-list">
+                    <li>Item 4</li>
+                    <li>Item 5</li>
+                    <li>Item 6</li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script>
+        AOS.init();
+    </script>
+
+    @Scripts.Render("~/bundles/Jquery")
+    @Scripts.Render("~/bundles/Form")
+    @Scripts.Render("~/bundles/Notifications")
+
+    @Html.AntiForgeryToken()
+</body>
+</html>

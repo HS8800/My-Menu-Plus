@@ -25,7 +25,22 @@ namespace MyMenuPlus
             bundles.Add(new ScriptBundle("~/bundles/MenuEditor").Include(
                       "~/Scripts/MenuEditor.js",
                       "~/Scripts/Currency.js"));
-            
+
+
+
+            bundles.Add(new ScriptBundle("~/bundles/Aos").Include(
+                    "~/Scripts/Aos.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/AosStyles").Include(
+                        "~/Content/Aos.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/Home").Include(
+                        "~/Content/Home.css",
+                        "~/Content/Footer.css",
+                        "~/Content/Form.css",
+                        "~/Content/Notifications.css"
+                        ));
+
 
             bundles.Add(new StyleBundle("~/bundles/EditorStyles").Include(
                         "~/Content/SectionEditor.css"));
@@ -35,9 +50,9 @@ namespace MyMenuPlus
                         "~/Content/Menu.css",
                         "~/Content/MainScale.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/DefaultStyles").Include(
+            bundles.Add(new StyleBundle("~/bundles/DefaultMenuStyles").Include(
                         "~/Content/Footer.css",
-                        "~/Content/Navbar.css",
+                        "~/Content/MenuNavbar.css",
                         "~/Content/Form.css",
                         "~/Content/Brand.css",
                         "~/Content/Notifications.css"

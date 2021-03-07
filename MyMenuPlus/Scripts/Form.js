@@ -19,9 +19,11 @@ $(".form-message").click(function () {
     if ($("#login-form").css("display") == "block") {
         $("#register-form").css({ "display": "block" });
         $("#login-form").css({ "display": "none" });
+        $(".errorDisplay").text("");
     } else {
         $("#register-form").css({ "display": "none" });
         $("#login-form").css({ "display": "block" });
+        $(".errorDisplay").text("");
     }
 });
 
@@ -40,8 +42,9 @@ $("#login-form").submit(function (e) {
         response = JSON.parse(response);
         if (response.response == "success") {
             newNotification("Welcome")
+            $(".errorDisplay").text("");
         } else if (response.response == "failed") {
-            newError(response.error)
+            $(".errorDisplay").text(response.error)
         }     
     });
 });
@@ -69,9 +72,10 @@ $("#register-form").submit(function (e) {
             response = JSON.parse(response);
 
             if (response.response == "success") {
-                newNotification("Welcome")
+                newNotification("Welcome");
+                $(".errorDisplay").text("");
             } else if (response.response == "failed") {
-                newError(response.error)
+                $(".errorDisplay").text(response.error)
             } 
     });
 });

@@ -5,23 +5,23 @@ footer{
     margin-top: 40px;
 }
 
-footer > div:nth-child(1){
-    background-color: #465c67;
-    height: 50px;
-    display: flex;
-    justify-content: space-around;
-    color: white;
-    line-height: 50px;
-    font-size: 14px;
-    font-weight: 300;
-}
+    footer > div:nth-child(1) {
+        background-color: #1b1f21;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+        color: white;
+        line-height: 50px;
+        font-size: 14px;
+        font-weight: 300;
+    }
 
 /* Main Footer Content */
-footer > div:nth-child(2){
-    background-color: #607d8b;
-    display: flex;
-    justify-content: center;
-}
+    footer > div:nth-child(2) {
+        background-color: #15191b;
+        display: flex;
+        justify-content: center;
+    }
 
 /* Part 1 */
 footer > div:nth-child(2) > div:nth-child(1){

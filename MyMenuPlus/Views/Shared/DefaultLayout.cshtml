@@ -1,4 +1,4 @@
-﻿@Styles.Render("~/bundles/DefaultStyles")
+﻿@Styles.Render("~/bundles/DefaultMenuStyles")
 @Scripts.Render("~/bundles/Jquery")
 @Html.AntiForgeryToken()
 <div id="navbar" class="select-disable sticky">
@@ -50,6 +50,7 @@
         <input id="login-password" type="password" placeholder="Enter Password" Required />
 
         <span id="login-forgot">Forgot Password</span>
+        <span class="errorDisplay"></span>
         <button id="btn-login" class="btn btn-login" Text="Log in">Login</button>
         <span class="form-message">Create An Account</span>
     </form>
@@ -71,6 +72,7 @@
         <input id="registerPassword" type="password" placeholder="Enter Password" Required />
         <input id="registerPasswordRepeat" type="password" placeholder="Enter Repeat Password" Required />
 
+        <span class="errorDisplay"></span>
         <button id="btn-register" class="btn btn-login" Text="Register">Create Account</button>
         <span class="form-message">Already Have An Account</span>
     </form>

@@ -33,7 +33,7 @@
 	display: block;
 	border: 1px solid #e7e7e7 !important;
 	border-radius: 4px;
-	padding: 10px 15px;
+	padding: 0px 15px;
 	min-height: 50px;
 	font-size: 16px;
 	color: #495057;
@@ -58,6 +58,7 @@
 	display: block;
 	margin-bottom: 30px;
 	font-size: 16px;
+	margin-left: 63px;
 }
 
 #login-forgot {
@@ -84,6 +85,7 @@
 
 .btn-login {
 	width: 70%;
+	margin: auto;
 }
 
 /*Register*/
@@ -146,7 +148,14 @@
 }
 
 
-
+.errorDisplay {
+	width: 70%;
+	margin: auto;
+	margin-bottom: 25px;
+	display: block;
+	color: #d81515;
+	font-weight: 300;
+}
 
 
 
