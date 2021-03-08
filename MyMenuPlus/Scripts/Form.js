@@ -35,7 +35,7 @@ $("#login-form").submit(function (e) {
 
     //Button Feedback
     $(".btn-login").addClass("btn-state-sent")
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent") }, 1000);
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent") }, 10000);
 
     //Send Post
     $.post('/Login/Login', { email: $("#login-email").val(), password: $("#login-password").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()}).done(function (response) {
@@ -43,10 +43,14 @@ $("#login-form").submit(function (e) {
         if (response.response == "success") {
             newNotification("Welcome")
             $(".errorDisplay").text("");
+            window.location.href = "/MenuSelection";//Redirect to menu selection
         } else if (response.response == "failed") {
             $(".errorDisplay").text(response.error)
         }     
+    }).always(function () {
+        $(".btn-state-sent").removeClass("btn-state-sent")
     });
+    password: $("#login-password").val("");
 });
 
 
@@ -57,7 +61,7 @@ $("#register-form").submit(function (e) {
 
     //Button Feedback
     $(".btn-register").addClass("btn-state-sent")
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent") }, 1000);
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent") }, 10000);
     //Send Post
     $.post('/Login/Register',
         {
@@ -70,14 +74,15 @@ $("#register-form").submit(function (e) {
 
         }).done(function (response) {
             response = JSON.parse(response);
-
             if (response.response == "success") {
                 newNotification("Welcome");
                 $(".errorDisplay").text("");
             } else if (response.response == "failed") {
                 $(".errorDisplay").text(response.error)
             } 
-    });
+        }).always(function () {
+            $(".btn-state-sent").removeClass("btn-state-sent")
+        });
 });
 
 //Passwords must match

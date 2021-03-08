@@ -34,10 +34,14 @@
         </div>
     </div>
 
+   
+
     <div class="flex-container" id="menu-container">
 
-        <div data-aos="fade-up" data-aos-delay="100"></div>
-        <div data-aos="fade-up" data-aos-delay="200"></div>
+       
+        @Html.Raw(@ViewData["menuThumbnails"])
+
+  
 
         <div data-aos="fade-up" data-aos-delay="300" id="menu-create-new">
             <div class="section-title title-small">Quick Start</div>

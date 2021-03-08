@@ -13,6 +13,10 @@ namespace MyMenuPlus.Controllers
     {
         public ActionResult Index()
         {
+            ViewData["menuThumbnails"] =  MenuContentHelper.menuThumbnails(Session["email"].ToString());//NEED TO USE SESSION HERE
+
+            
+
             return View();
         }
 

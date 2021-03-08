@@ -105,3 +105,15 @@
     }
 
 }
+
+.fa-plus-square {
+    font-size: 119px !important;
+    width: 100% !important;
+    color: #cc3333 !important;
+    text-align: center !important;
+    opacity: 0.2 !important;
+}
+
+.select-thumbnail {
+    padding: 20px;
+}

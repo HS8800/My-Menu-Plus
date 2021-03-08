@@ -68,23 +68,7 @@
 
 
                 <div class="editor-section-items">
-                    <div draggable="true" class="editor-section section-item">
-                        <div class="editor-section-handle"></div>
-                        <div class="editor-section-content">
-                            <div>
-                                <input placeholder="Item Name">
-                                <textarea placeholder="Item Description" rows="4" cols="50"></textarea>
-                            </div>
-                            <div>
-                                <input placeholder="Price" onchange="this.value = currency.format(this.value).replace(/[£]/g, '')" type="number" min="0.01" step="0.01">
-                                Tags<br>
-                                <input type="checkbox" value="Vegetarian">
-                                <label for="Vegetarian">Vegetarian</label><br>
-                                <input type="checkbox" value="Spicy">
-                                <label for="Vegetarian">Spicy</label><br>
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
                 <div class="editor-add">Add Item</div>
             </div>
@@ -100,7 +84,7 @@
 
 
 
-@*@Scripts.Render("~/bundles/MenuScripts")*@
+
 @Scripts.Render("~/bundles/MenuEditorPageScripts")
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
