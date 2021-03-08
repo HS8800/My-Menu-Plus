@@ -8,7 +8,7 @@
 
 .editor-section-handle {
     width: 64px;
-    background: #0d2f40;
+    background: #0c3853;
     border-radius: 5px 0px 0px 5px;
 }
 
@@ -40,37 +40,36 @@ textarea {
 
 
 /*Create New Item Button*/
-.editor-add {
+.editor-add, .editor-add-tag {
     margin-left: 25px;
     margin-bottom: 15px;
     display: flex;
     line-height: 24px;
     color: #6b6b6f;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.editor-add:hover {
-    opacity:0.7;
-}
+    .editor-add:hover, .editor-add-tag:hover {
+        opacity: 0.7;
+    }
 
-.editor-add::before {
-    content: "+";
-    border: 1px solid;
-    width: 20px;
-    line-height: 22px;
-    text-align: center;
-    height: 20px;
-    font-size: 20px;
-    margin-right: 7px;
-    display: block;
-}
+    .editor-add::before, .editor-add-tag::before {
+        content: "+";
+        border: 1px solid;
+        width: 20px;
+        line-height: 22px;
+        text-align: center;
+        height: 20px;
+        font-size: 20px;
+        margin-right: 7px;
+        display: block;
+    }
 
 
 /*Title Section*/
 .section-title {
-    min-height: 100px;
     margin: 20px;
-    color:white;     
+    color: white;
 }
 
 .section-title > .editor-section-content {
@@ -134,3 +133,129 @@ textarea {
         width: 100%
     }
 
+.section-item > .editor-section-handle {
+    background-color: #d89533;
+}
+
+/*Tag Section*/
+
+.section-tag {
+    width: 300px;
+    margin: 0px 0px 20px 20px;
+    min-height: initial;
+}
+
+.section-tag > .editor-section-content {
+    padding-right:96px
+}
+
+.editor-section-tags {
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+.editor-section-tags > div > .editor-section-handle {
+    background-color: #ca3333;
+}
+
+   
+    /*File Import Section*/
+    .section-file-import {
+        width: 100%;
+        height: 80px;
+        margin-top: 10px;
+    }
+
+
+/*Toolbar*/
+#toolbar {
+    height: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 8%);
+    line-height: 47px;
+    margin: 0px;
+    
+}
+
+    #toolbar > ul {
+        margin: 0px;
+        overflow: hidden;
+    }
+
+
+
+#toolbar > ul > li {
+    list-style-type: none;
+    margin-left: 10px;
+}
+
+#toolbar > ul > li > a {
+    text-decoration: none;
+    color: black;
+    cursor:pointer;
+}
+
+
+.fa-check {
+    color: #022f02
+}
+
+.fa-floppy-o {
+    margin-left: 2px;
+    animation-name: wave;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes wave {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    12% {
+        transform: rotate(-50deg);
+    }
+
+    25% {
+        transform: rotate(50deg);
+    }
+
+    36% {
+        transform: rotate(-50deg);
+    }
+
+    47% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.fa-check::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    transform: translate(0px, -16px) rotate(-50deg);
+    animation: tick 1s normal forwards ease-in-out;
+}
+
+
+
+@keyframes tick {
+    0% {
+        transform: translate(0px, -16px) rotate(-50deg);
+    }
+
+    100% {
+        transform: translate(20px, -36px) rotate(-50deg);
+    }
+}
+
+#toolbar-save {
+    display: none;
+}

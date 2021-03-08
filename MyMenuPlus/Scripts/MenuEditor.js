@@ -1,8 +1,20 @@
 ﻿
 //jquery ui draggable sections
 $(function () {
-    $(".editor-section-items").sortable();
-    $(".editor-section-items").disableSelection();   
+    $(".editor-section-items").sortable({
+        out: function () {
+            EditorChanges()
+        }
+    });
+    $(".editor-section-items").disableSelection();
+
+    $(".editor-section-tags").sortable({
+        out: function () {
+            EditorChanges()
+        }
+    });
+
+    $(".editor-section-tags").disableSelection();  
 });
 
 
@@ -26,6 +38,7 @@ const itemSection = `<div draggable="true" class="editor-section section-item">
 
 $(".editor-add:not(.add-section)").click(function () {
     $(this.parentElement.children[1]).append(itemSection)
+    EditorChanges();
 });
 
 const Section = `
@@ -36,9 +49,7 @@ const Section = `
                 <div class="editor-section section-title">
                     <div class="editor-section-handle"></div>
                     <div class="editor-section-content">
-
-                        Section Title
-                        <input class="section-title-input" placeholder="Enter Title Here">
+                        <input class="section-title-input" placeholder="Title">
 
                     </div>
                 </div>
@@ -57,8 +68,38 @@ $(".add-section").click(function () {
     $(".editor-add:not(.add-section)").last().click(function () {
         $(this.parentElement.children[1]).append(itemSection)
 
-        $(".editor-section-items").sortable({ connectWith: '.editor-section-items'});
+        $(".editor-section-items").sortable({
+            connectWith: '.editor-section-items',
+            out: function () {
+                EditorChanges()
+            }
+        });
         $(".editor-section-items").disableSelection();  
     });
+  
+    EditorChanges();
+});
+
+
+const Tag = `
+<div draggable="true" class="editor-section section-item section-tag ui-sortable-handle" style="">
+    <div class="editor-section-handle" style=""></div>
+    <div class="editor-section-content">
+    <input placeholder="Tag" style="height: 31px;">
+    </div>
+</div>`;
+
+$(".editor-add-tag").click(function () {
+    $(".editor-section-tags").append(Tag);
+    EditorChanges();
+});
+
+function EditorChanges() {
+    $("#toolbar-uptodate").css({ "display": "none" })
+    $("#toolbar-save").css({ "display": "inline" })
+}
+
+$("body").keypress(function () {
+    EditorChanges();
 });
 

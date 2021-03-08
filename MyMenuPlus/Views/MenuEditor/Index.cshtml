@@ -11,32 +11,46 @@
 
 
 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
-          rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
-          rel="stylesheet" />
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
 </head>
 
 <body>
 
+    <div id="toolbar">
+        <ul>
+            <li id="toolbar-save"><a>Save Changes <i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>
+            <li id="toolbar-uptodate"><a>Uptodate <i class="fa fa-check" aria-hidden="true"></i></a></li>
+        </ul>
+    </div>
+
+
+    <div class="editor-section">
+        <div class="editor-section-handle"></div>
+        <div class="editor-section-content">
 
 
 
-    <div id="main-scale">
-        <div id="main-top">
-            <div id="main-content">
-                <h1 id="main-title">Name</h1>
-                <p id="main-tags">
-                    <span>Chinese</span><span>•</span><span>First Tag</span><span>•</span><span>Second Tag</span><span>•</span><span>Deal</span><span>•</span><span>Limited Deal</span>
-                </p>
-                <p id="main-address">50 Broadcroft Avenue HA7 1PF Stanmore</p>
+
+
+            <div class="editor-section section-title">
+                <div class="editor-section-handle"></div>
+                <div class="editor-section-content">
+                    <input class="section-title-input" placeholder="Menu Title">
+                    <input class="section-file-import" type="file">
+                </div>
 
             </div>
-        </div>
 
+
+
+            <div class="editor-section-tags">
+
+            </div>
+            <div class="editor-add-tag">Add Tag</div>
+        </div>
     </div>
+
 
 
     <div id="section-container">
@@ -48,10 +62,7 @@
                 <div class="editor-section section-title">
                     <div class="editor-section-handle"></div>
                     <div class="editor-section-content">
-
-                        Section Title
-                        <input class="section-title-input" placeholder="Enter Title Here">
-
+                        <input class="section-title-input" placeholder="Title">
                     </div>
                 </div>
 
