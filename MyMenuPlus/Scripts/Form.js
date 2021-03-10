@@ -35,7 +35,8 @@ $("#login-form").submit(function (e) {
 
     //Button Feedback
     $(".btn-login").addClass("btn-state-sent")
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent") }, 10000);
+    $(".loading").css({ "display": "block" })
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $(".loading").css({ "display": "none" }) }, 10000);
 
     //Send Post
     $.post('/Login/Login', { email: $("#login-email").val(), password: $("#login-password").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()}).done(function (response) {
@@ -49,8 +50,10 @@ $("#login-form").submit(function (e) {
         }     
     }).always(function () {
         $(".btn-state-sent").removeClass("btn-state-sent")
+        $(".loading").css({ "display": "none" })
     });
     password: $("#login-password").val("");
+    
 });
 
 
@@ -61,7 +64,8 @@ $("#register-form").submit(function (e) {
 
     //Button Feedback
     $(".btn-register").addClass("btn-state-sent")
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent") }, 10000);
+    $(".loading").css({ "display": "block" })
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $(".loading").css({ "display": "none" }) }, 10000);
     //Send Post
     $.post('/Login/Register',
         {
@@ -82,6 +86,7 @@ $("#register-form").submit(function (e) {
             } 
         }).always(function () {
             $(".btn-state-sent").removeClass("btn-state-sent")
+            $(".loading").css({ "display": "none" })
         });
 });
 

@@ -2,6 +2,7 @@
 //show create new menu form
 $(".btn-create-new").click(function () {
     $("#menu-create-background").css({ "display": "block" });
+    $(window).scrollTop(0);
 });
 
 
@@ -21,8 +22,9 @@ $("#menu-create-form").submit(function (e) {
     //Button Feedback
     $("#btn-menu-create").addClass("btn-state-sent")
     $("#btn-menu-create").text("Creating")
+    $(".loading").css({ "display": "block" })
 
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $("#btn-menu-create").text("Create Menu"); }, 10000);
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $("#btn-menu-create").text("Create Menu"); $(".loading").css({ "display": "none" }) }, 10000);
 
     //Send Post
     $.post('/MenuSelection/CreateMenu', { menuName: $("#menu-create-title").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
@@ -38,6 +40,11 @@ $("#menu-create-form").submit(function (e) {
     }).always(function () {
         $(".btn-state-sent").removeClass("btn-state-sent");
         $("#btn-menu-create").text("Create Menu");
+        $(".loading").css({ "display": "none" });
     });
     $("#menu-create-title").val("");
 });
+
+setTimeout(function () {//after 2 seconds cancel animation fade in delay to avoid users with lots of menus having to wait
+    $("#menu-container > div").attr("data-aos-delay", "0");
+}, 2000);

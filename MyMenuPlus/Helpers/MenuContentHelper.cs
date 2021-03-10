@@ -29,7 +29,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
-                return (false, ex.ToString());
+                return (false, "an internal error occured");
             }
         }
 

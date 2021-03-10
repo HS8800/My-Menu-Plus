@@ -211,6 +211,7 @@
     <Content Include="Media\Arrow.svg" />
     <Content Include="Media\Burger-main.jpg" />
     <Content Include="Media\Cafe.jpg" />
+    <Content Include="Media\Loading.gif" />
     <Content Include="Media\Logo.png" />
     <Content Include="Media\logo.svg" />
     <Content Include="Media\menu2.svg" />

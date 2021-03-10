@@ -164,9 +164,19 @@
 }
 
 .btn-state-sent::after {
-	content: " Sent";
+	content: " Sent";	
 }
 
+
+.loading {
+	background-image: url('../Media/Loading.gif');
+	width: 30px;
+	height: 30px;
+	display: none;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin: 10px auto;
+}
 
 .errorDisplay {
 	width: 70%;
