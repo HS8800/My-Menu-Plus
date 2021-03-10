@@ -27,7 +27,7 @@
 	padding: 40px 0px 60px 0px;
 }
 
-.formDuelField > input, .loginControls > input[type=text], .loginControls > input[type=password], .loginControls > input[type=email] {
+.formDuelField > input, .loginControls > input[type=text], .loginControls > input[type=password], .loginControls > input[type=email], #menu-create > form > input[type=text] {
 	width: 70%;
 	margin: 30px auto 30px auto;
 	display: block;
@@ -39,7 +39,27 @@
 	color: #495057;
 }
 
+#menu-create > form > input[type=text] {
+	display: inline;
+	transform: translateX(3px);
+	padding: 0px 20px;
+}
 
+#menu-create > form > button {
+	display: inline;
+	transform: translateX(-3px);
+	border-radius: 0px 10px 10px 0px;
+	padding: 10px 20px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 600;
+	background: #cc3333;
+	color: white;
+	height: 48px;
+	margin-top: 36px;
+}
 
 .loginControls > label {
 	width: 70%;

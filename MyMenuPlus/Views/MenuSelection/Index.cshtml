@@ -18,7 +18,17 @@
 <body>
 
 
-
+    <div id="menu-create-background">
+        <div id="menu-create">
+            <button type="button" id="btn-menu-close">×</button>
+            <form>
+                <div class="section-title title-small btn-create-new" style="padding-top: 20px;">Create a menu</div>
+                <div class="section-title title-bold" style="padding: 0px 20px;">Almost done, you just need a name!</div>
+                <input minlength="1" placeholder="Give your menu a name" type="text">
+                <button>Create Menu</button>
+            </form>
+        </div>
+    </div>
 
 
     <div class="section-banner">
@@ -29,44 +39,34 @@
         </div>
 
         <div>
-            <button class="btn btn-outline" id="btn-banner-create-new">Create New Menu</button>
+            <button class="btn btn-outline btn-create-new" id="btn-banner-create-new">Create New Menu</button>
 
         </div>
     </div>
 
-   
+
 
     <div class="flex-container" id="menu-container">
 
-       
+
         @Html.Raw(@ViewData["menuThumbnails"])
 
-  
+
 
         <div data-aos="fade-up" data-aos-delay="300" id="menu-create-new">
-            <div class="section-title title-small">Quick Start</div>
+            <div class="section-title title-small btn-create-new">Quick Start</div>
             <div class="section-title title-bold">Create a new menu for your business</div>
-            <button class="btn btn-article">Get Started</button>
+            <button class="btn btn-article btn-create-new">Get Started</button>
 
         </div>
 
     </div>
-
-
-
-
-
-
 
 
 
 
 
     @Scripts.Render("~/bundles/MenuSelectionPageScripts")
-
-    <script>
-        AOS.init();
-    </script>
 
     @Html.AntiForgeryToken()
 </body>

@@ -38,14 +38,14 @@ namespace MyMenuPlus
 
             //MenuSelection
             bundles.Add(new StyleBundle("~/bundles/MenuSelectionPageStyles").Include(
-                 "~/Content/Aos.css",
-                 "~/Content/Home.css",
+                "~/Content/Form.css",
+                "~/Content/Home.css",
                  "~/Content/MenuSelection.css"
              ));
 
-            bundles.Add(new ScriptBundle("~/bundles/MenuSelectionPageScripts").Include(
-             "~/Scripts/Aos.js",
-             "~/Scripts/jquery-3.5.1.min.js"
+            bundles.Add(new ScriptBundle("~/bundles/MenuSelectionPageScripts").Include(             
+             "~/Scripts/jquery-3.5.1.min.js",
+             "~/Scripts/MenuSelection.js"
            ));
 
 
@@ -54,12 +54,10 @@ namespace MyMenuPlus
                "~/Content/Home.css",
                "~/Content/Footer.css",
                "~/Content/Form.css",
-               "~/Content/Notifications.css",
-               "~/Content/Aos.css"
+               "~/Content/Notifications.css"
                ));
 
             bundles.Add(new ScriptBundle("~/bundles/HomePageScripts").Include(
-                   "~/Scripts/Aos.js",
                    "~/Scripts/jquery-3.5.1.min.js",
                    "~/Scripts/Form.js",
                    "~/Scripts/Notifications.js"));
@@ -67,9 +65,16 @@ namespace MyMenuPlus
 
             //Main Site Layout
             bundles.Add(new StyleBundle("~/bundles/MainSiteLayout").Include(
+                        "~/Content/Aos.css",
                         "~/Content/Footer.css",
-                         "~/Content/Navbar.css"
+                        "~/Content/Navbar.css"
                         ));
+
+            bundles.Add(new ScriptBundle("~/bundles/MainSiteLayoutScripts").Include(
+               "~/Scripts/Aos.js"
+           ));
+
+            
 
             //Menu Layout
             bundles.Add(new StyleBundle("~/bundles/MenuLayoutStyles").Include(
