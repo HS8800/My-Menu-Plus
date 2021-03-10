@@ -16,16 +16,17 @@
 
 </head>
 <body>
-
+    <div id="notification-container"></div>
 
     <div id="menu-create-background">
         <div id="menu-create">
             <button type="button" id="btn-menu-close">×</button>
-            <form>
+            <form id="menu-create-form">
                 <div class="section-title title-small btn-create-new" style="padding-top: 20px;">Create a menu</div>
                 <div class="section-title title-bold" style="padding: 0px 20px;">Almost done, you just need a name!</div>
-                <input minlength="1" placeholder="Give your menu a name" type="text">
-                <button>Create Menu</button>
+                <input id="menu-create-title" minlength="1" placeholder="Give your menu a name" type="text" required>
+                <button id="btn-menu-create">Create Menu</button>
+                <span class="errorDisplay"></span>
             </form>
         </div>
     </div>

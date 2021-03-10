@@ -7,13 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
+
 namespace MyMenuPlus.Helpers
 {
     internal sealed class MenuContentHelper
     {
- 
-       
-        internal static string menuThumbnails(string email)
+
+
+        internal static (bool success, string details) CreateMenu(string menuName, string ownerEmail) {
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CALL createMenu(@ownerEmail,@menuName)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@menuName", menuName);
+                command.Parameters.AddWithValue("@ownerEmail", ownerEmail);
+
+                command.ExecuteNonQuery();
+                return (true, "New menu created");
+            }
+            catch (MySqlException ex)
+            {
+                return (false, ex.ToString());
+            }
+        }
+
+
+        internal static string MenuThumbnails(string email)
         {
            
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString); 

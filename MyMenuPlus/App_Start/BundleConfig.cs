@@ -40,11 +40,13 @@ namespace MyMenuPlus
             bundles.Add(new StyleBundle("~/bundles/MenuSelectionPageStyles").Include(
                 "~/Content/Form.css",
                 "~/Content/Home.css",
+                "~/Content/Notifications.css",
                  "~/Content/MenuSelection.css"
              ));
 
             bundles.Add(new ScriptBundle("~/bundles/MenuSelectionPageScripts").Include(             
              "~/Scripts/jquery-3.5.1.min.js",
+             "~/Scripts/Notifications.js",
              "~/Scripts/MenuSelection.js"
            ));
 

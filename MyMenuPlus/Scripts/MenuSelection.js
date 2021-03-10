@@ -13,4 +13,31 @@ $("#menu-create-background,#btn-menu-close").click(function (e) {
     $("#menu-create-background").css({ "display": "none" });
 });
 
+//submit create new menu
+$("#menu-create-form").submit(function (e) {
+    //Stop Form Redirect
+    e.preventDefault();
 
+    //Button Feedback
+    $("#btn-menu-create").addClass("btn-state-sent")
+    $("#btn-menu-create").text("Creating")
+
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $("#btn-menu-create").text("Create Menu"); }, 10000);
+
+    //Send Post
+    $.post('/MenuSelection/CreateMenu', { menuName: $("#menu-create-title").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
+        response = JSON.parse(response);
+        if (response.response == "success") {
+            
+            newNotification("Created")
+            window.location.href = "/MenuSelection";//Reload page
+
+        } else if (response.response == "failed") {
+            $(".errorDisplay").text(response.error)
+        }
+    }).always(function () {
+        $(".btn-state-sent").removeClass("btn-state-sent");
+        $("#btn-menu-create").text("Create Menu");
+    });
+    $("#menu-create-title").val("");
+});

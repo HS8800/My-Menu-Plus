@@ -167,3 +167,8 @@
 #menu-create-background {
     display:none;   
 }
+
+.btn-state-sent::after {/*Stop sent message for form button when creating a new menu*/
+    content: "";
+}
+

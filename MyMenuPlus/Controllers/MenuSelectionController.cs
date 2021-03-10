@@ -16,7 +16,7 @@ namespace MyMenuPlus.Controllers
 
             if (Session["email"] != null)
             {
-                ViewData["menuThumbnails"] = MenuContentHelper.menuThumbnails(Session["email"].ToString());
+                ViewData["menuThumbnails"] = MenuContentHelper.MenuThumbnails(Session["email"].ToString());
             }
             else {
                 return RedirectToAction("Index","Home");
@@ -24,6 +24,39 @@ namespace MyMenuPlus.Controllers
             
 
             return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public string CreateMenu(string menuName)
+        {
+
+            ResponseModel response = new ResponseModel();
+            response.operation = "attempting to create a new menu";
+
+            if (Convert.ToString(Session["email"]) != "")
+            {
+                var CreateMenu = MenuContentHelper.CreateMenu(menuName, Convert.ToString(Session["email"]));
+                if (CreateMenu.success)
+                {
+                    response.response = "success";
+                }
+                else 
+                {
+                    response.response = "failed";
+                    response.error = CreateMenu.details;
+                }
+            }
+            else 
+            {
+                response.response = "failed";
+                response.error = "This action requires you to login";
+            }
+
+
+
+            return JsonConvert.SerializeObject(response);
         }
 
     }
