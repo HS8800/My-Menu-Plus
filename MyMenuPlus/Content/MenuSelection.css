@@ -115,7 +115,7 @@
 }
 
 .select-thumbnail {
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
 }
 
 #menu-create-background {
@@ -174,4 +174,19 @@
 
 #menu-create-title {
     margin: 0px 0px 10px;
+}
+
+
+.menu-btn-container {
+    text-align:right
+}
+
+.btn-menu-delete {
+    margin: 10px 10px 0px 0px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#menu-container > div {
+    cursor: pointer;
 }

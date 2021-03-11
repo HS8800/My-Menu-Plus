@@ -10,10 +10,20 @@ namespace MyMenuPlus.Controllers
     public class MenuController : Controller
     {
  
-        public ActionResult Index()
+        //public ActionResult Index() //Need an oops, looks like you took a wrong turn
+        //{
+        //    return View();
+        //}
+
+
+      
+        //Pass menuID
+        public ActionResult Index(int content)
         {
+            ViewData["menuID"] = content;
             return View();
         }
+
 
     }
 }

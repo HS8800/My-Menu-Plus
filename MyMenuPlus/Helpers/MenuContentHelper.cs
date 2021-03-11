@@ -13,6 +13,26 @@ namespace MyMenuPlus.Helpers
     internal sealed class MenuContentHelper
     {
 
+        internal static (bool success, string details) DeleteMenu(string menuID, string ownerEmail)
+        {
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CALL deleteMenu(@menuID,@ownerEmail)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@menuID", menuID);
+                command.Parameters.AddWithValue("@ownerEmail", ownerEmail);
+
+                command.ExecuteNonQuery();
+                return (true, "Menu deleted");
+            }
+            catch (MySqlException ex)
+            {
+                return (false, "an internal error occured");
+            }
+        }
+
 
         internal static (bool success, string details) CreateMenu(string menuName, string ownerEmail) {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -54,9 +74,13 @@ namespace MyMenuPlus.Helpers
                 {
 
              
-                    thumbnailBuilder.Append("<div data-aos='fade-up' data-aos-delay='");
+                    thumbnailBuilder.Append("<div data-aos='fade-up' data-aos-delay='");//reader["title"]
+
                     thumbnailBuilder.Append(count*100);//animation fade in delay
                     thumbnailBuilder.Append("'>");
+                    thumbnailBuilder.Append("<div class='menu-btn-container' ><i class='fas fa-trash-alt btn-menu-delete' data-id='");
+                    thumbnailBuilder.Append(reader["id"]);
+                    thumbnailBuilder.Append("' btn-menu-delete' ></i></div>");
                     thumbnailBuilder.Append("<div class='section-title title-bold select-thumbnail'>");
                     thumbnailBuilder.Append(Convert.ToString(reader["title"]).Length > 13 ? Convert.ToString(reader["title"]).Substring(0, 10)+"..." : reader["title"]);//title LIMIT to no more than 13
                     thumbnailBuilder.Append("</div>");
