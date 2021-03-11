@@ -35,13 +35,14 @@ namespace MyMenuPlus.Controllers
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to login";
 
-            if (AccountHelper.Login(email, password))
-            {        
-                Session["email"] = email;
+            var Login = AccountHelper.Login(email, password);
+
+            if (Login.success)
+            {
+                Session["id"] = Login.accountID;              
                 response.response = "success";
-                
             }
-            else
+            else 
             {
                 response.response = "failed";
                 response.error = "Hmm, your credientails don't seem to be right, Please try again or use the Forgot Password button";

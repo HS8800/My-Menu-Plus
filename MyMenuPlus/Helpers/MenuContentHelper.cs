@@ -13,16 +13,16 @@ namespace MyMenuPlus.Helpers
     internal sealed class MenuContentHelper
     {
 
-        internal static (bool success, string details) DeleteMenu(string menuID, string ownerEmail)
+        internal static (bool success, string details) DeleteMenu(string menuID, int accountID)
         {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
             try
             {
                 connection.Open();
-                string query = "CALL deleteMenu(@menuID,@ownerEmail)";
+                string query = "CALL deleteMenu(@menuID,@accountID)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@menuID", menuID);
-                command.Parameters.AddWithValue("@ownerEmail", ownerEmail);
+                command.Parameters.AddWithValue("@accountID", accountID);
 
                 command.ExecuteNonQuery();
                 return (true, "Menu deleted");
@@ -34,15 +34,15 @@ namespace MyMenuPlus.Helpers
         }
 
 
-        internal static (bool success, string details) CreateMenu(string menuName, string ownerEmail) {
+        internal static (bool success, string details) CreateMenu(string menuName, int accountID) {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
             try
             {
                 connection.Open();
-                string query = "CALL createMenu(@ownerEmail,@menuName)";
+                string query = "CALL createMenu(@accountID,@menuName)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@menuName", menuName);
-                command.Parameters.AddWithValue("@ownerEmail", ownerEmail);
+                command.Parameters.AddWithValue("@accountID", accountID);
 
                 command.ExecuteNonQuery();
                 return (true, "New menu created");
@@ -54,16 +54,16 @@ namespace MyMenuPlus.Helpers
         }
 
 
-        internal static string MenuThumbnails(string email)
+        internal static string MenuThumbnails(int accountID)
         {
            
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString); 
             try
             {
                 connection.Open();             
-                string query = "CAll getMenus(@email)";
+                string query = "CAll getMenus(@accountID)";
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@accountID", accountID);
 
 
                 StringBuilder thumbnailBuilder = new StringBuilder();

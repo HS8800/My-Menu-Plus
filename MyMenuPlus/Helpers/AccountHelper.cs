@@ -56,36 +56,43 @@ namespace MyMenuPlus.Helpers
         /// <param name="email">string of login email</param>
         /// <param name="rawPassword">string of raw plain text password</param>
         /// <returns>bool success, string details</returns>
-        internal static bool Login(string email,string rawPassword)
+        internal static (bool success, string details, int accountID) Login(string email,string rawPassword)
         {
            
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString); 
             try
             {
                 connection.Open();             
-                string query = "SELECT password FROM account WHERE email = @email limit 1";
+                string query = "SELECT id, password FROM account WHERE email = @email limit 1";
                 MySqlCommand command = new MySqlCommand(query, connection);
 
                 command.Parameters.AddWithValue("@email", email);
-                string hashedPassword = Convert.ToString(command.ExecuteScalar());
-
-
-                if (hashedPassword != "" && Cryptography.VerifyHash(rawPassword, hashedPassword))
+           
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
                 {
-                    System.Diagnostics.Debug.WriteLine("login success");
-                    return true;
+                    string hashedPassword = reader["password"].ToString();
+                    int accountID = Convert.ToInt32(reader["id"]);
+
+                    if (hashedPassword != "" && Cryptography.VerifyHash(rawPassword, hashedPassword))
+                    {
+                        System.Diagnostics.Debug.WriteLine("login success");
+                        return (true, "login success", accountID);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("login failed");
+                        return (false, "login failed", -1);
+                    }
                 }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("login failed");
-                    return false;
-                }
+
+                return (false, "no such account found", -1);
 
             }
             catch (MySqlException ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex);
-                return false;
+                return (false, "an internal error occured", -1);
             }
 
         }

@@ -14,9 +14,9 @@ namespace MyMenuPlus.Controllers
         public ActionResult Index()
         {
 
-            if (Session["email"] != null)
+            if (Session["id"] != null)
             {
-                ViewData["menuThumbnails"] = MenuContentHelper.MenuThumbnails(Session["email"].ToString());
+                ViewData["menuThumbnails"] = MenuContentHelper.MenuThumbnails(Convert.ToInt32(Session["id"]));
             }
             else {
                 return RedirectToAction("Index","Home");
@@ -35,9 +35,9 @@ namespace MyMenuPlus.Controllers
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to create a new menu";
 
-            if (Convert.ToString(Session["email"]) != "")
+            if (Session["id"].ToString() != "")
             {
-                var CreateMenu = MenuContentHelper.CreateMenu(menuName, Convert.ToString(Session["email"]));
+                var CreateMenu = MenuContentHelper.CreateMenu(menuName, Convert.ToInt32(Session["id"]));
                 if (CreateMenu.success)
                 {
                     response.response = "success";
@@ -67,9 +67,9 @@ namespace MyMenuPlus.Controllers
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to delete a menu";
 
-            if (Convert.ToString(Session["email"]) != "")
+            if (Convert.ToString(Session["id"]) != "")
             {
-                var DeleteMenu = MenuContentHelper.DeleteMenu(menuID, Convert.ToString(Session["email"]));
+                var DeleteMenu = MenuContentHelper.DeleteMenu(menuID, Convert.ToInt32(Session["id"]));
                 if (DeleteMenu.success)
                 {
                     response.response = "success";

@@ -190,3 +190,7 @@
 #menu-container > div {
     cursor: pointer;
 }
+
+    #menu-container > div:not(#menu-create-new):hover {
+        opacity: 0.7;
+    }

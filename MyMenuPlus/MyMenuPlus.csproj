@@ -251,6 +251,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MenuSelection\Index.cshtml" />
     <Content Include="Views\Shared\MainSiteLayout.cshtml" />
+    <Content Include="Views\Menu\MenuNotFound.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

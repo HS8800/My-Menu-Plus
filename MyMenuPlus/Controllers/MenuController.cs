@@ -9,21 +9,22 @@ namespace MyMenuPlus.Controllers
 {
     public class MenuController : Controller
     {
- 
+
         //public ActionResult Index() //Need an oops, looks like you took a wrong turn
         //{
-        //    return View();
+        //    return View("MenuNotFound");
         //}
 
 
-      
-        //Pass menuID
         public ActionResult Index(int content)
         {
             ViewData["menuID"] = content;
+            
             return View();
         }
 
+        
+ 
 
     }
 }
