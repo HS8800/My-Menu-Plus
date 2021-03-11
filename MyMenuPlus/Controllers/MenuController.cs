@@ -19,7 +19,16 @@ namespace MyMenuPlus.Controllers
         public ActionResult Index(int content)
         {
             ViewData["menuID"] = content;
-            
+
+            if (Session["id"] != null) {
+                ViewData["editButton"] = @"
+                    <div class='nav-button btn-effect'>
+                        <i class='fas fa-edit'></i>
+                        <span id='login-text'>Edit</span>
+                    </div>
+                ";                   
+            }
+           
             return View();
         }
 

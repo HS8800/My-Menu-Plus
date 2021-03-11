@@ -35,7 +35,7 @@ namespace MyMenuPlus.Controllers
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to create a new menu";
 
-            if (Session["id"].ToString() != "")
+            if (Session["id"] != null)
             {
                 var CreateMenu = MenuContentHelper.CreateMenu(menuName, Convert.ToInt32(Session["id"]));
                 if (CreateMenu.success)
@@ -67,7 +67,7 @@ namespace MyMenuPlus.Controllers
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to delete a menu";
 
-            if (Convert.ToString(Session["id"]) != "")
+            if (Session["id"] != null)
             {
                 var DeleteMenu = MenuContentHelper.DeleteMenu(menuID, Convert.ToInt32(Session["id"]));
                 if (DeleteMenu.success)
