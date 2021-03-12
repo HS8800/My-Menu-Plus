@@ -80,7 +80,13 @@ $("#register-form").submit(function (e) {
             response = JSON.parse(response);
             if (response.response == "success") {
                 newNotification("Welcome");
+         
+                //go to login form
+                $("#register-form").css({ "display": "none" });
+                $("#login-form").css({ "display": "block" });
                 $(".errorDisplay").text("");
+
+
             } else if (response.response == "failed") {
                 $(".errorDisplay").text(response.error)
             } 
@@ -96,7 +102,7 @@ $("#registerPasswordRepeat, #registerPassword").on('input', function () {
         $("#registerPassword")[0].setCustomValidity("Passwords must match.");
         $("#registerPassword")[0].checkValidity();
     } else {
-        $("#registerPassword")[0].setCustomValidity();
+        $("#registerPassword")[0].setCustomValidity("");
         $("#registerPassword")[0].checkValidity();
     }
 });

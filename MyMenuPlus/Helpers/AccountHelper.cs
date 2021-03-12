@@ -96,6 +96,31 @@ namespace MyMenuPlus.Helpers
             }
 
         }
+        internal static bool CanEditMenu(int menuID, int accountID)
+        {
+
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CALL canEditMenu(@menuID,@accountID)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@menuID", menuID);
+                command.Parameters.AddWithValue("@accountID", accountID);
+
+                return Convert.ToBoolean(command.ExecuteScalar());
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+                return false;
+            }
+
+        }
+
+
+        
 
     }
 }
