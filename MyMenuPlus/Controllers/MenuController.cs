@@ -24,8 +24,8 @@ namespace MyMenuPlus.Controllers
             
 
             if (Session["id"] != null && AccountHelper.CanEditMenu(content, Convert.ToInt32(Session["id"]))) {
-                ViewData["editButton"] = @"
-                    <div class='nav-button btn-effect' data-id=''>
+                ViewData["editButton"] = $@"
+                    <div class='nav-button btn-effect' id='btn-edit-menu' data-id='{content}'>
                         <i class='fas fa-edit'></i>
                         <span id='login-text'>Edit</span>
                     </div>

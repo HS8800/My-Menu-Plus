@@ -30,8 +30,10 @@ namespace MyMenuPlus
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/MenuPageScripts").Include(
+                 "~/Scripts/jquery-3.5.1.min.js",
                  "~/Scripts/Scroll.js",
-                 "~/Scripts/MenuScale.js"
+                 "~/Scripts/MenuScale.js",
+                 "~/Scripts/Menu.js"
             ));
 
 

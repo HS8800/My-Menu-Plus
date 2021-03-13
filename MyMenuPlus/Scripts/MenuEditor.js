@@ -81,9 +81,70 @@ $(".add-section").click(function () {
 });
 
 
+//function insertAtIndex(i) {
+//    if (i === 0) {
+//        $("#controller").prepend("<div>okay things</div>");
+//        return;
+//    }
+
+
+//    $("#controller > div:nth-child(" + (i) + ")").after("<div>great things</div>");
+//}
+
+function moveTagLeft(button) {
+    var tag = button.parentNode.parentNode.parentNode;
+    if ($(tag).index() != 0) {
+
+        $(".editor-section-tags > div:nth-child(" + ($(tag).index()) + ")").before(`
+        <div draggable="true" class="editor-section section-item section-tag ui-sortable-handle" style="">
+            <div class="editor-section-handle">
+                <ul class="editor-section-controls tags">
+                    <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove()"></i>
+                    <i class="fas fa-caret-left controls-half" onclick="moveTagLeft(this)"></i>
+                    <i class="fas fa-caret-right controls-half" onclick="moveTagRight(this)" style="float: right;"></i>
+                </ul>
+            </div>
+            <div class="editor-section-content">
+            <input placeholder="Tag" style="height: 31px;" value="`+ tag.children[1].children[0].value + `">
+            </div>
+        </div>
+    `);
+        $(tag).remove();
+    }
+}
+
+function moveTagRight(button) {
+    var tag = button.parentNode.parentNode.parentNode;
+
+    if ($(tag).index() != $(".editor-section-tags > div").length-1) {
+
+       $(`<div draggable="true" class="editor-section section-item section-tag ui-sortable-handle" style="">
+            <div class="editor-section-handle">
+                <ul class="editor-section-controls tags">
+                    <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove()"></i>
+                    <i class="fas fa-caret-left controls-half" onclick="moveTagLeft(this)"></i>
+                    <i class="fas fa-caret-right controls-half" onclick="moveTagRight(this)" style="float: right;"></i>
+                </ul>
+            </div>
+            <div class="editor-section-content">
+            <input placeholder="Tag" style="height: 31px;" value="`+ tag.children[1].children[0].value + `">
+            </div>
+        </div>
+    `).insertAfter($(".editor-section-tags > div:nth-child(" + ($(tag).index()+2) + ")"));
+       $(tag).remove();
+    }
+}
+
 const Tag = `
 <div draggable="true" class="editor-section section-item section-tag ui-sortable-handle" style="">
-    <div class="editor-section-handle" style=""></div>
+    <div class="editor-section-handle">
+        <ul class="editor-section-controls tags">
+            <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove()"></i>
+            <i class="fas fa-caret-left controls-half" onclick="moveTagLeft(this)" ></i>
+            <i class="fas fa-caret-right controls-half" onclick="moveTagRight(this)" style="float: right;"></i>
+
+        </ul>
+    </div>
     <div class="editor-section-content">
     <input placeholder="Tag" style="height: 31px;">
     </div>
@@ -103,3 +164,35 @@ $("body").keypress(function () {
     EditorChanges();
 });
 
+$(".section-file-import").change(function () {
+    console.log(this.files[0]);
+});
+
+
+const input = $("#section-file-import")[0];
+input.addEventListener('change', function (e) {
+
+    console.log(input.files[0].type)
+
+    if (input.files[0].type == "image/jpeg" || input.files[0].type == "image/png") {
+        var reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
+
+        reader.onload = function () {    
+            console.log(reader.result);
+
+            $("#section-file-import").css({ "background-image": "url('" + reader.result + "')" })
+            EditorChanges()
+        };
+
+        reader.onerror = function (error) {
+            console.log("Error: ", error);
+            alert("Oh no looks like something went wrong.");
+        };
+
+    } else {
+        $(".section-file-import")[0].value = "";
+        alert("image pust be png or jpeg");
+    }
+
+});
