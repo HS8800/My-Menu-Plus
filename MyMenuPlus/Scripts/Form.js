@@ -3,6 +3,10 @@
 //Login Menu Open & Close Controls
 $(".login-close").click(function () {
     $("#login-popup").css({ "display": "none" });
+
+    $("#register-form").css({ "display": "none" });
+    $("#login-form").css({ "display": "block" });
+    $(".errorDisplay").text("");
 });
 
 $("#login-show").click(function () {
@@ -108,5 +112,32 @@ $("#registerPasswordRepeat, #registerPassword").on('input', function () {
 });
 
 
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+            end = dc.length;
+        }
+    }
+  
+    return decodeURI(dc.substring(begin + prefix.length, end));
+} 
 
 
+
+
+$(".getStarted").click(function () {
+    $("#login-popup").css({ "display": "block" });
+
+    $("#register-form").css({ "display": "block" });
+    $("#login-form").css({ "display": "none" });
+    $(".errorDisplay").text("");
+});
