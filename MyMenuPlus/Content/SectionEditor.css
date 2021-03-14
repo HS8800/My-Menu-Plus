@@ -50,6 +50,11 @@ textarea {
     width: 130px;
 }
 
+.add-section {
+    margin-left: 140px;
+    margin-top: 20px;
+}
+
     .editor-add:hover, .editor-add-tag:hover {
         opacity: 0.7;
     }
@@ -154,11 +159,20 @@ textarea {
 .editor-section-controls > i {
     width: 100%;
     text-align: center;
-    margin: 8px 0px;
+    padding: 8px 0px;
     font-size: 20px;
     filter: brightness(0.5);
     cursor:pointer;
 }
+
+.fa-caret-up {
+    padding-top: 18px !important;
+}
+
+.fa-caret-down {
+    padding-bottom: 18px !important;
+}
+
 
 .editor-section-controls > i:hover {
     filter: brightness(0.1);
@@ -295,3 +309,29 @@ textarea {
 #toolbar-save {
     display: none;
 }
+
+.toolbar-items {
+    color: #d89533;
+    width: 100%;
+    text-align: center;
+    margin: 8px 0px;
+    filter: brightness(0.5);
+    cursor: pointer;
+}
+
+.toolbar-sections {
+    color: #0c3853;
+    width: 100%;
+    text-align: center;
+    margin: 8px 0px;
+    filter: brightness(0.5);
+    cursor: pointer;
+}
+
+.toolbar-sections > i:hover {
+    opacity:0.5;
+}
+
+    .fa-caret-down, .fa-caret-up {
+        font-size: 25px !important;
+    }
