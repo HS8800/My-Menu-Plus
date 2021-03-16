@@ -19,7 +19,8 @@
 
     <div id="toolbar">
         <ul>
-            <li id="toolbar-save"><a>Save Changes <i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>
+            <li class="loading"></li>
+            <li data-content="@ViewData["menuID"]"  id="toolbar-save"><a>Save Changes <i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>
             <li id="toolbar-uptodate"><a>Uptodate <i class="fa fa-check" aria-hidden="true"></i></a></li>
         </ul>
     </div>
@@ -36,7 +37,7 @@
             <div class="editor-section section-title">
                 <div class="editor-section-handle"></div>
                 <div class="editor-section-content">
-                    <input class="section-title-input" placeholder="Menu Title">
+                    <input id="menu-title" class="section-title-input" placeholder="Menu Title">
                     <input id="section-file-import" type="file">
                 </div>
 

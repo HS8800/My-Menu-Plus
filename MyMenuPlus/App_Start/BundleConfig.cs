@@ -11,12 +11,14 @@ namespace MyMenuPlus
 
             //Menu Editor
             bundles.Add(new StyleBundle("~/bundles/MenuEditorPageStyles").Include(
+                    "~/Content/Notifications.css",
                     "~/Content/Menu.css",
                     "~/Content/MainScale.css",
                     "~/Content/SectionEditor.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/MenuEditorPageScripts").Include(
                 "~/Scripts/jquery-3.5.1.min.js",
+                "~/Scripts/Notifications.js",
                  "~/Scripts/MenuEditor.js",
                  "~/Scripts/Currency.js"
              ));

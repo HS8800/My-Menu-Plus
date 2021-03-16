@@ -332,6 +332,18 @@ textarea {
     opacity:0.5;
 }
 
-    .fa-caret-down, .fa-caret-up {
-        font-size: 25px !important;
-    }
+.fa-caret-down, .fa-caret-up {
+    font-size: 25px !important;
+}
+
+
+.loading {
+    background-image: url('../Media/Loading.gif');
+    width: 30px;
+    height: 30px;
+    display: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px auto;
+    margin-left: 70px;
+}

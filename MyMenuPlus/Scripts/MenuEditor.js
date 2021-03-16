@@ -48,15 +48,15 @@ const itemSection = `<div draggable="true" class="editor-section section-item">
     </div>
     <div class="editor-section-content">
         <div>
-            <input oninput="setAttValue(this)" placeholder="Item Name">
-            <textarea value="" placeholder="Item Description" rows="4" cols="50" oninput="setAttValue(this)"></textarea>
+            <input class="item-name" oninput="setAttValue(this)" placeholder="Item Name">
+            <textarea class="item-description" value="" placeholder="Item Description" rows="4" cols="50" oninput="setAttValue(this)"></textarea>
         </div>
         <div>
-            <input oninput="setAttValue(this)" placeholder="Price" onchange="this.value = currency.format(this.value).replace(/[£]/g, '')" type="number" min="0.01" step="0.01">
+            <input class="item-price" oninput="setAttValue(this)" placeholder="Price" onchange="this.value = currency.format(this.value).replace(/[£]/g, '')" type="number" min="0.01" step="0.01">
             Tags<br>
-            <input oninput="setChkValue(this)" type="checkbox" value="Vegetarian">
+            <input class="item-veg" oninput="setChkValue(this)" type="checkbox" value="Vegetarian">
             <label for="Vegetarian">Vegetarian</label><br>
-            <input oninput="setChkValue(this)" type="checkbox" value="Spicy">
+            <input  class="item-spicy" oninput="setChkValue(this)" type="checkbox" value="Spicy">
             <label for="Vegetarian">Spicy</label><br>
         </div>
     </div>
@@ -300,7 +300,7 @@ function EditorChanges() {
     $("#toolbar-save").css({ "display": "inline" })
 }
 
-$("body").keypress(function () {
+$("body").keyup(function () {
     EditorChanges();
 });
 
@@ -310,6 +310,7 @@ $(".section-file-import").change(function () {
 
 
 const input = $("#section-file-import")[0];
+var bannerImageBase64 = "";
 input.addEventListener('change', function (e) {
 
     console.log(input.files[0].type)
@@ -319,8 +320,12 @@ input.addEventListener('change', function (e) {
         reader.readAsDataURL(input.files[0]);
 
         reader.onload = function () {    
-            console.log(reader.result);
+            if (reader.result.length > 800000) {
+                alert("Image is to large, please use an image less than 600kbs")
+                return;
+            }
 
+            bannerImageBase64 = reader.result;
             $("#section-file-import").css({ "background-image": "url('" + reader.result + "')" })
             EditorChanges()
         };
@@ -331,8 +336,96 @@ input.addEventListener('change', function (e) {
         };
 
     } else {
-        $(".section-file-import")[0].value = "";
-        alert("image pust be png or jpeg");
+        $("#section-file-import")[0].value = "";
+        alert("image pust be png, jpg or jpeg");
     }
+
+});
+
+
+$(window).bind('beforeunload', function () {
+    if ($("#toolbar-uptodate").css("display") == "none") {
+        return 'Are you sure you want to leave? you still have unsaved data that will be lost!';
+    }
+});
+
+
+$("#toolbar-save").click(function(){
+
+    //define main structure
+    var menu = {};
+
+    //Find menu tags
+    var tagElements = $(".editor-section-tags > div");
+    var tags = [];
+
+    for (let i = 0; i < tagElements.length; i++) {
+        tags.push(tagElements[i].children[1].children[0].value)
+    }
+
+    //Build menu details
+    menu["title"] = $("#menu-title").val();
+    //menu["bannerImage"] = bannerImageBase64;
+    menu["tags"] = Object.assign({}, tags);
+
+    //Get menu items
+    //Get all menu sections as array
+    var sections = [];
+    //Find and loop through each section
+    var sectionElements = $("#section-container > div");
+    for (let i = 0; i < sectionElements.length; i++) {
+
+        var section = [];
+        var sectionItems = [];
+
+        //Set Each Section Name
+        section["title"] = $(sectionElements[i]).find(".section-title-input").val();
+
+        //Find and loop through all items in each section
+        var sectionItemElements = $(sectionElements[i]).find(".editor-section-items > div");
+        for (let i2 = 0; i2 < sectionItemElements.length; i2++) {
+            var sectionItem = [];
+
+            //Get items and build as json
+            sectionItem["name"] = $(sectionItemElements[i2]).find(".item-name").val();
+            sectionItem["description"] = $(sectionItemElements[i2]).find(".item-description").val();
+            sectionItem["price"] = $(sectionItemElements[i2]).find(".item-price").val();
+            sectionItem["isVegetarian"] = $(sectionItemElements[i2]).find(".item-veg").prop("checked");
+            sectionItem["isSpicy"] = $(sectionItemElements[i2]).find(".item-spicy").prop("checked");
+
+            //Add each completed item into the current sectionItems
+            sectionItems.push(Object.assign({}, sectionItem));
+        }
+
+        //After all the section items for a section are built add it to the sections array
+        section["sectionItems"] = Object.assign({}, sectionItems);
+        sections.push(Object.assign({}, section));
+    }
+
+
+    menu["sections"] = Object.assign({}, sections);
+
+
+    $.post('/MenuEditor/UpdateMenu', {
+        menuID: this.dataset.content, menuImage: bannerImageBase64, menuData: JSON.stringify(menu) , __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+    }).done(function (response) {
+        response = JSON.parse(response);
+        if (response.response == "success") {
+            $("#toolbar-uptodate").css({ "display": "inline" });
+            newNotification("Saved")
+            //window.location.href = "/MenuSelection";//Reload page
+
+        } else if (response.response == "failed") {
+            newError(response.error)
+            $("#toolbar-save").css({ "display": "inline" });
+        }
+    }).always(function () {
+        $(".loading").css({ "display": "none" })
+    });
+
+    $(".loading").css({ "display": "inline-block" });
+    $("#toolbar-save").css({ "display": "none" });
+
+
 
 });

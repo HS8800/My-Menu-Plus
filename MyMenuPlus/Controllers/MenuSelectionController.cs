@@ -62,7 +62,7 @@ namespace MyMenuPlus.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string DeleteMenu(string menuID)
+        public string DeleteMenu(int menuID)
         {
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to delete a menu";
