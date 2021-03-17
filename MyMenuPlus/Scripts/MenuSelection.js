@@ -27,7 +27,7 @@ $("#menu-create-form").submit(function (e) {
     setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $("#btn-menu-create").text("Create Menu"); $(".loading").css({ "display": "none" }) }, 10000);
 
     //Send Post
-    $.post('/MenuSelection/CreateMenu', { menuName: $("#menu-create-title").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
+    $.post('/MenuSelection/CreateMenu', { menuName: $("#menu-create-title").val().replace(/(<([^>]+)>)/gi, ""), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
         response = JSON.parse(response);
         if (response.response == "success") {
             
