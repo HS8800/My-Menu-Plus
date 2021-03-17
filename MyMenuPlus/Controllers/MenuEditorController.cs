@@ -45,10 +45,33 @@ namespace MyMenuPlus.Controllers
         }
 
 
+    
+
         public ActionResult Index(int content)
         {
-            ViewData["menuID"] = content;
-            return View();
+            if (Session["id"] != null)
+            {
+                var menuComponents = MenuContentHelper.createMenuComponents(content, Convert.ToInt32(Session["id"]));
+
+                if (menuComponents.success)
+                {
+                    ViewData["title"] = menuComponents.title;
+                    ViewData["tags"] = menuComponents.tags;
+                    ViewData["sections"] = menuComponents.sections;
+                    ViewData["bannerImage"] = menuComponents.bannerImage;
+
+                    ViewData["menuID"] = content;
+                    return View();
+                }
+                else {
+                    ViewData["error"] = "Menu components couldn't be loaded at this time";
+                    return View("~/Views/Shared/Error.cshtml");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }         
         }
 
     }

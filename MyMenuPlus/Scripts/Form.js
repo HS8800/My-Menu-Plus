@@ -46,9 +46,9 @@ $("#login-form").submit(function (e) {
     $.post('/Login/Login', { email: $("#login-email").val(), password: $("#login-password").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()}).done(function (response) {
         response = JSON.parse(response);
         if (response.response == "success") {
-            newNotification("Welcome")
-            $(".errorDisplay").text("");
             window.location.href = "/MenuSelection";//Redirect to menu selection
+            newNotification("Welcome")
+            $(".errorDisplay").text("");           
         } else if (response.response == "failed") {
             $(".errorDisplay").text(response.error)
         }     

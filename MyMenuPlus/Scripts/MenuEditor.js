@@ -114,7 +114,15 @@ const Tag = `
 </div>`;
 
 
+
+//create a temp id used to keep track of sections when moving there items around
 var tempID = 1;
+$(".editor-section-items").each(function () {//this sets the starting temp id after the highest current temp id of the loaded in content
+    if (this.dataset.id >= tempID) {
+        tempID = this.dataset.id + 1;
+    }
+});
+
 //detect changes when a section is created
 $(".add-section").click(function () {
     $("#section-container").append(Section);
@@ -150,6 +158,8 @@ function moveTagLeft(button) {
 
         //Remove Old Element
         $(tag).remove();
+
+        EditorChanges();
     }
 
 }
@@ -165,6 +175,8 @@ function moveTagRight(button) {
 
         //Remove Old Element
         $(tag).remove();
+
+        EditorChanges();
     }
 }
 
@@ -195,6 +207,8 @@ function moveItemSectionDown(button) {
 
         //Remove Old Element
         $(item).remove();
+
+        EditorChanges();
     }
 }
 
@@ -220,6 +234,8 @@ function moveItemSectionUp(button) {
 
         //Remove Old Element
         $(item).remove();
+
+        EditorChanges();
     }
  
 }
@@ -255,6 +271,8 @@ function moveSectionDown(button) {
         //Remove Old Element
         $(item).remove();
     }
+
+  
 }
 
 
@@ -366,7 +384,7 @@ $("#toolbar-save").click(function(){
     //Build menu details
     menu["title"] = $("#menu-title").val();
     //menu["bannerImage"] = bannerImageBase64;
-    menu["tags"] = Object.assign({}, tags);
+    menu["tags"] = tags;
 
     //Get menu items
     //Get all menu sections as array
@@ -375,35 +393,37 @@ $("#toolbar-save").click(function(){
     var sectionElements = $("#section-container > div");
     for (let i = 0; i < sectionElements.length; i++) {
 
-        var section = [];
+        var section = {};
         var sectionItems = [];
 
         //Set Each Section Name
-        section["title"] = $(sectionElements[i]).find(".section-title-input").val();
+        section.title = $(sectionElements[i]).find(".section-title-input").val();
 
         //Find and loop through all items in each section
         var sectionItemElements = $(sectionElements[i]).find(".editor-section-items > div");
         for (let i2 = 0; i2 < sectionItemElements.length; i2++) {
-            var sectionItem = [];
+            var sectionItem = {};
 
             //Get items and build as json
-            sectionItem["name"] = $(sectionItemElements[i2]).find(".item-name").val();
-            sectionItem["description"] = $(sectionItemElements[i2]).find(".item-description").val();
-            sectionItem["price"] = $(sectionItemElements[i2]).find(".item-price").val();
-            sectionItem["isVegetarian"] = $(sectionItemElements[i2]).find(".item-veg").prop("checked");
-            sectionItem["isSpicy"] = $(sectionItemElements[i2]).find(".item-spicy").prop("checked");
+            sectionItem.name = $(sectionItemElements[i2]).find(".item-name").val();
+            sectionItem.description = $(sectionItemElements[i2]).find(".item-description").val();
+            sectionItem.price = $(sectionItemElements[i2]).find(".item-price").val();
+            sectionItem.isVegetarian = $(sectionItemElements[i2]).find(".item-veg").prop("checked");
+            sectionItem.isSpicy = $(sectionItemElements[i2]).find(".item-spicy").prop("checked");
+
 
             //Add each completed item into the current sectionItems
-            sectionItems.push(Object.assign({}, sectionItem));
+            sectionItems.push(sectionItem);
         }
 
+
         //After all the section items for a section are built add it to the sections array
-        section["sectionItems"] = Object.assign({}, sectionItems);
-        sections.push(Object.assign({}, section));
+        section.sectionItems = sectionItems;
+        sections.push(section);
     }
 
+    menu.sections = sections;
 
-    menu["sections"] = Object.assign({}, sections);
 
 
     $.post('/MenuEditor/UpdateMenu', {
@@ -426,6 +446,8 @@ $("#toolbar-save").click(function(){
     $(".loading").css({ "display": "inline-block" });
     $("#toolbar-save").css({ "display": "none" });
 
-
-
 });
+
+
+
+
