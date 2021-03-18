@@ -215,6 +215,7 @@
     <Content Include="Media\Logo.png" />
     <Content Include="Media\logo.svg" />
     <Content Include="Media\menu2.svg" />
+    <Content Include="Media\Placeholder-pattern.jpg" />
     <Content Include="Scripts\Aos.js" />
     <Content Include="Scripts\Currency.js" />
     <Content Include="Scripts\Form.js" />

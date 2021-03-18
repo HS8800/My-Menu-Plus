@@ -51,7 +51,7 @@ namespace MyMenuPlus.Controllers
         {
             if (Session["id"] != null)
             {
-                var menuComponents = MenuContentHelper.createMenuComponents(content, Convert.ToInt32(Session["id"]));
+                var menuComponents = MenuContentHelper.createMenuEditorComponents(content, Convert.ToInt32(Session["id"]));
 
                 if (menuComponents.success)
                 {

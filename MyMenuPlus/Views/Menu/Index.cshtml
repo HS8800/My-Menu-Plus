@@ -28,15 +28,13 @@
 
 
 
-    <div id="main-scale">
+    <div id="main-scale" style="background-image: url(@ViewData["bannerImage"])">
         <div id="main-top">
             <div id="main-content">
-                <h1 id="main-title">Name</h1>
+                <h1 id="main-title">@ViewData["title"]</h1>
                 <p id="main-tags">
-                    <span>Chinese</span><span>•</span><span>First Tag</span><span>•</span><span>Second Tag</span><span>•</span><span>Deal</span><span>•</span><span>Limited Deal</span>
+                    @Html.Raw(@ViewData["tags"])
                 </p>
-                <p id="main-address">50 Broadcroft Avenue HA7 1PF Stanmore</p>
-
             </div>
         </div>
 
@@ -49,15 +47,7 @@
     <div id="select-main" class="select-disable sticky">
         <div id="select-scroll">
             <div class="select-gap select-arrow-width"></div>
-            <div>Appertisers</div>
-            <div>Sweet & Sour</div>
-            <div>Chicken Dishes</div>
-            <div>Pork Dishes</div>
-            <div>Duck Dishes</div>
-            <div>Beef Dishes</div>
-            <div>Noodles</div>
-            <div>Specials</div>
-            <div>Drinks</div>
+            @Html.Raw(@ViewData["menuNavigaton"])
             <div class="select-gap select-arrow-width"></div>
         </div>
     </div>
@@ -74,95 +64,7 @@
 
 
         <div id="main-menu">
-
-            <h1>Appertisers</h1>
-
-            <table>
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-            </table>
-
-            <h1>Sweet & Sour</h1>
-
-            <table>
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="item-name">Item 1</div>
-                        <div class="item-description">Hello this is what item 1 is.</div>
-                    </td>
-                    <td class="item-right">
-                        <span class="item-price">£5.99</span><button class="item-btn">+</button>
-                    </td>
-                </tr>
-            </table>
-
+            @Html.Raw(@ViewData["menuSections"])
         </div>
 
         <div id="basket-container" class="sticky">

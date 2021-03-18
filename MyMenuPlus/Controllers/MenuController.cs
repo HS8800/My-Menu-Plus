@@ -21,7 +21,14 @@ namespace MyMenuPlus.Controllers
         {
             ViewData["menuID"] = content;
 
-            
+            //NEED TO REMOVE owener ID/accountID requirements
+            var menuComponents = MenuContentHelper.createMenuComponents(content, Convert.ToInt32(Session["id"]));
+
+            ViewData["title"] = menuComponents.title;
+            ViewData["tags"] = menuComponents.tags;
+            ViewData["menuSections"] = menuComponents.sections;
+            ViewData["bannerImage"] = menuComponents.bannerImage;
+            ViewData["menuNavigaton"] = menuComponents.menuNavigaton;
 
             if (Session["id"] != null && AccountHelper.CanEditMenu(content, Convert.ToInt32(Session["id"]))) {
                 ViewData["editButton"] = $@"

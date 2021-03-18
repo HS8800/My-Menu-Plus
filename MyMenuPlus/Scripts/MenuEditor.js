@@ -328,7 +328,7 @@ $(".section-file-import").change(function () {
 
 
 const input = $("#section-file-import")[0];
-var bannerImageBase64 = "";
+var bannerImageBase64 = "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg";
 input.addEventListener('change', function (e) {
 
     console.log(input.files[0].type)

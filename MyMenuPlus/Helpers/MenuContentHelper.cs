@@ -64,8 +64,131 @@ namespace MyMenuPlus.Helpers
             }
         }
 
+        internal static (bool success, string title, string tags, string sections, string bannerImage, string menuNavigaton) createMenuComponents(int menuID, int accountID)
+        {
 
-        internal static (bool success, string title, string tags, string sections, string bannerImage) createMenuComponents(int menuID, int accountID)
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CALL getMenuContent(@menuID,@accountID)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@menuID", menuID);
+            
+
+                StringBuilder sectionBuilder = new StringBuilder();
+                StringBuilder tagBuilder = new StringBuilder();
+                StringBuilder menuNavigaton = new StringBuilder();
+
+                string title = "";
+                string menuImage = "";
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    if (Convert.ToString(reader["menuData"]) == "initial") {
+                        return (true, "Welcome to your new menu!", "<div>An empty template</div>", $@"
+
+                            <div style=' padding: 20px;'>                       
+                            <h3 style='text-align: center;'>Your menu looks a bit empty at the moment</h3>
+
+                            <button data-id='{menuID}' class='btn' id='btn-new-menu' style='
+                                margin: 0px auto 93px auto;
+                                display: block;
+                                background-color: #cc3333;
+                                font-weight: 700;
+                            '>Start Creating</button>
+    
+                            </div>
+
+                            <style>
+                                #basket-container{{display:none}}
+                                #main-container{{width:100%}}
+                            </style>
+
+                        ", "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg", "");
+                    }
+
+                    dynamic menuData = JsonConvert.DeserializeObject(Convert.ToString(reader["menuData"]));
+
+                    //Get menu title
+                    title = menuData.title;
+
+                    //Get menu banner image
+                    menuImage = Convert.ToString(reader["menuImage"]);
+                    if (menuImage == "")
+                    {
+                        menuImage = "/Media/Placeholder-pattern.jpg";
+                    }
+
+                    //Generate menu tags
+                    dynamic tags = menuData.tags;
+                    for (int i = 0; i < tags.Count; i++)
+                    {
+
+                        if (i % 2 != 0)
+                        {//if odd add dot in-between tag
+                            tagBuilder.Append("<span>•</span>");
+                        }
+
+                        tagBuilder.Append("<span>");
+                        tagBuilder.Append(tags[i]);
+                        tagBuilder.Append("</span>");
+                    }
+
+
+
+
+
+                    //Create menu sections
+                    dynamic sections = menuData.sections;
+                    for (int s = 0; s < sections.Count; s++)
+                    {
+                      
+                        dynamic section = sections[s];
+                        StringBuilder sectionItemElements = new StringBuilder();
+
+
+                        //Build menu items
+                        dynamic sectionItems = section.sectionItems;
+                        for (int si = 0; si < sectionItems.Count; si++)
+                        {
+                            sectionItemElements.Append(createMenuItem(
+                                Convert.ToString(sectionItems[si].name), 
+                                Convert.ToString(sectionItems[si].description), 
+                                Convert.ToString(sectionItems[si].price)              
+                            ));
+
+                                //Convert.ToBoolean(sectionItems[si].isVegetarian),
+                                //Convert.ToBoolean(sectionItems[si].isSpicy)
+                        }
+
+
+                        menuNavigaton.Append("<div>"+ section.title + "</div>");
+                        sectionBuilder.Append(createMenuSection(
+                             Convert.ToString(section.title), 
+                            sectionItemElements.ToString()
+                        ));
+
+                    }
+                }
+
+                return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage, menuNavigaton.ToString());
+            }
+            catch (MySqlException ex)
+            {
+                return (false, "", "", "", "", "");
+            }
+        }
+
+        private static void createMenuItem(dynamic dynamic1, dynamic dynamic2)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static (bool success, string title, string tags, string sections, string bannerImage) createMenuEditorComponents(int menuID, int accountID)
         {
          
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -75,7 +198,7 @@ namespace MyMenuPlus.Helpers
                 string query = "CALL getMenuContent(@menuID,@accountID)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@menuID", menuID);
-                command.Parameters.AddWithValue("@accountID", accountID);
+          
 
                 StringBuilder sectionBuilder = new StringBuilder();
                 StringBuilder tagBuilder = new StringBuilder();
@@ -86,6 +209,13 @@ namespace MyMenuPlus.Helpers
 
                 while (reader.Read())
                 {
+                    
+                    if (Convert.ToString(reader["menuData"]) == "initial")
+                    {
+                        return (true, "", "", "", "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg");
+                    }
+
+
                     int unquieID = 0;
                     dynamic menuData = JsonConvert.DeserializeObject(Convert.ToString(reader["menuData"]));
 
@@ -94,29 +224,16 @@ namespace MyMenuPlus.Helpers
 
                     //Get menu banner image
                     menuImage = Convert.ToString(reader["menuImage"]);
-
-
-
-                    //Generate menu tags
-                    //dynamic tags = menuData.tags;
-                    //for (int i = 0; i < tags.Count; i++) {
-
-                    //    if (i%2 != 0){//if odd add dot in-between tag
-                    //        tagBuilder.Append("<span>•</span>");
-                    //    }
-
-                    //    tagBuilder.Append("<span>");
-                    //    tagBuilder.Append(tags[i]);
-                    //    tagBuilder.Append("</span>");
-                    //}
-
+                    if (menuImage == "") {
+                        menuImage = "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg";
+                    }
 
                     //Generate menu tags
                     dynamic tags = menuData.tags;
 
                     for (int i = 0; i < tags.Count; i++)
                     {
-                        tagBuilder.Append(createTag(Convert.ToString(tags[i])));                     
+                        tagBuilder.Append(createEditorTag(Convert.ToString(tags[i])));                     
                     }
 
 
@@ -292,7 +409,7 @@ namespace MyMenuPlus.Helpers
             return item;
         }
 
-        internal static string createTag(string tagName) { 
+        internal static string createEditorTag(string tagName) { 
         
             string tag = $@"
             <div draggable = 'true' class='editor-section section-item section-tag ui-sortable-handle' style=''>
@@ -309,6 +426,41 @@ namespace MyMenuPlus.Helpers
             </div>";
 
             return tag;
+
+        }
+
+        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice)
+        {
+
+            string item = $@"
+                <tr>
+	                <td>
+		                <div class='item-name'>{itemName}</div>
+		                <div class='item-description'>{itemDescription}</div>
+	                </td>
+	                <td class='item-right'>
+		                <span class='item-price'>£{itemPrice}</span><button class='item-btn'>+</button>
+	                </td>
+                </tr>
+            ";
+
+            return item;
+
+        }
+
+        internal static string createMenuSection(string sectionName, string itemDescription)
+        {
+
+            string item = $@"
+                <h1>{sectionName}</h1>
+                <table>
+                <tbody>
+                    {itemDescription}
+                </tbody>
+                </table>
+            ";
+
+            return item;
 
         }
 
