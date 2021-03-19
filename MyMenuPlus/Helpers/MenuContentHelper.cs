@@ -17,12 +17,40 @@ namespace MyMenuPlus.Helpers
         internal static (bool success, string details) updateMenu(int menuID, int accountID, string menuData, string menuImage)
         {
 
+
+            //Check image is valid
             if (menuImage.Length > 800000) {
                 return (false, "Image is to large, please use an image less than 600kbs");
             } else if (menuData.Length > 16777215) {
                 return (false, "Your menu is to large, please reduce the number of items to save");
             }
 
+
+            //Create ids for menu items
+            dynamic menuDataJSON = JsonConvert.DeserializeObject(menuData);
+            int itemID = 1;
+            //Loop through menu section
+            dynamic sections = menuDataJSON.sections;
+            for (int s = 0; s < sections.Count; s++)
+            {
+                //Add id to each menu item
+                dynamic sectionItems = sections[s].sectionItems;
+                for (int si = 0; si < sectionItems.Count; si++)
+                {
+
+                    try//In event where the price is "" or can't be a decimal this item will be skipped
+                    {
+                        sectionItems[si].price = Convert.ToDecimal(sectionItems[si].price).ToString("C").Substring(1);//format money
+                        sectionItems[si].id = itemID++;
+                    }
+                    catch { }
+                }
+            }
+
+            //Replace old menu items with new items with ids 
+            menuData = JsonConvert.SerializeObject(menuDataJSON);
+
+            //Save to database
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
             try
             {
@@ -71,7 +99,7 @@ namespace MyMenuPlus.Helpers
             try
             {
                 connection.Open();
-                string query = "CALL getMenuContent(@menuID,@accountID)";
+                string query = "CALL getMenuContent(@menuID)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@menuID", menuID);
             
@@ -155,11 +183,17 @@ namespace MyMenuPlus.Helpers
                         dynamic sectionItems = section.sectionItems;
                         for (int si = 0; si < sectionItems.Count; si++)
                         {
-                            sectionItemElements.Append(createMenuItem(
-                                Convert.ToString(sectionItems[si].name), 
-                                Convert.ToString(sectionItems[si].description), 
-                                Convert.ToString(sectionItems[si].price)              
-                            ));
+             
+
+                            if (Convert.ToString(sectionItems[si].price) != "0.00")
+                            {
+                                sectionItemElements.Append(createMenuItem(
+                                    Convert.ToString(sectionItems[si].name),
+                                    Convert.ToString(sectionItems[si].description),
+                                    Convert.ToString(sectionItems[si].price),
+                                    Convert.ToInt32(sectionItems[si].id)
+                                ));
+                            }
 
                                 //Convert.ToBoolean(sectionItems[si].isVegetarian),
                                 //Convert.ToBoolean(sectionItems[si].isSpicy)
@@ -183,11 +217,7 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-        private static void createMenuItem(dynamic dynamic1, dynamic dynamic2)
-        {
-            throw new NotImplementedException();
-        }
-
+     
         internal static (bool success, string title, string tags, string sections, string bannerImage) createMenuEditorComponents(int menuID, int accountID)
         {
          
@@ -195,7 +225,7 @@ namespace MyMenuPlus.Helpers
             try
             {
                 connection.Open();
-                string query = "CALL getMenuContent(@menuID,@accountID)";
+                string query = "CALL getMenuContent(@menuID)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@menuID", menuID);
           
@@ -353,7 +383,7 @@ namespace MyMenuPlus.Helpers
             <div class='editor-section'>
                 <div class='editor-section-handle'>
                     <ul class='editor-section-controls toolbar-sections'>
-                        <i class='fas fa-trash-alt' onclick='$(this.parentNode.parentNode.parentNode)[0].remove()'></i>
+                        <i class='fas fa-trash-alt' onclick='$(this.parentNode.parentNode.parentNode)[0].remove();EditorChanges()'></i>
                         <i class='fas fa-caret-up' onclick='moveSectionUp(this)'></i>
                         <i class='fas fa-caret-down' onclick='moveSectionDown(this)'></i>
                     </ul>
@@ -385,7 +415,7 @@ namespace MyMenuPlus.Helpers
                 <div class='editor-section-handle'>
     
                 <ul class='editor-section-controls toolbar-items'>
-                    <i class='fas fa-trash-alt' onclick='$(this.parentNode.parentNode.parentNode)[0].remove()'></i>
+                    <i class='fas fa-trash-alt' onclick='$(this.parentNode.parentNode.parentNode)[0].remove();EditorChanges()'></i>
                     <i class='fas fa-caret-up' onclick='moveItemSectionUp(this)'></i>
                     <i class='fas fa-caret-down' onclick='moveItemSectionDown(this)'></i>
                 </ul>
@@ -397,7 +427,7 @@ namespace MyMenuPlus.Helpers
                         <textarea class='item-description' value='' placeholder='Item Description' rows='4' cols='50' oninput='setAttValue(this)'>{description}</textarea>
                     </div>
                     <div>
-                        <input class='item-price' oninput='setAttValue(this)' placeholder='Price' onchange='this.value = currency.format(this.value).replace(/[£]/g, \'\')' value='{price}' type='number' min='0.01' step='0.01'>
+                        <input class='item-price' oninput='setAttValue(this)' placeholder='Price' onchange='this.value = currency.format(this.value).replace(/[£]/g, """")' value='{price}' type='number' min='0.01' step='0.01'>
                         Tags<br>
                         <input class='item-veg' oninput='setChkValue(this)' type='checkbox' value='Vegetarian' {(isVegetarian ? "checked" : "")}>
                         <label for='Vegetarian'>Vegetarian</label><br>
@@ -415,7 +445,7 @@ namespace MyMenuPlus.Helpers
             <div draggable = 'true' class='editor-section section-item section-tag ui-sortable-handle' style=''>
                 <div class='editor-section-handle'>
                     <ul class='editor-section-controls tags'>
-                        <i class='fas fa-trash-alt' onclick='$(this.parentNode.parentNode.parentNode)[0].remove()'></i>
+                        <i class='fas fa-trash-alt' onclick='$(this.parentNode.parentNode.parentNode)[0].remove();EditorChanges()'></i>
                         <i class='fas fa-caret-left controls-half' onclick='moveTagLeft(this)'></i>
                         <i class='fas fa-caret-right controls-half' onclick='moveTagRight(this)' style='float: right;'></i>
                     </ul>
@@ -429,11 +459,11 @@ namespace MyMenuPlus.Helpers
 
         }
 
-        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice)
+        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice, int itemID)
         {
 
             string item = $@"
-                <tr>
+                <tr data-itemID='{itemID}'>
 	                <td>
 		                <div class='item-name'>{itemName}</div>
 		                <div class='item-description'>{itemDescription}</div>

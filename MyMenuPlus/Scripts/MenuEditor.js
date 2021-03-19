@@ -40,7 +40,7 @@ const itemSection = `<div draggable="true" class="editor-section section-item">
     <div class="editor-section-handle">
     
     <ul class="editor-section-controls toolbar-items">
-        <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove()"></i>
+        <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove();EditorChanges()"></i>
         <i class="fas fa-caret-up" onclick="moveItemSectionUp(this)"></i>
         <i class="fas fa-caret-down" onclick="moveItemSectionDown(this)"></i>
     </ul>
@@ -74,7 +74,7 @@ const Section = `
         <div class="editor-section">
             <div class="editor-section-handle">
                 <ul class="editor-section-controls toolbar-sections">
-                    <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove()"></i>
+                    <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove();EditorChanges()"></i>
                     <i class="fas fa-caret-up" onclick="moveSectionUp(this)"></i>
                     <i class="fas fa-caret-down" onclick="moveSectionDown(this)"></i>
                 </ul>
@@ -103,7 +103,7 @@ const Tag = `
 <div draggable="true" class="editor-section section-item section-tag ui-sortable-handle" style="">
     <div class="editor-section-handle">
         <ul class="editor-section-controls tags">
-            <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove()"></i>
+            <i class="fas fa-trash-alt" onclick="$(this.parentNode.parentNode.parentNode)[0].remove();EditorChanges()"></i>
             <i class="fas fa-caret-left controls-half" onclick="moveTagLeft(this)" ></i>
             <i class="fas fa-caret-right controls-half" onclick="moveTagRight(this)" style="float: right;"></i>
         </ul>
