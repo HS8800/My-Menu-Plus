@@ -232,6 +232,7 @@
     <Content Include="Media\menu2.svg" />
     <Content Include="Media\Placeholder-pattern.jpg" />
     <Content Include="Scripts\Aos.js" />
+    <Content Include="Scripts\Basket.js" />
     <Content Include="Scripts\Currency.js" />
     <Content Include="Scripts\Form.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

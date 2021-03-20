@@ -469,7 +469,7 @@ namespace MyMenuPlus.Helpers
 		                <div class='item-description'>{itemDescription}</div>
 	                </td>
 	                <td class='item-right'>
-		                <span class='item-price'>£{itemPrice}</span><button class='item-btn'>+</button>
+		                <span class='item-price'>£{itemPrice}</span><button class='item-btn item-add'>+</button>
 	                </td>
                 </tr>
             ";

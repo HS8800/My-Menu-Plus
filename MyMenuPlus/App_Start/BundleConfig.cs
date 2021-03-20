@@ -35,7 +35,9 @@ namespace MyMenuPlus
                  "~/Scripts/jquery-3.5.1.min.js",
                  "~/Scripts/Scroll.js",
                  "~/Scripts/MenuScale.js",
-                 "~/Scripts/Menu.js"
+                 "~/Scripts/Menu.js",
+                 "~/Scripts/Currency.js",
+                 "~/Scripts/Basket.js"
             ));
 
 

@@ -40,16 +40,16 @@
   width: 40px;
 }
 
-.select-arrow{
-  position: absolute; 
-  height: 40px;
-  margin: -50px 10px;
-  z-index: 999; 
-  background-image: url('../img/Arrow.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.7;
-  cursor: pointer;
+.select-arrow {
+    position: absolute;
+    height: 40px;
+    margin: -50px 10px;
+    z-index: 999;
+    background-image: url('../Media/Arrow.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .select-gap{

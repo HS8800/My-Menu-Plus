@@ -150,7 +150,7 @@ background-color: white;
 }
 
 .item-description{
-  font-size: 15px;
+  font-size: 14px;
   color:#616060;
 }
 
@@ -203,7 +203,7 @@ background-color: white;
 
 #basket-container{
   background-color: white;
-  max-width: 340px;
+  max-width: 440px;
   width: 100%;
   margin: 30px;
   box-shadow: 0px 22px 24px 0px rgba(46,51,51,0.07);
@@ -243,3 +243,61 @@ background-color: white;
   transform: none;
   opacity: 0.7;
 }
+
+#basket-total {
+    display: none;
+    margin: 0px;
+}
+
+#basket-table {
+    width: 100%;
+    padding: 20px;
+    display: none;
+    color: #2e4753;
+    border-spacing: 5px;
+    border-collapse: separate;
+}
+
+
+#basket-table > tr > td {
+    padding: 0px 10px;
+}
+
+#basket-table > tr > th {
+    text-align: left;
+}
+
+select {
+    padding: 4px 4px 4px 0px;
+    background-color: #f0f2f5;
+    border: 1px solid #dadde2;
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+    border-radius: 5px;
+}
+
+#basket-content {
+    display: block;
+    max-height: 170px;
+    overflow-y: auto;
+}
+
+#basket-thead, #basket-content > tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    text-align: left;
+}
+
+
+    #basket-content > tr > td:last-child, #basket-thead > tr > th:last-child {
+        width: 15%;
+    }
+
+
+#basket-content > tr > td:first-child, #basket-thead > tr > th:first-child {
+    width: 60%;
+}
+
+
+
+
