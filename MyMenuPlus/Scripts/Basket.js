@@ -96,3 +96,35 @@ $(".item-add").click(function () {
     basketAdd(item.dataset.itemid, $(item).find(".item-name").text(), 1, $(item).find(".item-price").text())
 });
 
+$(".basket-btn").click(function () {
+
+    if ($("#shop-more-container").css("display") != "flex") {//First step confirm order
+        $("#main-menu").hide();
+        $("#basket-container").css({ "max-width": "initial" });
+        $("#shop-more-container").css({ "display": "flex" });
+        
+    } else {//Second step collect payment
+        $("#payment-form").css({ "display": "block" });   
+        $("#basket-list").css({ "display": "none" });  
+        $(".basket-btn").css({ "display": "none" });  
+        $("#btn-shop-back").css({ "display": "block" });   
+    }
+
+});
+
+$("#btn-shop-more").click(function () {
+    $("#main-menu").show();
+    $("#basket-container").css({ "max-width": "440px" });
+    $("#shop-more-container").css({ "display": "none" });
+    $("#payment-form").css({ "display": "none" });  
+});
+
+$("#btn-shop-back").click(function () {
+    $("#payment-form").css({ "display": "none" });  
+    $("#btn-shop-back").css({ "display": "none" });   
+    $("#basket-list").css({ "display": "block" });  
+    $("#shop-more-container").css({ "display": "flex" });
+    $(".basket-btn").css({ "display": "block" });  
+
+});
+

@@ -9,6 +9,9 @@ namespace MyMenuPlus
         public static void RegisterBundles(BundleCollection bundles)
         {
 
+
+
+
             //Menu Editor
             bundles.Add(new StyleBundle("~/bundles/MenuEditorPageStyles").Include(
                     "~/Content/Notifications.css",
@@ -23,6 +26,9 @@ namespace MyMenuPlus
                  "~/Scripts/Currency.js"
              ));
 
+
+
+       
 
             //Menu
             bundles.Add(new StyleBundle("~/bundles/MenuPageStyles").Include(

@@ -92,7 +92,7 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-        internal static (bool success, string title, string tags, string sections, string bannerImage, string menuNavigaton) createMenuComponents(int menuID, int accountID)
+        internal static (bool success, string title, string tags, string sections, string bannerImage, string menuNavigaton) createMenuComponents(int menuID)
         {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);

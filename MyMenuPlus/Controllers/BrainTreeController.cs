@@ -16,7 +16,7 @@ namespace MyMenuPlus.Controllers
         // GET: BrainTree
         public ActionResult Index()
         {      
-            ViewData["ClientToken"] = brain.CreateClientToken(); ;
+            ViewData["ClientToken"] = brain.CreateClientToken(); 
             return View();
         }
 
