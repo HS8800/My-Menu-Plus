@@ -11,20 +11,15 @@ namespace MyMenuPlus.Controllers
   
     public class BrainTreeController : Controller
     {
-        BrainTree brain = new BrainTree();
-
-        // GET: BrainTree
-        public ActionResult Index()
-        {      
-            ViewData["ClientToken"] = brain.CreateClientToken(); 
-            return View();
-        }
-
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreatePurchase(FormCollection collection)
-        {       
+        {
+            BrainTree brain = new BrainTree();
+
+
             string nonceFromTheClient = collection["payment_method_nonce"];
             // Use payment method nonce here
 
@@ -32,9 +27,8 @@ namespace MyMenuPlus.Controllers
             Random rnd = new Random();
             var request = new TransactionRequest
             {
-                Amount = rnd.Next(1, 100),
+                Amount = 26,
                 PaymentMethodNonce = nonceFromTheClient,
-                OrderId = "1",
                 Options = new TransactionOptionsRequest
                 {
                     SubmitForSettlement = true
@@ -44,14 +38,22 @@ namespace MyMenuPlus.Controllers
             var gateway = brain.CreateGateway();
             Result<Transaction> result = gateway.Transaction.Sale(request);
 
-            
-            if (result.Target.ProcessorResponseText == "Approved") {
+
+            if (result.IsSuccess())
+            {
                 TempData["Success"] = "Transaction was successful, Transaction ID" + result.Target.Id + ", Amount Charged : £" + result.Target.Amount;
+                return RedirectToAction("Success");
             }
-            return RedirectToAction("Index");
 
 
+            TempData["Error"] = result.Target.ProcessorResponseText;
+            return RedirectToAction("Error");
         }
+
+        public ActionResult Success() {
+            return View();
+        }
+
 
     }
 }

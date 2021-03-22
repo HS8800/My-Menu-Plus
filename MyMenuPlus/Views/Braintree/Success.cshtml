@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/MenuLayout.cshtml";
+}
+
+@*https://localhost:44392/Braintree/Success*@
+
+@Styles.Render("~/bundles/ResponseStyles")
+
+<div id="container">
+    <div class="circle"><i class="fas fa-check"></i></div>
+    <h1 id="outcome-text">Success</h1>
+    <p id="outcome-info">@TempData["Success"]</p>
+    <button id="btn-return" onclick="window.history.back()">Return to Menu</button>
+</div>

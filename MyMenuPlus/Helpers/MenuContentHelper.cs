@@ -72,7 +72,7 @@ namespace MyMenuPlus.Helpers
         }
 
 
-        internal static (bool success, string details) DeleteMenu(int menuID, int accountID)
+        internal static (bool success, string details) deleteMenu(int menuID, int accountID)
         {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
             try

@@ -69,7 +69,7 @@ namespace MyMenuPlus.Controllers
 
             if (Session["id"] != null)
             {
-                var DeleteMenu = MenuContentHelper.DeleteMenu(menuID, Convert.ToInt32(Session["id"]));
+                var DeleteMenu = MenuContentHelper.deleteMenu(menuID, Convert.ToInt32(Session["id"]));
                 if (DeleteMenu.success)
                 {
                     response.response = "success";

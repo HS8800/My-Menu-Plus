@@ -11,6 +11,11 @@ namespace MyMenuPlus
 
 
 
+            //Success Page
+            
+            bundles.Add(new StyleBundle("~/bundles/ResponseStyles").Include("~/Content/Response.css"));
+
+      
 
             //Menu Editor
             bundles.Add(new StyleBundle("~/bundles/MenuEditorPageStyles").Include(
