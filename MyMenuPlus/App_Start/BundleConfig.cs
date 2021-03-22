@@ -11,8 +11,7 @@ namespace MyMenuPlus
 
 
 
-            //Success Page
-            
+            //Success Page           
             bundles.Add(new StyleBundle("~/bundles/ResponseStyles").Include("~/Content/Response.css"));
 
       
@@ -39,7 +38,7 @@ namespace MyMenuPlus
             bundles.Add(new StyleBundle("~/bundles/MenuPageStyles").Include(
                     "~/Content/Scroll.css",
                     "~/Content/Menu.css",
-                    "~/Content/MainScale.css"
+                    "~/Content/MainScale.css"                 
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/MenuPageScripts").Include(
@@ -86,7 +85,8 @@ namespace MyMenuPlus
             bundles.Add(new StyleBundle("~/bundles/MainSiteLayout").Include(
                         "~/Content/Aos.css",
                         "~/Content/Footer.css",
-                        "~/Content/Navbar.css"
+                        "~/Content/Navbar.css",
+                        "~/Content/LoadingPage.css"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/MainSiteLayoutScripts").Include(
@@ -101,7 +101,8 @@ namespace MyMenuPlus
                     "~/Content/MenuNavbar.css",
                     "~/Content/Form.css",
                     "~/Content/Brand.css",
-                    "~/Content/Notifications.css"
+                    "~/Content/Notifications.css",
+                    "~/Content/LoadingPage.css"
                     ));
 
 

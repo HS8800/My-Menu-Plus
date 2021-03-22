@@ -99,17 +99,20 @@ $(".item-add").click(function () {
 
 $(".basket-btn").click(function () {
 
-    if ($("#shop-more-container").css("display") != "flex") {//First step confirm order
-        $("#main-menu").hide();
-        $("#basket-container").css({ "max-width": "initial" });
-        $("#shop-more-container").css({ "display": "flex" });
-        
-    } else {//Second step collect payment    
-        $("#basket-items").val(JSON.stringify(basket));
-        $("#payment-form").css({ "display": "block" });   
-        $("#basket-list").css({ "display": "none" });  
-        $(".basket-btn").css({ "display": "none" });  
-        $("#btn-shop-back").css({ "display": "block" });   
+
+    if (basket.length > 0) {
+        if ($("#shop-more-container").css("display") != "flex") {//First step confirm order
+            $("#main-menu").hide();
+            $("#basket-container").css({ "max-width": "initial" });
+            $("#shop-more-container").css({ "display": "flex" });
+
+        } else {//Second step collect payment    
+            $("#basket-items").val(JSON.stringify(basket));
+            $("#payment-form").css({ "display": "block" });
+            $("#basket-list").css({ "display": "none" });
+            $(".basket-btn").css({ "display": "none" });
+            $("#btn-shop-back").css({ "display": "block" });
+        }
     }
 
 });

@@ -6,7 +6,7 @@ $(".btn-create-new").click(function () {
 });
 
 
-//hide create new meu form
+//hide create new menu form
 $("#menu-create-background,#btn-menu-close").click(function (e) {
     if (e.target !== this)//prevent click event when clicking over menu
         return;
@@ -23,19 +23,20 @@ $("#menu-create-form").submit(function (e) {
     $("#btn-menu-create").addClass("btn-state-sent")
     $("#btn-menu-create").text("Creating")
     $(".loading").css({ "display": "block" })
+    $("#loading-background").css({ "display": "flex" })
 
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $("#btn-menu-create").text("Create Menu"); $(".loading").css({ "display": "none" }) }, 10000);
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $("#btn-menu-create").text("Create Menu"); $(".loading").css({ "display": "none" }); $("#loading-background").css({ "display": "none" }) }, 10000);
 
     //Send Post
     $.post('/MenuSelection/CreateMenu', { menuName: $("#menu-create-title").val().replace(/(<([^>]+)>)/gi, ""), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
         response = JSON.parse(response);
         if (response.response == "success") {
-            
-            newNotification("Created")
+
             window.location.href = "/MenuSelection";//Reload page
 
         } else if (response.response == "failed") {
             $(".errorDisplay").text(response.error)
+            $("#loading-background").css({ "display": "none" })
         }
     }).always(function () {
         $(".btn-state-sent").removeClass("btn-state-sent");
@@ -53,14 +54,18 @@ $(".btn-menu-delete").click(function () {
     var menuElement = $(this)[0];
     if (confirm("You are about to permanently delete the menu " + menuElement.parentElement.parentElement.childNodes[1].innerText + ",\nare you sure?")) {
         //Send Post
-        $.post('/MenuSelection/DeleteMenu', { menuID: menuElement.dataset.id, __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
+
+        $("#loading-background").css({ "display": "flex" })
+        $.post('/MenuSelection/DeleteMenu', { menuID: menuElement.dataset.id, __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()}).done(function (response) {
             response = JSON.parse(response);
             if (response.response == "success") {
-                newNotification("Deleted")
                 $(menuElement.parentElement.parentElement).remove();//Delete visual      
             } else if (response.response == "failed") {
                 $(".errorDisplay").text(response.error)
             }
+           
+        }).always(function () {
+            $("#loading-background").css({ "display": "none" })
         });
     }
  
@@ -81,6 +86,7 @@ $('#menu-container > div').click(function (e) {
         menuID = e.target.childNodes[0].childNodes[0].dataset.id;
     }
 
+    $("#loading-background").css({ "display": "flex" })
     window.location.href = "/Menu?content="+menuID;//Go to menu
 
 

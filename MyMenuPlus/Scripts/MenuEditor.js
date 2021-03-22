@@ -425,20 +425,20 @@ $("#toolbar-save").click(function(){
     menu.sections = sections;
 
 
+    $("#loading-background").css({ "display": "flex" })
+    setTimeout(function () { $("#loading-background").css({ "display": "none" }) }, 10000);
 
     $.post('/MenuEditor/UpdateMenu', {
         menuID: this.dataset.content, menuImage: bannerImageBase64, menuData: JSON.stringify(menu) , __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
     }).done(function (response) {
         response = JSON.parse(response);
         if (response.response == "success") {
-            $("#toolbar-uptodate").css({ "display": "inline" });
-            newNotification("Saved")
-            //window.location.href = "/MenuSelection";//Reload page
-
+            $("#toolbar-uptodate").css({ "display": "inline" });           
         } else if (response.response == "failed") {
             newError(response.error)
             $("#toolbar-save").css({ "display": "inline" });
         }
+        $("#loading-background").css({ "display": "none" })
     }).always(function () {
         $(".loading").css({ "display": "none" })
     });

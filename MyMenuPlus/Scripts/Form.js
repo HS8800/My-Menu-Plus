@@ -40,21 +40,21 @@ $("#login-form").submit(function (e) {
     //Button Feedback
     $(".btn-login").addClass("btn-state-sent")
     $(".loading").css({ "display": "block" })
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $(".loading").css({ "display": "none" }) }, 10000);
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $(".loading").css({ "display": "none" }); $("#loading-background").css({ "display": "none" })  }, 10000);
+    $("#loading-background").css({ "display": "flex" })
 
     //Send Post
     $.post('/Login/Login', { email: $("#login-email").val(), password: $("#login-password").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()}).done(function (response) {
         response = JSON.parse(response);
         if (response.response == "success") {
-            window.location.href = "/MenuSelection";//Redirect to menu selection
-            newNotification("Welcome")
-            $(".errorDisplay").text("");           
+            window.location.href = "/MenuSelection";//Redirect to menu selection          
         } else if (response.response == "failed") {
             $(".errorDisplay").text(response.error)
+            $("#loading-background").css({ "display": "none" })    
         }     
     }).always(function () {
         $(".btn-state-sent").removeClass("btn-state-sent")
-        $(".loading").css({ "display": "none" })
+        $(".loading").css({ "display": "none" })        
     });
     password: $("#login-password").val("");
     
@@ -69,7 +69,9 @@ $("#register-form").submit(function (e) {
     //Button Feedback
     $(".btn-register").addClass("btn-state-sent")
     $(".loading").css({ "display": "block" })
-    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $(".loading").css({ "display": "none" }) }, 10000);
+    setTimeout(function () { $(".btn-state-sent").removeClass("btn-state-sent"); $(".loading").css({ "display": "none" }); $("#loading-background").css({ "display": "none" })   }, 10000);
+    $("#loading-background").css({ "display": "flex" })
+
     //Send Post
     $.post('/Login/Register',
         {
@@ -93,6 +95,7 @@ $("#register-form").submit(function (e) {
 
             } else if (response.response == "failed") {
                 $(".errorDisplay").text(response.error)
+                $("#loading-background").css({ "display": "none" })
             } 
         }).always(function () {
             $(".btn-state-sent").removeClass("btn-state-sent")
