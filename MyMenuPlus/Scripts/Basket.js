@@ -82,6 +82,7 @@ function refreshBasketTable() {
       
 
         $("#basket-total-value").text(currency.format(total));
+        $("#basket-amount").val(currency.format(total));
 
     } else {
         $("#basket-total").hide();
@@ -103,7 +104,8 @@ $(".basket-btn").click(function () {
         $("#basket-container").css({ "max-width": "initial" });
         $("#shop-more-container").css({ "display": "flex" });
         
-    } else {//Second step collect payment
+    } else {//Second step collect payment    
+        $("#basket-items").val(JSON.stringify(basket));
         $("#payment-form").css({ "display": "block" });   
         $("#basket-list").css({ "display": "none" });  
         $(".basket-btn").css({ "display": "none" });  

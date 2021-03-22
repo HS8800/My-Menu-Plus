@@ -204,6 +204,7 @@
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Models\LoginModels.cs" />
+    <Compile Include="Models\PriceModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

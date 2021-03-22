@@ -9,8 +9,15 @@
 @Styles.Render("~/bundles/ResponseStyles")
 
 <div id="container">
-    <div class="circle"><i class="fas fa-check"></i></div>
+    <div class="circle"><i class="fas fa-exclamation"></i></div>
     <h1 id="outcome-text">Oops, looks like something wasn't quite right</h1>
     <p id="outcome-info">@TempData["Error"]</p>
     <button id="btn-return" onclick="window.history.back()">Return to Menu</button>
 </div>
+
+<style>
+    .fa-exclamation, #outcome-text {
+        color: #cc3333 !important;
+    }
+
+</style>

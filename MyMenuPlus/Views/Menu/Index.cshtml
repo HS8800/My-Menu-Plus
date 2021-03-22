@@ -86,12 +86,14 @@
 
             <script src="https://js.braintreegateway.com/web/dropin/1.27.0/js/dropin.min.js"></script>
             <form id="payment-form" action="/BrainTree/CreatePurchase" method="post">
-                <!-- Putting the empty container you plan to pass to
-        `braintree.dropin.create` inside a form will make layout and flow
-        easier to manage -->
+
                 <div id="dropin-container"></div>
                 <input class="item-btn" id="btn-basket-submit" type="submit" />
                 @Html.AntiForgeryToken()
+
+                <input type="hidden" value="@ViewData["menuID"]" name="menu-id" />
+                <input type="hidden" id="basket-items" name="basket-items" />
+                <input type="hidden" id="basket-amount" name="basket-amount" />
 
                 <input type="hidden" id="nonce" name="payment_method_nonce" />
             </form>
