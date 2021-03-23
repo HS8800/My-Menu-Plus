@@ -38,7 +38,8 @@ namespace MyMenuPlus
             bundles.Add(new StyleBundle("~/bundles/MenuPageStyles").Include(
                     "~/Content/Scroll.css",
                     "~/Content/Menu.css",
-                    "~/Content/MainScale.css"                 
+                    "~/Content/MainScale.css",
+                    "~/Content/TableSelection.css"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/MenuPageScripts").Include(
@@ -47,7 +48,8 @@ namespace MyMenuPlus
                  "~/Scripts/MenuScale.js",
                  "~/Scripts/Menu.js",
                  "~/Scripts/Currency.js",
-                 "~/Scripts/Basket.js"
+                 "~/Scripts/Basket.js",
+                 "~/Scripts/TableSelection.js"
             ));
 
 

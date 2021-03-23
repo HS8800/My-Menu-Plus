@@ -1,13 +1,23 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
-</body>
-</html>
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/MenuLayout.cshtml";
+}
+
+
+
+@Styles.Render("~/bundles/ResponseStyles")
+
+<div id="container">
+    <div class="circle"><i class="fas fa-ghost"></i></div>
+    <h1 id="outcome-text">Oops, looks like something wasn't quite right</h1>
+    <p id="outcome-info">@TempData["Error"]</p>
+    <button id="btn-return" onclick="window.history.back()">Back</button>
+</div>
+
+<style>
+    .fa-ghost, #outcome-text {
+        color: #3f51b5 !important;
+    }
+
+</style>

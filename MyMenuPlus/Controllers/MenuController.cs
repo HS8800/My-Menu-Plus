@@ -18,8 +18,16 @@ namespace MyMenuPlus.Controllers
 
         BrainTree brain = new BrainTree();
 
-        public ActionResult Index(int content)
+
+
+        public ActionResult Index(int content = -1,int table = -1)
         {
+
+            if (content == -1) {
+                TempData["Error"] = "The menu you are looking for doesn't exist";
+                return View("MenuNotFound");
+            }
+
             ViewData["menuID"] = content;
             var menuComponents = MenuContentHelper.createMenuComponents(content);
 

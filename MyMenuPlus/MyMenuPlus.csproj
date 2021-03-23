@@ -223,6 +223,7 @@
     <Content Include="Content\Notifications.css" />
     <Content Include="Content\Scroll.css" />
     <Content Include="Content\SectionEditor.css" />
+    <Content Include="Content\TableSelection.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -245,6 +246,7 @@
     <Content Include="Scripts\MenuSelection.js" />
     <Content Include="Scripts\Notifications.js" />
     <Content Include="Scripts\Scroll.js" />
+    <Content Include="Scripts\TableSelection.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -272,9 +274,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MenuSelection\Index.cshtml" />
     <Content Include="Views\Shared\MainSiteLayout.cshtml" />
-    <Content Include="Views\Menu\MenuNotFound.cshtml" />
     <Content Include="Views\Braintree\Success.cshtml" />
     <Content Include="Views\Braintree\Error.cshtml" />
+    <Content Include="Views\Menu\MenuNotFound.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
