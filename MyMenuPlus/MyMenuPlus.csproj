@@ -245,6 +245,8 @@
     <Content Include="Scripts\MenuScale.js" />
     <Content Include="Scripts\MenuSelection.js" />
     <Content Include="Scripts\Notifications.js" />
+    <Content Include="Scripts\qr-scanner-worker.min.js" />
+    <Content Include="Scripts\qr-scanner.min.js" />
     <Content Include="Scripts\Scroll.js" />
     <Content Include="Scripts\TableSelection.js" />
     <Content Include="Web.config" />

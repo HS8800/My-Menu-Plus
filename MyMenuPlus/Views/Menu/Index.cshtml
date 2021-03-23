@@ -26,10 +26,53 @@
 <body>
 
 
+
+
+
     <div id="table-background">
         <form id="table-container">
             <h3 style="width: 100%;text-align: center;">Table Number</h3>
-            <input id="input-table-number" type="number" value="3" min="1" max="999">
+            <input id="input-table-number" type="number" min="1" max="999">
+
+                <span class="login-close" id="qr-close">×</span>
+                <video muted playsinline id="qr-video"></video>
+                <script type="module">
+                    var redirected = false;
+
+                    import QrScanner from "/Scripts/qr-scanner.min.js";
+                    QrScanner.WORKER_PATH = '/Scripts/qr-scanner-worker.min.js';
+                    const video = document.getElementById('qr-video');
+                    const scanner = new QrScanner(video, result => new function () {
+
+                        if (!redirected) {
+                            window.location.href = result;
+                            redirected = true;
+                            $("#table-background").hide();
+                            $("#loading-background").css({ "display": "flex" });
+                        }
+                      
+                    });
+                
+                    $("#btn-table-qr").click(function () {
+                        scanner.start();
+                        $("#qr-video").css({ "display": "block" })
+                        $("#qr-close").css({ "display": "block" })
+                      
+                    });
+
+                    $("#qr-close").click(function () {
+                        scanner.stop();
+                        $("#qr-video").css({ "display": "none" })
+                        $("#qr-close").css({ "display": "none" })
+
+                    });
+                    
+
+                </script>
+
+        
+
+
             <input type="button" value="Scan QR Code" id="btn-table-qr" class="btn-table btn-table-dark">
             <input type="submit" value="Submit Table Number" class="btn-table btn-table-dark">
             <span id="btn-table-skip" class="btn-table">Just taking a look</span>
