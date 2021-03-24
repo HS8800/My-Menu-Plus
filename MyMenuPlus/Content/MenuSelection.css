@@ -195,3 +195,32 @@
     #menu-container > div:not(#menu-create-new):hover {
         opacity: 0.7;
     }
+
+
+@media only screen and (max-width: 920px) {
+
+    #menu-container > div {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 575px) {
+    #btn-menu-create {
+        width: 100%;
+        max-width: 350px;
+        margin-top: -22px !important;
+        transform: none !important;
+        border-radius: 10px !important;
+    }
+
+    #menu-create-title {
+        transform: none !important;
+
+    }
+ 
+}
+
+body {
+    overflow-x: hidden;
+}

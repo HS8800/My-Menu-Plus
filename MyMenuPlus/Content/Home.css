@@ -1,7 +1,7 @@
 ﻿body {
     font-family: "Poppins", sans-serif;
     background-color: #f9f9f9;
-    margin:0px;
+    margin: 0px;    
 }
 
 :root {
@@ -74,6 +74,7 @@
     margin-left: 38%;
     padding-top: 59px;
     color: white;
+    padding-bottom: 32px;
 }
 
 #large-top-text {
@@ -144,7 +145,7 @@
         background-color: white;
         margin: 20px;
         width: 400px;
-        height: 260px;
+        min-height: 260px;
         box-shadow: 0 0 5px 0 rgb(0 0 0 / 8%);
     }
 
@@ -229,4 +230,71 @@
         opacity: 1;
     }
 }
+
+
+@media only screen and (max-width: 950px) {
+    #large-top-text {
+        zoom: 0.8;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .flex-container {
+        flex-wrap: wrap;
+    }
+    
+}
+
+@media only screen and (max-width: 895px) {
+    .double-flex {
+        margin: 20px;
+        width: calc(100% - 40px);
+    }
+}
+
+@media only screen and (max-width: 765px) {
+    #large-top-text {
+        zoom: 0.6;
+    }
+
+    :root {
+        --main-large-top-height: 494px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .slanted-section > div {
+        transform: translateX(-20%);
+    }
+
+    .slanted-section-content {
+        transform: translateX(-4%);
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+    #large-top-text {
+        zoom: 0.5;
+    }
+
+    :root {
+        --main-large-top-height: 456px;
+    }
+}
+
+
+@media only screen and (max-width: 420px) {
+    #large-top-text {
+        zoom: 0.4;
+    }
+
+    :root {
+        --main-large-top-height: 396px;
+    }
+}
+
+
+
 

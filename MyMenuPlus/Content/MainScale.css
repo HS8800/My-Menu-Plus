@@ -32,12 +32,16 @@
 }
 
 @media only screen and (max-width: 1060px) {
-  #basket-container {
-    display: none;
-  }
-#main-menu {
-    width: 100%;
-}
+    #basket-container {
+        display: none;
+        position: absolute !important;
+        right: 0px;
+        width: calc(100% - 60px);
+    }
+
+    #main-menu {
+        width: 100%;
+    }
 
   #main-container {
     width: 100%;
