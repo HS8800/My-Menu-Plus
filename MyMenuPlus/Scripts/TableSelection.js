@@ -1,4 +1,6 @@
-﻿$("#table-background,#btn-table-skip").click(function (e) {
+﻿
+
+$("#table-background,#btn-table-skip").click(function (e) {
     if (e.target !== this)
         return;
 
@@ -35,6 +37,12 @@ function getParam(param) {
     return url.searchParams.get(param);
 }
 
+//Set table number from url as varable to prevent having to reload the page if the user gives a table number later
+var table = -1;
+if (getParam("table") != null) {
+    table = getParam("table");
+}
+
 $("#table-container").submit(function (e) {  
     e.preventDefault();
     insertParam("table", $("#input-table-number").val());
@@ -52,3 +60,15 @@ $(document).ready(function () {
 
 });
 
+
+$("#basket-table-update").click(function () {
+    $("#table-background").show();
+    $("#btn-table-qr").hide();
+    $("#table-container").unbind();
+    $("#table-container").submit(function (e) {
+        e.preventDefault();
+        table = $("#input-table-number").val();
+        $("#table-background").hide();
+        $("#basket-table-number-value").text(table);
+    });
+});

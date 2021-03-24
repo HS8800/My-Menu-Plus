@@ -100,21 +100,36 @@ $(".item-add").click(function () {
 $(".basket-btn").click(function () {
 
 
-    if (basket.length > 0) {
-        if ($("#shop-more-container").css("display") != "flex") {//First step confirm order
-            $("#main-menu").hide();
-            $("#basket-container").css({ "max-width": "initial" });
-            $("#shop-more-container").css({ "display": "flex" });
+    if (table == -1) {
+        $("#table-background").show();
+        $("#btn-table-qr").hide();
+        $("#table-container").unbind();
+        $("#table-container").submit(function (e) {
+            e.preventDefault();
+            table = $("#input-table-number").val();
+            $("#table-background").hide();
+        });
+    } else {
 
-        } else {//Second step collect payment    
-            $("#basket-items").val(JSON.stringify(basket));
-            $("#payment-form").css({ "display": "block" });
-            $("#basket-list").css({ "display": "none" });
-            $(".basket-btn").css({ "display": "none" });
-            $("#btn-shop-back").css({ "display": "block" });
+        if (basket.length > 0) {
+            if ($("#shop-more-container").css("display") != "flex") {//First step confirm order
+                $("#main-menu").hide();
+                $("#basket-container").css({ "max-width": "initial" });
+                $("#shop-more-container").css({ "display": "flex" });
+
+            } else {//Second step collect payment    
+
+                $("#basket-table-number-value").text(table);
+                $("#basket-table-number").show();
+                $("#basket-items").val(JSON.stringify(basket));
+                $("#payment-form").css({ "display": "block" });
+                $("#basket-list").css({ "display": "none" });
+                $(".basket-btn").css({ "display": "none" });
+                $("#btn-shop-back").css({ "display": "block" });
+            }
         }
-    }
 
+    }
 });
 
 $("#btn-shop-more").click(function () {
@@ -130,6 +145,7 @@ $("#btn-shop-back").click(function () {
     $("#basket-list").css({ "display": "block" });  
     $("#shop-more-container").css({ "display": "flex" });
     $(".basket-btn").css({ "display": "block" });  
+    $("#basket-table-number").hide();
 
 });
 

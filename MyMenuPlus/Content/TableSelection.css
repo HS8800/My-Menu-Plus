@@ -110,3 +110,15 @@
     }
 }
 
+
+
+#basket-table-number {
+    display:none;
+}
+
+#basket-table-update {
+    color: #6b6868;
+    font-weight: 300;
+    font-size: 13px;
+}
+
