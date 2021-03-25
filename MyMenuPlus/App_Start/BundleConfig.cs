@@ -11,10 +11,14 @@ namespace MyMenuPlus
 
 
 
+            //OrderDisplay
+            bundles.Add(new ScriptBundle("~/bundles/OrderDisplayScripts").Include(
+                    "~/Scripts/jquery-3.5.1.min.js",
+                    "~/Scripts/Orders.js"));
+
+
             //Success Page           
             bundles.Add(new StyleBundle("~/bundles/ResponseStyles").Include("~/Content/Response.css"));
-
-      
 
             //Menu Editor
             bundles.Add(new StyleBundle("~/bundles/MenuEditorPageStyles").Include(
