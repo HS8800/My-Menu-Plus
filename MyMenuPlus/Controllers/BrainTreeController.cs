@@ -1,5 +1,8 @@
 ﻿using Braintree;
+using Microsoft.AspNet.SignalR;
 using MyMenuPlus.Helpers;
+using MyMenuPlus.Models;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,6 +29,7 @@ namespace MyMenuPlus.Controllers
             int menuID = Convert.ToInt32(collection["menu-id"]);
             dynamic basketItems = JsonConvert.DeserializeObject(collection["basket-items"]);          
             string untrustedBasketAmount = collection["basket-amount"];
+            int tableNumber = Convert.ToInt32(collection["tableNumber"]);
 
             //Find menu prices
             var PriceDictionary = Helpers.BrainTreeHelper.getPriceDictionary(menuID);
@@ -36,12 +40,24 @@ namespace MyMenuPlus.Controllers
 
     
             //Check that pricing and item names are correct
-            decimal trustedTotal = 0;          
+            decimal trustedTotal = 0;
+            List<OrderItemModel> trustedOrderItems = new List<OrderItemModel>();
             foreach (var item in basketItems)
             {
                 var itemLookup = PriceDictionary.PriceDictionary[Convert.ToInt32(item.id)];
                 if (Convert.ToDecimal(Convert.ToString(item.price).Substring(1)) == itemLookup.price && item.name == itemLookup.name)
                 {
+
+                    //Create new verifyed item for order
+                    OrderItemModel orderItemType = new OrderItemModel();
+                    orderItemType.id = Convert.ToInt32(item.id);
+                    orderItemType.name = itemLookup.name;
+                    orderItemType.pricePerUnit = Convert.ToDecimal(Convert.ToString(item.price).Substring(1));
+                    orderItemType.qty = Convert.ToInt32(item.qty);
+
+                    trustedOrderItems.Add(orderItemType);
+
+                    //Add to order total
                     trustedTotal += Convert.ToDecimal(Convert.ToString(item.price).Substring(1)) * Convert.ToInt32(item.qty);
                 }
                 else {
@@ -68,6 +84,57 @@ namespace MyMenuPlus.Controllers
 
             if (result.IsSuccess())
             {
+                //Attempt to create order
+                MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+                try
+                {
+                    connection.Open();
+                    string query = "CALL createOrder(@transactionID,@menuID,@tableNumber,@itemsJSON)";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@transactionID", result.Target.Id);
+                    command.Parameters.AddWithValue("@menuID", menuID);
+                    command.Parameters.AddWithValue("@tableNumber", tableNumber);
+                    command.Parameters.AddWithValue("@itemsJSON", JsonConvert.SerializeObject(trustedOrderItems));
+                    command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    connection.Close();
+                    //Attempt to create order again
+                    try//retry
+                    {
+                        connection.Open();
+                        string query = "CALL createOrder(@transactionID,@menuID,@tableNumber,@itemsJSON)";
+                        MySqlCommand command = new MySqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@transactionID", result.Target.Id);
+                        command.Parameters.AddWithValue("@menuID", menuID);
+                        command.Parameters.AddWithValue("@tableNumber", tableNumber);
+                        command.Parameters.AddWithValue("@itemsJSON", JsonConvert.SerializeObject(trustedOrderItems));
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                    catch
+                    { //Could not create order
+                        TempData["Error"] = $"A Serious Error has occured, a transaction of £{trustedTotal} was made but your order was unable to be created. </br> Please provide the transaction id  {result.Target.Id} to a member of staff.";
+                        return RedirectToAction("Error");
+                    }
+                }
+
+
+                try // Incase somthing with the web sockets breaks still inform the user that they paid 
+                {
+                    //Send order to kitchen order displays
+                    var OrderDisplayHub = GlobalHost.ConnectionManager.GetHubContext<OrderDisplayHub>();
+                    OrderDisplayHub.Clients.All.Order(result.Target.Id, tableNumber, JsonConvert.SerializeObject(trustedOrderItems));
+
+                }
+                catch {
+                    TempData["Error"] = $"Your order of £{result.Target.Amount} was made successfully but we had a problem contacting the kitchen, please inform a member of staff. id: {result.Target.Id}";
+                    return RedirectToAction("Error");
+                }
+
+
+                //Purchase successfull
                 TempData["Success"] = "Transaction was successful, Transaction ID" + result.Target.Id + ", Amount Charged : £" + result.Target.Amount;
                 return RedirectToAction("Success");
             }

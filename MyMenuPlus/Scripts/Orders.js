@@ -80,7 +80,45 @@ setInterval(function(){
 
    
 
-  }, 1000);
+}, 1000);
+
+function htmlEncode(value) {
+    var encodedValue = $('<div />').text(value).html();
+    return encodedValue;
+}
+
+function newOrder(id,table,items) {
+
+    id = htmlEncode(id);
+    table = htmlEncode(table);
+    items = htmlEncode(items);
+
+    var order = `
+        <div>
+            <div class="timer"><span>0</span>:<span>0</span>:<span>0</span></div>
+            <div class="order-content">
+                <h2>Order <span>`+id+`</span></h2>
+                <h4 class="table-number">Table <span>`+table+`</span></h4>
+            </div>
+            <table class="item-table">
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>Burger</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Burger</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="order-complete">Complete</button>
+        </div>
+    `
+    $("#order-container").append(order);
 
 
+
+
+}
 

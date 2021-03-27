@@ -48,7 +48,6 @@
                     </tr>
                 </tbody>
             </table>
-
             <button class="order-complete">Complete</button>
         </div>
 
@@ -63,6 +62,9 @@
 <script src="~/signalr/hubs"></script>
 <!--SignalR script to update the chat page and send messages.-->
 <script>
+
+
+
     $(function () {
         // Reference the auto-generated proxy for the hub.
         var orderDisplay = $.connection.orderDisplayHub;
@@ -71,7 +73,7 @@
         // Create a function that the hub can call back to display messages.
 
         orderDisplay.client.order = function (id, table, items) {
-            alert(table + " has placed an order");
+            newOrder(id,table,items)
         };
 
 
@@ -86,11 +88,7 @@
 
 
     });
-    // This optional function html-encodes messages for display in the page.
-    function htmlEncode(value) {
-        var encodedValue = $('<div />').text(value).html();
-        return encodedValue;
-    }
+   
 </script>
 
 

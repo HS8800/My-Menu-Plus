@@ -9,9 +9,9 @@ namespace MyMenuPlus
 {
     public class OrderDisplayHub : Hub
     {
-        public void OrderComplete(string order)//Needs Security
+        public void OrderComplete(string orderID)//Needs Security
         {
-            Debug.WriteLine(order);
+            Debug.WriteLine(orderID);
 
             
             //Clients.All.order(1,3,"Items Example");

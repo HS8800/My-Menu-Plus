@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using MyMenuPlus.Helpers;
 using MyMenuPlus.Models;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,7 @@ namespace MyMenuPlus.Controllers
 
         public ActionResult Index()
         {
-            var OrderDisplayHub = GlobalHost.ConnectionManager.GetHubContext<OrderDisplayHub>();
-            OrderDisplayHub.Clients.All.Order(1, 3, "data example");
+            
 
             return View();
         }
