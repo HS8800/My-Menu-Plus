@@ -32,7 +32,7 @@
     <div id="table-background">
         <form id="table-container">
             <h3 style="width: 100%;text-align: center;">Table Number</h3>
-            <input id="input-table-number" type="number" min="1" max="999">
+            <input id="input-table-number" type="number" min="1" max="999" required>
 
                 <span class="login-close" id="qr-close">×</span>
                 <video muted playsinline id="qr-video"></video>
@@ -141,8 +141,7 @@
 
                 <input type="hidden" value="@ViewData["menuID"]" name="menu-id" />
                 <input type="hidden" id="basket-items" name="basket-items" />
-                <input type="hidden" id="basket-amount" name="basket-amount" />
-
+                <input type="hidden" id="table-number" name="table-number" />
                 <input type="hidden" id="nonce" name="payment_method_nonce" />
             </form>
 
@@ -161,13 +160,10 @@
 
                     dropinInstance.requestPaymentMethod((error, payload) => {
                         if (error) console.error(error);
-
-                        // Step four: when the user is ready to complete their
-                        //   transaction, use the dropinInstance to get a payment
-                        //   method nonce for the user's selected payment method, then add
-                        //   it a the hidden field before submitting the complete form to
-                        //   a server-side integration
-                        document.getElementById('nonce').value = payload.nonce;
+                        $("#nonce").val(payload.nonce);
+                        $("#table-number").val(table);
+                        $("#basket-items").val(JSON.stringify(basket));
+ 
                         form.submit();
                     });
                 });

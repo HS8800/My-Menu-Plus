@@ -96,6 +96,43 @@ namespace MyMenuPlus.Helpers
             }
 
         }
+
+
+        internal static (bool success,int menuID) displayLogin(string displaykey) {
+
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CALL displayLogin(@displayKey)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@displayKey", displaykey);
+
+
+                string f = Convert.ToString(command.ExecuteScalar());
+
+                if (Convert.ToString(command.ExecuteScalar()) != "false")
+                {
+                    int menuID = Convert.ToInt32(command.ExecuteScalar());
+                    connection.Close();
+                    return (true, menuID);
+                }
+                else {
+                    connection.Close();
+                    return (false, -1);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                connection.Close();
+                return (false, -1);
+            }
+
+
+        }
+
+
+
         internal static bool CanEditMenu(int menuID, int accountID)
         {
 

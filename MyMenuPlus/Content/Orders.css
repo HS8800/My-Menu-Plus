@@ -97,3 +97,57 @@ body{
 .order-complete:hover{
     opacity: 0.7;
 }
+.loading {
+    background-image: url(../Media/Loading.gif);
+    width: 30px;
+    height: 30px;
+    display: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px auto;
+}
+
+#login {
+    width: 400px;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
+}
+
+#connection-form {
+    padding: 20px 20px 32px 20px;
+    text-align: center;
+}
+
+#connection-key {
+    padding: 4px 4px 4px 10px;
+    background-color: #f0f2f5;
+    border: 1px solid #dadde2;
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+    border-radius: 5px;
+}
+
+#connection-submit {
+    display: inline;
+    border-radius: 0px 5px 5px 0;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    background: #cc3333;
+    color: white;
+    height: 25px;
+    line-height: 2px;
+    transform: translateX(-6px);
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0;
+}
+
+#connection-message {
+    text-align: center;
+    font-size: 11px;
+    padding: 0px 32px;
+}

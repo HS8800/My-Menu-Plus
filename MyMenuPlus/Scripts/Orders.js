@@ -118,7 +118,13 @@ function newOrder(id,table,items) {
     $("#order-container").append(order);
 
 
-
-
 }
+
+
+$("#connection-form").submit(function (e) {
+    e.preventDefault();
+    $(".loading").css({ "display": "block" });
+    orderDisplay.server.loginToDisplay($("#connection-key").val(), $.connection.hub.id);
+    $("#connection-key").val("");
+});
 

@@ -63,6 +63,8 @@ namespace MyMenuPlus.Helpers
                 command.Parameters.AddWithValue("@menuImage", menuImage);
 
                 command.ExecuteNonQuery();
+                connection.Close();
+
                 return (true, "Menu updated");
             }
             catch (MySqlException ex)
@@ -84,6 +86,7 @@ namespace MyMenuPlus.Helpers
                 command.Parameters.AddWithValue("@accountID", accountID);
 
                 command.ExecuteNonQuery();
+                connection.Close();
                 return (true, "Menu deleted");
             }
             catch (MySqlException ex)
@@ -112,7 +115,7 @@ namespace MyMenuPlus.Helpers
                 string menuImage = "";
 
                 MySqlDataReader reader = command.ExecuteReader();
-
+                
                 while (reader.Read())
                 {
 
@@ -208,7 +211,7 @@ namespace MyMenuPlus.Helpers
 
                     }
                 }
-
+                connection.Close();
                 return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage, menuNavigaton.ToString());
             }
             catch (MySqlException ex)
@@ -236,7 +239,7 @@ namespace MyMenuPlus.Helpers
                 string menuImage = "";
 
                 MySqlDataReader reader = command.ExecuteReader();
-
+                
                 while (reader.Read())
                 {
                     
@@ -300,6 +303,7 @@ namespace MyMenuPlus.Helpers
                         
                     }
                 }
+                connection.Close();
 
                 return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage);
             }
@@ -321,6 +325,7 @@ namespace MyMenuPlus.Helpers
                 command.Parameters.AddWithValue("@accountID", accountID);
 
                 command.ExecuteNonQuery();
+                connection.Close();
                 return (true, "New menu created");
             }
             catch (MySqlException ex)
@@ -344,7 +349,7 @@ namespace MyMenuPlus.Helpers
 
                 StringBuilder thumbnailBuilder = new StringBuilder();
                 MySqlDataReader reader = command.ExecuteReader();
-
+  
                 int count = 1;
                 while (reader.Read())
                 {
@@ -366,7 +371,7 @@ namespace MyMenuPlus.Helpers
                     count++;
 
                 }
-
+                connection.Close();
                 return thumbnailBuilder.ToString();
             }
             catch (MySqlException ex)

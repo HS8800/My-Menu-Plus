@@ -126,7 +126,6 @@ $(".basket-btn,#btn-basket-menu").click(function () {
 
                 $("#basket-table-number-value").text(table);
                 $("#basket-table-number").show();
-                $("#basket-items").val(JSON.stringify(basket));
                 $("#payment-form").css({ "display": "block" });
                 $("#basket-list").css({ "display": "none" });
                 $(".basket-btn").css({ "display": "none" });

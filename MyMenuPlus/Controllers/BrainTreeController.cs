@@ -23,18 +23,40 @@ namespace MyMenuPlus.Controllers
         {
             BrainTree brain = new BrainTree();
 
+            string nonceFromTheClient;
+            int menuID;
+            dynamic basketItems;
+            int tableNumber;
 
-            //Get post fields
-            string nonceFromTheClient = collection["payment_method_nonce"]; 
-            int menuID = Convert.ToInt32(collection["menu-id"]);
-            dynamic basketItems = JsonConvert.DeserializeObject(collection["basket-items"]);          
-            string untrustedBasketAmount = collection["basket-amount"];
-            int tableNumber = Convert.ToInt32(collection["tableNumber"]);
+            //Validate Parameters 
+            try
+            {
+                //Get post fields
+                nonceFromTheClient = collection["payment_method_nonce"];
+                menuID = Convert.ToInt32(collection["menu-id"]);
+                basketItems = JsonConvert.DeserializeObject(collection["basket-items"]);             
+                tableNumber = Convert.ToInt32(collection["table-number"]);
+            }
+            catch {
+                TempData["Error"] = "Missing Parameters";
+                return RedirectToAction("Error");
+            }
+         
+            if (tableNumber < 1) {
+                TempData["Error"] = "Invalid Table Number";
+                return RedirectToAction("Error");
+            }
+
+            if (menuID < 1) {
+                TempData["Error"] = "Invalid Reference To Menu";
+                return RedirectToAction("Error");
+            }
+
 
             //Find menu prices
             var PriceDictionary = Helpers.BrainTreeHelper.getPriceDictionary(menuID);
             if (!PriceDictionary.Success) {
-                TempData["Error"] = "Unable to confirm prices, we where unable to complete the translation";
+                TempData["Error"] = "Unable to confirm prices, we were unable to complete the translation";
                 return RedirectToAction("Error");
             }
 
@@ -42,30 +64,41 @@ namespace MyMenuPlus.Controllers
             //Check that pricing and item names are correct
             decimal trustedTotal = 0;
             List<OrderItemModel> trustedOrderItems = new List<OrderItemModel>();
-            foreach (var item in basketItems)
-            {
-                var itemLookup = PriceDictionary.PriceDictionary[Convert.ToInt32(item.id)];
-                if (Convert.ToDecimal(Convert.ToString(item.price).Substring(1)) == itemLookup.price && item.name == itemLookup.name)
+
+            try{
+                foreach (var item in basketItems)
                 {
+                    var itemLookup = PriceDictionary.PriceDictionary[Convert.ToInt32(item.id)];
+                    if (Convert.ToDecimal(Convert.ToString(item.price).Substring(1)) == itemLookup.price && item.name == itemLookup.name)
+                    {
 
-                    //Create new verifyed item for order
-                    OrderItemModel orderItemType = new OrderItemModel();
-                    orderItemType.id = Convert.ToInt32(item.id);
-                    orderItemType.name = itemLookup.name;
-                    orderItemType.pricePerUnit = Convert.ToDecimal(Convert.ToString(item.price).Substring(1));
-                    orderItemType.qty = Convert.ToInt32(item.qty);
+                        //Create new verifyed item for order
+                        OrderItemModel orderItemType = new OrderItemModel();
+                        orderItemType.id = Convert.ToInt32(item.id);
+                        orderItemType.name = itemLookup.name;
+                        orderItemType.pricePerUnit = Convert.ToDecimal(Convert.ToString(item.price).Substring(1));
+                        orderItemType.qty = Convert.ToInt32(item.qty);
 
-                    trustedOrderItems.Add(orderItemType);
+                        trustedOrderItems.Add(orderItemType);
 
-                    //Add to order total
-                    trustedTotal += Convert.ToDecimal(Convert.ToString(item.price).Substring(1)) * Convert.ToInt32(item.qty);
-                }
-                else {
-                    //return error when item info don't match server info
-                    TempData["Error"] = "Pricing error, we where unable to complete the translation";
-                    return RedirectToAction("Error");
+                        //Add to order total
+                        trustedTotal += Convert.ToDecimal(Convert.ToString(item.price).Substring(1)) * Convert.ToInt32(item.qty);
+                    }
+                    else
+                    {
+                        //return error when item info don't match server info
+                        TempData["Error"] = "Pricing error, we were unable to complete the translation";
+                        return RedirectToAction("Error");
+                    }
                 }
             }
+            catch {
+                TempData["Error"] = "Your basket items seem to be damaged, we were unable to complete the translation ";
+                return RedirectToAction("Error");
+            }
+
+
+
 
  
             var request = new TransactionRequest
@@ -96,6 +129,7 @@ namespace MyMenuPlus.Controllers
                     command.Parameters.AddWithValue("@tableNumber", tableNumber);
                     command.Parameters.AddWithValue("@itemsJSON", JsonConvert.SerializeObject(trustedOrderItems));
                     command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch
                 {
@@ -115,7 +149,7 @@ namespace MyMenuPlus.Controllers
                     }
                     catch
                     { //Could not create order
-                        TempData["Error"] = $"A Serious Error has occured, a transaction of £{trustedTotal} was made but your order was unable to be created. </br> Please provide the transaction id  {result.Target.Id} to a member of staff.";
+                        TempData["Error"] = $"A Serious Error has occured, a transaction of £{trustedTotal} was made but your order was unable to be created. Please provide the transaction id  {result.Target.Id} to a member of staff.";
                         return RedirectToAction("Error");
                     }
                 }
@@ -135,7 +169,7 @@ namespace MyMenuPlus.Controllers
 
 
                 //Purchase successfull
-                TempData["Success"] = "Transaction was successful, Transaction ID" + result.Target.Id + ", Amount Charged : £" + result.Target.Amount;
+                TempData["Success"] = "Transaction was successful, Transaction ID " + result.Target.Id + " Amount Charged : £" + result.Target.Amount;
                 return RedirectToAction("Success");
             }
 

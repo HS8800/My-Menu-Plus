@@ -22,11 +22,19 @@
 <body>
 
 
-
-
-
     <div id="breakers"></div>
+    <div id="login">
 
+        <form id="connection-form">
+            <h2>Connect Order Diplay</h2>
+            <input id="connection-key" type="text" placeholder="Connection Key" required>
+            <input id="connection-submit" type="submit" value="Connect">
+
+            <p id="connection-message">You can find your Connection Key by logging in and going to the menu editor</p>
+            <a class="loading"></a>
+        </form>
+
+    </div>
 
     <div id="order-container">
 
@@ -54,6 +62,7 @@
     </div>
 </body>
 
+
 @Scripts.Render("~/bundles/OrderDisplayScripts")
 
 <!--Reference the SignalR library. -->
@@ -65,29 +74,43 @@
 
 
 
-    $(function () {
+   
         // Reference the auto-generated proxy for the hub.
         var orderDisplay = $.connection.orderDisplayHub;
 
 
         // Create a function that the hub can call back to display messages.
 
+    
+
         orderDisplay.client.order = function (id, table, items) {
-            newOrder(id,table,items)
+            newOrder(id, table, items)
         };
 
+        orderDisplay.client.login = function (result) {
+            $(".loading").hide();
+            if (result == "Logged in" || result == "Already logged in") {
+                $("#connection-form").css({"display":"none"})
+            } else {
+                $("#connection-message").val("Login Incorrect")
+                $("#connection-message").css({"color":"red"})
+            }
 
+
+            console.log("result: " + result)
+        };
 
 
         // Start the connection.
         $.connection.hub.start().done(function () {
-            $('.order-complete').click(function () {
-                orderDisplay.server.orderComplete("hi");
-            });
+           
+
+
+
         });
 
 
-    });
+  
    
 </script>
 

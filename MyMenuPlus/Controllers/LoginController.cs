@@ -11,21 +11,7 @@ namespace MyMenuPlus.Controllers
 {
     public class LoginController : Controller
     {
-        //// GET: Login
-        //public string Index()
-        //{        
-        //    return "hello";
-        //}
-
-        ////Get requests
-        //public string WelcomeMsg(string input)
-        //{
-        //    if (!String.IsNullOrEmpty(input))
-        //        return "Please welcome " + input + ".";
-        //    else
-        //        return "Please enter your name.";
-        //}
-
+ 
  
         [HttpPost]//send as form-data (no content type needed)
         [ValidateAntiForgeryToken]
