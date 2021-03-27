@@ -208,6 +208,7 @@
     <Compile Include="Controllers\OrderDisplayController.cs" />
     <Compile Include="Hubs\OrderDisplayHub.cs" />
     <Compile Include="Models\OrderItemModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\WebSocketClientModel.cs" />
     <Compile Include="Startup.cs" />
     <Content Include="Content\LoadingPage.css" />

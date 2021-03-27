@@ -115,6 +115,8 @@ namespace MyMenuPlus.Controllers
             Result<Transaction> result = gateway.Transaction.Sale(request);
 
 
+
+            int newOrderID;
             if (result.IsSuccess())
             {
                 //Attempt to create order
@@ -128,7 +130,7 @@ namespace MyMenuPlus.Controllers
                     command.Parameters.AddWithValue("@menuID", menuID);
                     command.Parameters.AddWithValue("@tableNumber", tableNumber);
                     command.Parameters.AddWithValue("@itemsJSON", JsonConvert.SerializeObject(trustedOrderItems));
-                    command.ExecuteNonQuery();
+                    newOrderID = Convert.ToInt32(command.ExecuteScalar());
                     connection.Close();
                 }
                 catch
@@ -144,7 +146,7 @@ namespace MyMenuPlus.Controllers
                         command.Parameters.AddWithValue("@menuID", menuID);
                         command.Parameters.AddWithValue("@tableNumber", tableNumber);
                         command.Parameters.AddWithValue("@itemsJSON", JsonConvert.SerializeObject(trustedOrderItems));
-                        command.ExecuteNonQuery();
+                        newOrderID = Convert.ToInt32(command.ExecuteScalar());
                         connection.Close();
                     }
                     catch
@@ -155,17 +157,26 @@ namespace MyMenuPlus.Controllers
                 }
 
 
-                try // Incase somthing with the web sockets breaks still inform the user that they paid 
-                {
-                    //Send order to kitchen order displays
+                //try // Incase somthing with the web sockets breaks still inform the user that they paid 
+                //{
+                    //Send order to valid kitchen order displays
                     var OrderDisplayHub = GlobalHost.ConnectionManager.GetHubContext<OrderDisplayHub>();
-                    OrderDisplayHub.Clients.All.Order(result.Target.Id, tableNumber, JsonConvert.SerializeObject(trustedOrderItems));
+                    
+                    foreach (WebSocketClientModel client in OrderDisplayClients.WebSocketClients)
+                    {
+                        if (client.menuID == menuID) {//Only sent to displays of the same menuID
+                            OrderDisplayHub.Clients.Client(client.connectionID).order(newOrderID, result.Target.Id, tableNumber, JsonConvert.SerializeObject(trustedOrderItems));
+                        }
+                                             
+                    }
 
-                }
-                catch {
-                    TempData["Error"] = $"Your order of £{result.Target.Amount} was made successfully but we had a problem contacting the kitchen, please inform a member of staff. id: {result.Target.Id}";
-                    return RedirectToAction("Error");
-                }
+
+
+                //}
+                //catch {
+                //    TempData["Error"] = $"Your order of £{result.Target.Amount} was made successfully but we had a problem contacting the kitchen, please inform a member of staff. id: {result.Target.Id}";
+                //    return RedirectToAction("Error");
+                //}
 
 
                 //Purchase successfull

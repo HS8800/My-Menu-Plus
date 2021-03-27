@@ -10,13 +10,13 @@ using MySql.Data.MySqlClient;
 
 namespace MyMenuPlus
 {
+    public class OrderDisplayClients{
+        public static List<WebSocketClientModel> WebSocketClients = new List<WebSocketClientModel>();
+    }
+
     public class OrderDisplayHub : Hub
     {
-
-
-
-        private static List<WebSocketClientModel> WebSocketClients = new List<WebSocketClientModel>();
-
+        
 
         public void OrderComplete(string orderID)//Needs Security
         {
@@ -26,9 +26,19 @@ namespace MyMenuPlus
             //Clients.All.order(1,3,"Items Example");
         }
 
-        public void Order(int id, int tableNumber, string items) {
-            Clients.All.order(id, tableNumber, items);
+  
+
+        public void LoadOrders(string connectionID) {
+
+            var ConnectionIndex = OrderDisplayClients.WebSocketClients.FindIndex(client => client.connectionID == connectionID);
+            if (ConnectionIndex == -1) {//Client not logged in
+                return;
+            }
+
+            Clients.Client(connectionID).orders(MenuContentHelper.LoadOrders(OrderDisplayClients.WebSocketClients[ConnectionIndex].menuID));
+
         }
+
         public void LoginToDisplay(string key, string connectionID) {
 
             var displayLogin = AccountHelper.displayLogin(key);
@@ -36,12 +46,13 @@ namespace MyMenuPlus
             if (displayLogin.success)
             {
 
-                if (WebSocketClients.FindIndex(item => item.connectionID == connectionID) == 0)
+   
+                if (OrderDisplayClients.WebSocketClients.FindIndex(item => item.connectionID == connectionID) == -1)
                 {
                     WebSocketClientModel client = new WebSocketClientModel();
                     client.menuID = displayLogin.menuID;
                     client.connectionID = connectionID;
-                    WebSocketClients.Add(client);
+                    OrderDisplayClients.WebSocketClients.Add(client);
          
                     Clients.Client(connectionID).login("Logged in");
                 }

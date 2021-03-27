@@ -1,4 +1,5 @@
 ﻿using MyMenuPlus.Helpers;
+using MyMenuPlus.Models;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -378,6 +379,44 @@ namespace MyMenuPlus.Helpers
             {
                 System.Diagnostics.Debug.WriteLine(ex);
                 return "<h3>Your menus could not be loaded at this time<h3>";
+            }
+
+        }
+
+
+        internal static string LoadOrders(int menuID)
+        {
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CAll loadOrders(@menuID)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@menuID", menuID);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                List<OrderModel> orderItems = new List<OrderModel>();
+
+                while (reader.Read())
+                {
+                    OrderModel orderItem = new OrderModel();
+                    orderItem.id = Convert.ToInt32(reader["id"]);
+                    orderItem.menuID = Convert.ToInt32(reader["menuID"]);
+                    orderItem.transaction = Convert.ToString(reader["transaction"]);
+                    orderItem.tableNumber = Convert.ToInt32(reader["tableNumber"]);
+                    orderItem.itemsJSON = Convert.ToString(reader["itemsJSON"]);
+                    orderItem.ordered = Convert.ToDateTime(reader["ordered"]);
+                    orderItems.Add(orderItem);
+                }
+
+                connection.Close();
+
+                return JsonConvert.SerializeObject(orderItems);
+
+            }
+            catch (MySqlException ex)
+            {
+                return "";
             }
 
         }

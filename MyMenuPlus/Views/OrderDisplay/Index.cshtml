@@ -36,30 +36,7 @@
 
     </div>
 
-    <div id="order-container">
-
-        <div>
-            <div class="timer"><span>0</span>:<span>0</span>:<span>0</span></div>
-            <div class="order-content">
-                <h2>Order <span>3223</span></h2>
-                <h4 class="table-number">Table <span>3</span></h4>
-            </div>
-            <table class="item-table">
-                <tbody>
-                    <tr>
-                        <td>2</td>
-                        <td>Burger</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Burger</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button class="order-complete">Complete</button>
-        </div>
-
-    </div>
+    <div id="order-container"></div>
 </body>
 
 
@@ -79,18 +56,33 @@
         var orderDisplay = $.connection.orderDisplayHub;
 
 
-        // Create a function that the hub can call back to display messages.
-
     
-
-        orderDisplay.client.order = function (id, table, items) {
-            newOrder(id, table, items)
+        orderDisplay.client.order = function (id,transactionID,table, items) {
+            newOrder(id, transactionID, table, items)
         };
+
+        orderDisplay.client.orders = function (orderData) {
+           
+            var orderDataJSON = JSON.parse(orderData).reverse();
+
+
+            for (let i = 0; i < orderDataJSON.length; i++) {
+               
+                try {
+                    newOrder(orderDataJSON[i].id, orderDataJSON[i].transaction, orderDataJSON[i].tableNumber, orderDataJSON[i].itemsJSON, new Date(orderDataJSON[i].ordered))
+                } catch(e){ }
+
+            }
+
+
+        };
+        
 
         orderDisplay.client.login = function (result) {
             $(".loading").hide();
             if (result == "Logged in" || result == "Already logged in") {
-                $("#connection-form").css({"display":"none"})
+                $("#connection-form").css({ "display": "none" })
+                orderDisplay.server.loadOrders($.connection.hub.id);
             } else {
                 $("#connection-message").val("Login Incorrect")
                 $("#connection-message").css({"color":"red"})
@@ -103,7 +95,8 @@
 
         // Start the connection.
         $.connection.hub.start().done(function () {
-           
+
+          
 
 
 
