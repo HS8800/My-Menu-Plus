@@ -119,7 +119,7 @@ function newOrder(id,transactionID,table,items) {
             <table class="item-table">
                 <tbody>`+ itemsHTML +`</tbody>
             </table>
-            <button data-id="`+id+`" class="order-complete">Complete</button>
+            <button onclick='completeOrder(this)' data-id="`+id+`" class="order-complete">Complete</button>
         </div>
     `
     $("#order-container").append(order);
@@ -170,7 +170,7 @@ function newOrder(id, transactionID, table, items, orderedDateTime) {
             <table class="item-table">
                 <tbody>`+ itemsHTML + `</tbody>
             </table>
-            <button data-id="`+ id + `" class="order-complete">Complete</button>
+            <button onclick='completeOrder(this)' data-id="`+ id + `" class="order-complete">Complete</button>
         </div>
     `
     $("#order-container").append(order);
@@ -186,4 +186,11 @@ $("#connection-form").submit(function (e) {
     orderDisplay.server.loginToDisplay($("#connection-key").val(), $.connection.hub.id);
     $("#connection-key").val("");
 });
+
+
+function completeOrder(e) {
+    orderDisplay.server.completeOrder(e.dataset.id, $.connection.hub.id);
+    $(e.parentNode).remove();
+}
+
 

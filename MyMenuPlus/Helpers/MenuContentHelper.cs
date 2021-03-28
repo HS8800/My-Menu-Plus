@@ -383,6 +383,19 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        internal static void updateOrderStatus(int orderID,int statusCode,int menuID) {
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+           
+            connection.Open();
+            string query = " Call setOrderStatus(@orderID,@statusCode,@menuID)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@orderID", orderID); 
+            command.Parameters.AddWithValue("@statusCode", statusCode);
+            command.Parameters.AddWithValue("@menuID", menuID);
+            command.ExecuteNonQuery();
+              
+            connection.Close();
+        }
 
         internal static string LoadOrders(int menuID)
         {
@@ -416,6 +429,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 return "";
             }
 

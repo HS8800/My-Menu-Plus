@@ -26,7 +26,20 @@ namespace MyMenuPlus
             //Clients.All.order(1,3,"Items Example");
         }
 
-  
+
+        public void CompleteOrder(int orderID,string connectionID) {
+
+            var ConnectionIndex = OrderDisplayClients.WebSocketClients.FindIndex(client => client.connectionID == connectionID);
+            if (ConnectionIndex == -1)
+            {//Client not logged in
+                return;
+            }
+
+            MenuContentHelper.updateOrderStatus(orderID, 1, OrderDisplayClients.WebSocketClients[ConnectionIndex].menuID);
+            
+
+        }
+
 
         public void LoadOrders(string connectionID) {
 
