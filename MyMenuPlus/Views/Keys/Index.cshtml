@@ -21,15 +21,15 @@
     <div id="key-header">
         <div>Keys</div>
         <div>
-            <button class="btn btn-outline" id="btn-new-key">Create New Key</button>
+            <button class="btn btn-outline" id="btn-new-key">@ViewData["keyTableText"]</button>
         </div>
     </div>
 
     <table id="key-table">
-        <tr><th></th><th></th><tr>
-       
-        <tr><td><input class="key" type="password" value="jkj32fksfdfsfj32kjkl" disabled /></td><td class="btn-key-new"><i class="fas fa-sync-alt"><span>Generate New Key</span></i></td></tr>
-       
+        @Html.Raw(@ViewData["keyTableRows"])
+        <a class="loading"></a>
     </table>
 
 </div>
+
+@Scripts.Render("~/bundles/KeysScripts")

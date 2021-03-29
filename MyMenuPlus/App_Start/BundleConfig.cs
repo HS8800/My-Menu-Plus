@@ -17,7 +17,9 @@ namespace MyMenuPlus
                  "~/Content/MenuSelection.css",
                  "~/Content/keys.css"));
 
-            
+            bundles.Add(new ScriptBundle("~/bundles/KeysScripts").Include(
+                  "~/Scripts/jquery-3.5.1.min.js",
+                   "~/Scripts/Keys.js")); ; ;
 
 
             //OrderDisplay
