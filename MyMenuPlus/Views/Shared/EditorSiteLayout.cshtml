@@ -1,0 +1,81 @@
+﻿@Styles.Render("~/bundles/MainSiteLayout")
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@Html.AntiForgeryToken()
+
+
+<div id="loading-background">
+    <div id="background-content">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+
+<div id="nav">
+    <ul>
+        <li><a href="/Menu?content=@ViewData["menuID"]">Back To Menu</a></li>
+        <li><a href="/MenuEditor?content=@ViewData["menuID"]">Editor</a></li>
+        <li><a href="/Keys?content=@ViewData["menuID"]">Keys</a></li>
+
+        <li class="right-nav" id="login-show"><a>Login</a></li>
+        <li class="right-nav" id="logout-li"><a>Logout</a></li>
+    </ul>
+</div>
+<div id="notification-container"></div>
+
+@RenderBody()
+
+<footer style="margin-top:105px">
+    <div>
+        <div id="social-text">Why not share you experience</div>
+        <div class="social-container">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-instagram"></a>
+        </div>
+    </div>
+    <div>
+
+        <div>
+            <div class="footer-icon">
+                <span>My Menu Plus</span>
+                <div class="icon-svg-container">
+                    <img class="icon-svg" src="@Url.Content("~/Media/logo.svg")" />
+                </div>
+            </div>
+            <p id="footer-desc">My Menu Plus was made by Harrison Smith to provide a digital alternative that aims to streamline the traditional menu by providing modern features not achievable on a paper-based format.</p>
+        </div>
+
+        <div>
+            <h3>Heading 1</h3>
+            <ul class="footer-list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Heading 2</h3>
+            <ul class="footer-list">
+                <li>Item 4</li>
+                <li>Item 5</li>
+                <li>Item 6</li>
+            </ul>
+        </div>
+
+    </div>
+</footer>
+
+@Scripts.Render("~/bundles/MainSiteLayoutScripts")
+
+
+<script>
+    AOS.init();
+</script>
+
+

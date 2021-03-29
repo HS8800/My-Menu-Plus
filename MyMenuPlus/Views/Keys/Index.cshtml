@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Views/Shared/EditorSiteLayout.cshtml";
+}
+
+
+@Styles.Render("~/bundles/KeysPageStyles")
+
+<div class="section-banner">
+
+    <div>
+        <div class="section-title title-bold title-banner">Display Keys</div>
+        <div class="section-title title-small">Manage your secret display key used to connect your <a class="link">order displays</a></div>
+    </div>
+    
+</div>
+
+
+<div class="menu-section">
+
+    <div id="key-header">
+        <div>Keys</div>
+        <div>
+            <button class="btn btn-outline" id="btn-new-key">Create New Key</button>
+        </div>
+    </div>
+
+    <table id="key-table">
+        <tr><th></th><th></th><tr>
+       
+        <tr><td><input class="key" type="password" value="jkj32fksfdfsfj32kjkl" disabled /></td><td class="btn-key-new"><i class="fas fa-sync-alt"><span>Generate New Key</span></i></td></tr>
+       
+    </table>
+
+</div>

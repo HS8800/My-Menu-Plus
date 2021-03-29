@@ -205,12 +205,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\KeysController.cs" />
     <Compile Include="Controllers\OrderDisplayController.cs" />
     <Compile Include="Hubs\OrderDisplayHub.cs" />
     <Compile Include="Models\OrderItemModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\WebSocketClientModel.cs" />
     <Compile Include="Startup.cs" />
+    <Content Include="Content\Keys.css" />
     <Content Include="Content\LoadingPage.css" />
     <Content Include="Content\Orders.css" />
     <Content Include="Content\Response.css" />
@@ -308,6 +310,8 @@
     <Content Include="Views\Braintree\Error.cshtml" />
     <Content Include="Views\Menu\MenuNotFound.cshtml" />
     <Content Include="Views\OrderDisplay\Index.cshtml" />
+    <Content Include="Views\Shared\EditorSiteLayout.cshtml" />
+    <Content Include="Views\Keys\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    Layout = "~/Views/Shared/EditorSiteLayout.cshtml";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -17,10 +22,18 @@
 
 <body>
 
+    <div class="section-banner">
+        <div>
+            <div class="section-title title-bold title-banner" style="font-size: 40px; color: #0c3853;margin: 10px 0px 0px 0px;">Menu Editor</div>
+            <div class="section-title title-small" style="margin:0px">Create content for your menu</div>
+        </div>
+    </div>
+
+
     <div id="toolbar">
         <ul>
             <li class="loading"></li>
-            <li data-content="@ViewData["menuID"]"  id="toolbar-save"><a>Save Changes <i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>
+            <li data-content="@ViewData["menuID"]" id="toolbar-save"><a>Save Changes <i class="fa fa-floppy-o" aria-hidden="true"></i></a></li>
             <li id="toolbar-uptodate"><a>Uptodate <i class="fa fa-check" aria-hidden="true"></i></a></li>
         </ul>
     </div>

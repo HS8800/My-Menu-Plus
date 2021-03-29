@@ -18,8 +18,6 @@ namespace MyMenuPlus.Controllers
 
         BrainTree brain = new BrainTree();
 
-
-
         public ActionResult Index(int content = -1,int table = -1)
         {
 

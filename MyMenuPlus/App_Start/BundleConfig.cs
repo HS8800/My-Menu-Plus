@@ -11,6 +11,15 @@ namespace MyMenuPlus
 
 
 
+            //Keys Page
+            bundles.Add(new StyleBundle("~/bundles/KeysPageStyles").Include(
+                "~/Content/Home.css",
+                 "~/Content/MenuSelection.css",
+                 "~/Content/keys.css"));
+
+            
+
+
             //OrderDisplay
             bundles.Add(new ScriptBundle("~/bundles/OrderDisplayScripts").Include(
                     "~/Scripts/jquery-3.5.1.min.js",
@@ -22,6 +31,8 @@ namespace MyMenuPlus
 
             //Menu Editor
             bundles.Add(new StyleBundle("~/bundles/MenuEditorPageStyles").Include(
+                    "~/Content/Home.css",
+                     "~/Content/MenuSelection.css",
                     "~/Content/Notifications.css",
                     "~/Content/Menu.css",
                     "~/Content/MainScale.css",

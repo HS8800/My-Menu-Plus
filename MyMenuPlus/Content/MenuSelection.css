@@ -27,12 +27,12 @@
 
 .section-banner > div > .title-small{/*Title comment*/
     color:grey;
-    line-height: 10px;
+    line-height: 17px;
     display: inline;
 }
 
-.title-banner{
-    font-size: 40px;  
+.title-banner {
+    font-size: 40px;
     text-align: left;
 }
 
