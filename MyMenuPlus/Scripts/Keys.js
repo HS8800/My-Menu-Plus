@@ -9,7 +9,7 @@ function getParam(param) {
 
 
 
-$(".btn-key-new").click(function () {
+$(".btn-key-new").click(function (e) {
 
     $("#key-table").hide();
     $(".loading").css({ "display": "block" });
@@ -18,6 +18,11 @@ $(".btn-key-new").click(function () {
         response = JSON.parse(response);
 
         if (response.response != null) {
+
+            if (e.target.dataset["reload"] == "true") {
+                location.reload();
+            }
+
             $("#key-table").show();
             $(".key").val(response.response);
         } else {

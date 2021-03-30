@@ -55,6 +55,7 @@ namespace MyMenuPlus.Controllers
                 else {
                     ViewData["keyTableRows"] = "<tr><td style='color: grey;'>You haven't created any keys</td></tr>";
                     ViewData["keyTableText"] = "Create New Key";
+                    ViewData["keyTableButtonCreateKeyClass"] = "btn-key-new";
                 }
 
             
