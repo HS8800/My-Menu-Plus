@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = "~/Views/Shared/EditorSiteLayout.cshtml";
+    ViewBag.Title = "Keys";
 }
 
 
@@ -19,7 +20,7 @@
 
     <div id="key-header">
         <div style="width:100%">
-            Connect to <a class="link">BrainTree</a> to take payments
+            Connect to <a class="link" onclick="$('#loading-background').css({'display':'block'});window.location.href='https://www.braintreegateway.com/login'">BrainTree</a> to take payments
         </div>
       
     </div>
@@ -46,6 +47,7 @@
                 <tr><td>Private Key</td><td><input id="PrivateKey" type="text" required></td></tr>
             </tbody>
         </table>
+        <p style="text-align: center;font-size: 11px;margin-top: -10px;">For security all previously given API keys will not be shown </p>
         <input id="APISubmit" type="submit" value="Submit Keys">
 
     </form>
@@ -56,7 +58,7 @@
 
     <div id="key-header">
         <div>
-            Manage your secret display keys used to connect your <a class="link">order displays</a>
+            Manage your secret display keys used to connect your <a class="link" onclick="$('#loading-background').css({'display':'block'});window.location.href='/OrderDisplay'">order displays</a>
         </div>
         <div>
             <button class="btn btn-outline @ViewData["keyTableButtonCreateKeyClass"]" data-reload="true" id="btn-new-key">@ViewData["keyTableText"]</button>

@@ -47,3 +47,7 @@
     display: block
 }
 
+
+#nav {
+    min-height: 20px;
+}

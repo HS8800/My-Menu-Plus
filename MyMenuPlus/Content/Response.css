@@ -57,3 +57,7 @@
 #btn-return:hover {
     opacity:0.7
 }
+
+#btn-basket-menu {
+    display: none
+}

@@ -75,10 +75,10 @@
 
 /* -----login button---- */
 .nav-button {
-  height: 35px;
-  width: 90px;
-  line-height: 35px;
-  margin-top: 23px;
+    height: 35px;
+    width: 90px;
+    line-height: 35px;
+    margin-top: 23px;
 }
 
 #login-icon {
@@ -86,8 +86,9 @@
 }
 
 #nav-menu {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 #login-text {
@@ -105,4 +106,9 @@
 
 .btn-effect:active {
   opacity: 0.6;
+}
+
+
+#btn-basket-menu {
+    margin-left: -22px;
 }
