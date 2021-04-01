@@ -195,7 +195,9 @@ namespace MyMenuPlus.Helpers
                                     Convert.ToString(sectionItems[si].name),
                                     Convert.ToString(sectionItems[si].description),
                                     Convert.ToString(sectionItems[si].price),
-                                    Convert.ToInt32(sectionItems[si].id)
+                                    Convert.ToInt32(sectionItems[si].id),
+                                    Convert.ToBoolean(sectionItems[si].isVegetarian),
+                                    Convert.ToBoolean(sectionItems[si].isSpicy)
                                 ));
                             }
 
@@ -517,14 +519,26 @@ namespace MyMenuPlus.Helpers
 
         }
 
-        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice, int itemID)
+        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice, int itemID, bool isVeg, bool isSpicy)
         {
+
+
+            string icons = "";
+
+            if (isVeg) {
+                icons += "<i class='fas fa-apple-alt'></i>";
+            }
+
+            if (isSpicy) {
+                icons += "<i class='fas fa-pepper-hot'></i>";
+            }
 
             string item = $@"
                 <tr data-itemID='{itemID}'>
 	                <td>
 		                <div class='item-name'>{itemName}</div>
 		                <div class='item-description'>{itemDescription}</div>
+                        {icons}
 	                </td>
 	                <td class='item-right'>
 		                <span class='item-price'>£{itemPrice}</span><button class='item-btn item-add'>+</button>

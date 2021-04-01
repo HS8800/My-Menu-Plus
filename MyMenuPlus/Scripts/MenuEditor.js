@@ -25,7 +25,7 @@ function setAttValue(input) {
 }
 
 function setChkValue(input) {
-
+    EditorChanges()
     if (input.checked) {
         input.setAttribute("checked", "");
     } else {
