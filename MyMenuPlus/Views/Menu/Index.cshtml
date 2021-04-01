@@ -146,30 +146,30 @@
             </form>
 
             <script type="text/javascript">
-        const form = document.getElementById('payment-form');
+                const form = document.getElementById('payment-form');
 
-        braintree.dropin.create({
-            authorization: '@ViewData["ClientToken"]',
-            container: '#dropin-container'
-        }, (error, dropinInstance) => {
+                braintree.dropin.create({
+                    authorization: '@ViewData["ClientToken"]',
+                    container: '#dropin-container'
+                }, (error, dropinInstance) => {
 
-                if (error) console.error(error);
-
-                form.addEventListener('submit', event => {
-                    event.preventDefault();
-
-                    dropinInstance.requestPaymentMethod((error, payload) => {
                         if (error) console.error(error);
-                        $("#nonce").val(payload.nonce);
-                        $("#table-number").val(table);
-                        $("#basket-items").val(JSON.stringify(basket));
+
+                        form.addEventListener('submit', event => {
+                            event.preventDefault();
+
+                            dropinInstance.requestPaymentMethod((error, payload) => {
+                                if (error) console.error(error);
+                                $("#nonce").val(payload.nonce);
+                                $("#table-number").val(table);
+                                $("#basket-items").val(JSON.stringify(basket));
  
-                        form.submit();
-                    });
+                                form.submit();
+                            });
+                        });
+
+
                 });
-
-
-        });
 
                 </script>
 

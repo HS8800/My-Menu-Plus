@@ -45,7 +45,7 @@ namespace MyMenuPlus.Helpers
         /// </summary>
         /// <param name="password">the password</param>
         /// <param name="hashedPassword">the hash</param>
-        /// <returns>could be verified?</returns>
+        /// <returns>could it be verified?</returns>
         internal static bool VerifyHash(string password, string hashedPassword)
         {
             // Declare variables required

@@ -9,6 +9,31 @@ function getParam(param) {
 
 
 
+$('#uploadBraintreeKeys').submit(function (e) {
+    $("#loading-background").css({ "display": "block" })
+    e.preventDefault();
+    $.post('/Keys/updateBraintreeKeys', { content: getParam("content"), production: $("#chkEnviroment")[0].checked, MerchantID: $("#MerchantID").val(), PublicKey: $("#PublicKey").val(), PrivateKey: $("#PrivateKey").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
+        response = JSON.parse(response);
+
+        if (response.response != null) {
+            alert(response.response)
+
+        } else {
+            alert(response.error)
+
+        }
+
+    }).always(function () {
+        $(".loading").css({ "display": "none" });
+        $("#loading-background").css({ "display": "none" })
+    });
+
+
+}); 
+
+
+
+
 $(".btn-key-new").click(function (e) {
 
     $("#key-table").hide();
@@ -35,3 +60,13 @@ $(".btn-key-new").click(function (e) {
         
     });
 })
+
+
+$("#chkEnviroment").change(function () {
+    if ($(this).is(':checked')) {
+        $("#Environment").text("Production")
+    } else {
+        $("#Environment").text("Sandbox")
+    }
+
+});

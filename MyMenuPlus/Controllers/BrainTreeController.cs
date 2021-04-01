@@ -15,14 +15,12 @@ namespace MyMenuPlus.Controllers
   
     public class BrainTreeController : Controller
     {
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreatePurchase(FormCollection collection)
-        {
-            BrainTree brain = new BrainTree();
-
+        {         
             string nonceFromTheClient;
             int menuID;
             dynamic basketItems;
@@ -51,6 +49,10 @@ namespace MyMenuPlus.Controllers
                 TempData["Error"] = "Invalid Reference To Menu";
                 return RedirectToAction("Error");
             }
+
+
+            //Create braintree object
+            BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]), Convert.ToInt32(Session["id"]));
 
 
             //Find menu prices
@@ -157,8 +159,7 @@ namespace MyMenuPlus.Controllers
                 }
 
 
-                //try // Incase somthing with the web sockets breaks still inform the user that they paid 
-                //{
+               
                     //Send order to valid kitchen order displays
                     var OrderDisplayHub = GlobalHost.ConnectionManager.GetHubContext<OrderDisplayHub>();
                     
@@ -169,14 +170,6 @@ namespace MyMenuPlus.Controllers
                         }
                                              
                     }
-
-
-
-                //}
-                //catch {
-                //    TempData["Error"] = $"Your order of £{result.Target.Amount} was made successfully but we had a problem contacting the kitchen, please inform a member of staff. id: {result.Target.Id}";
-                //    return RedirectToAction("Error");
-                //}
 
 
                 //Purchase successfull
@@ -192,6 +185,12 @@ namespace MyMenuPlus.Controllers
         public ActionResult Success() {
             return View();
         }
+
+        public ActionResult Alert()
+        {
+            return View();
+        }
+
         public ActionResult Error()
         {
             return View();

@@ -12,17 +12,34 @@ namespace MyMenuPlus.Helpers
     public class BrainTree
     {
 
-        BraintreeGateway gateway = new BraintreeGateway
+        public static BraintreeGateway gateway;
+
+
+        public BrainTree(int menuID, int accountID)
         {
-            Environment = Braintree.Environment.SANDBOX,
-            MerchantId = "nfydc3g3765f3cn6",
-            PublicKey = "57scb6kt4k93z69h",
-            PrivateKey = "91380c8ae8665677c61f8fc9c86d65ef"
-        };
+            var braintreeKeys = BrainTreeHelper.getBraintreeKeys(menuID, accountID);
+         
+            BraintreeGateway _gateway = new BraintreeGateway
+            {
+                Environment = braintreeKeys.enviroment,
+                MerchantId = braintreeKeys.merchantID,
+                PublicKey = braintreeKeys.publicKey,
+                PrivateKey = braintreeKeys.privateKey
+            };
+
+            gateway = _gateway;
+            
+        }
 
 
-        public string CreateClientToken() {
-            return gateway.ClientToken.Generate();
+        public (bool success,string token) CreateClientToken() {
+            try
+            {
+                return (true, gateway.ClientToken.Generate());
+            }
+            catch {
+                return (false, "");
+            }
         }
 
         public IBraintreeGateway CreateGateway()
@@ -34,6 +51,43 @@ namespace MyMenuPlus.Helpers
 
     public class BrainTreeHelper {
 
+
+        internal static (bool success, dynamic enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID, int accountID)
+        {
+
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+           
+            connection.Open();
+            string query = "CALL getBraintreeKeys(@menuID,@accountID)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@menuID", menuID);
+            command.Parameters.AddWithValue("@accountID", accountID);
+
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+
+                dynamic Enviroment = Braintree.Environment.SANDBOX;
+                if (Convert.ToBoolean(reader["Production"])) {
+                    Enviroment = Braintree.Environment.PRODUCTION;
+                }
+
+                return (
+                    true,
+                    Enviroment,
+                    Convert.ToString(reader["MerchantID"]),
+                    Convert.ToString(reader["PublicKey"]),
+                    Convert.ToString(reader["PrivateKey"])
+                );
+
+            }
+                connection.Close();
+
+                
+            return (false, "", "", "", "");
+
+        }
 
         public static (bool Success, Dictionary<int, PriceModel> PriceDictionary) getPriceDictionary(int menuID) {
 

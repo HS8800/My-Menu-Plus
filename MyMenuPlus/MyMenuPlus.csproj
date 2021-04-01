@@ -252,6 +252,7 @@
     <Content Include="Content\Scroll.css" />
     <Content Include="Content\SectionEditor.css" />
     <Content Include="Content\TableSelection.css" />
+    <Content Include="Content\Tickbox.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -314,6 +315,7 @@
     <Content Include="Views\OrderDisplay\Index.cshtml" />
     <Content Include="Views\Shared\EditorSiteLayout.cshtml" />
     <Content Include="Views\Keys\Index.cshtml" />
+    <Content Include="Views\Braintree\Alert.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -15,7 +15,9 @@ namespace MyMenuPlus
             bundles.Add(new StyleBundle("~/bundles/KeysPageStyles").Include(
                 "~/Content/Home.css",
                  "~/Content/MenuSelection.css",
-                 "~/Content/keys.css"));
+                 "~/Content/keys.css",
+                 "~/Content/Tickbox.css"
+                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/KeysScripts").Include(
                   "~/Scripts/jquery-3.5.1.min.js",

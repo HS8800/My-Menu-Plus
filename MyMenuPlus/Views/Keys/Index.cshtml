@@ -9,17 +9,55 @@
 <div class="section-banner">
 
     <div>
-        <div class="section-title title-bold title-banner">Display Keys</div>
-        <div class="section-title title-small">Manage your secret display key used to connect your <a class="link">order displays</a></div>
+        <div class="section-title title-bold title-banner">Keys</div>
+        <div class="section-title title-small">Manage your keys</div>
     </div>
     
 </div>
 
+<div class="menu-section">
+
+    <div id="key-header">
+        <div style="width:100%">
+            Connect to <a class="link">BrainTree</a> to take payments
+        </div>
+      
+    </div>
+
+    <a class="loading"></a>
+    
+
+    <form id="uploadBraintreeKeys">
+        <table id="key-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <label class="switch">
+                            <input id="chkEnviroment" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td id="Environment">
+                        Sandbox
+                    </td>
+                </tr>
+                <tr><td>Merchant ID</td><td><input id="MerchantID" type="text" required></td></tr>
+                <tr><td>Public Key</td><td><input id="PublicKey" type="text" required></td></tr>
+                <tr><td>Private Key</td><td><input id="PrivateKey" type="text" required></td></tr>
+            </tbody>
+        </table>
+        <input id="APISubmit" type="submit" value="Submit Keys">
+
+    </form>
+
+</div>
 
 <div class="menu-section">
 
     <div id="key-header">
-        <div>Keys</div>
+        <div>
+            Manage your secret display keys used to connect your <a class="link">order displays</a>
+        </div>
         <div>
             <button class="btn btn-outline @ViewData["keyTableButtonCreateKeyClass"]" data-reload="true" id="btn-new-key">@ViewData["keyTableText"]</button>
         </div>

@@ -11,20 +11,26 @@ namespace MyMenuPlus.Controllers
     public class MenuController : Controller
     {
 
-        //public ActionResult Index() //Need an oops, looks like you took a wrong turn
-        //{
-        //    return View("MenuNotFound");
-        //}
-
-        BrainTree brain = new BrainTree();
 
         public ActionResult Index(int content = -1,int table = -1)
         {
-
+            BrainTree brain = new BrainTree(content, Convert.ToInt32(Session["id"]));
+            
             if (content == -1) {
                 TempData["Error"] = "The menu you are looking for doesn't exist";
                 return View("MenuNotFound");
             }
+
+            var brainToken = brain.CreateClientToken();
+
+            if (!brainToken.success) {
+                @TempData["Alert"] = "You just need to connect your BrainTree Account to your menu to take payments";
+                @TempData["Redirect"] = "/Keys?content="+content;
+                return RedirectToAction("Alert", "Braintree");
+            }
+
+            ViewData["ClientToken"] = brainToken.token;
+
 
             ViewData["menuID"] = content;
             var menuComponents = MenuContentHelper.createMenuComponents(content);
@@ -35,7 +41,7 @@ namespace MyMenuPlus.Controllers
             ViewData["bannerImage"] = menuComponents.bannerImage;
             ViewData["menuNavigaton"] = menuComponents.menuNavigaton;
 
-            ViewData["ClientToken"] = brain.CreateClientToken();
+            
 
             if (Session["id"] != null && AccountHelper.CanEditMenu(content, Convert.ToInt32(Session["id"]))) {
                 ViewData["editButton"] = $@"
