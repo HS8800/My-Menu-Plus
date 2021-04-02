@@ -40,7 +40,12 @@
 
 #logout-li, #login-show {
     margin-top: -10px;
-    display:none;
+    display: none;
+
+    color: red;
+    text-align: center;
+    border-radius: 6px;
+    width: fit-content !important;
 }
 
 #logout-li {
