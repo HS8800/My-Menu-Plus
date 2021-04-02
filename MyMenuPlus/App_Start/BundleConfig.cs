@@ -51,11 +51,12 @@ namespace MyMenuPlus
 
 
 
-       
 
+            
             //Menu
             bundles.Add(new StyleBundle("~/bundles/MenuPageStyles").Include(
                     "~/Content/Scroll.css",
+                    "~/Content/Aos.css",
                     "~/Content/Menu.css",
                     "~/Content/MainScale.css",
                     "~/Content/TableSelection.css"
@@ -63,6 +64,7 @@ namespace MyMenuPlus
 
             bundles.Add(new ScriptBundle("~/bundles/MenuPageScripts").Include(
                  "~/Scripts/jquery-3.5.1.min.js",
+                 "~/Scripts/Aos.js",
                  "~/Scripts/Scroll.js",
                  "~/Scripts/MenuScale.js",
                  "~/Scripts/Menu.js",

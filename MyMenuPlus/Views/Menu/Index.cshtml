@@ -111,11 +111,11 @@
     <div id="main-container">
 
 
-        <div id="main-menu">
+        <div id="main-menu" data-aos="fade-up">
             @Html.Raw(@ViewData["menuSections"])
         </div>
 
-        <div id="basket-container" class="sticky">
+        <div id="basket-container" class="sticky" data-aos="fade-left">
             <span id="btn-shop-back">Back</span>
 
             <div id="basket-list">
@@ -188,3 +188,7 @@
     <i class="fas fa-apple-alt" style="padding: 5px;"></i>Vegetarian
     <i class="fas fa-pepper-hot" style="margin-left: 10px;padding: 5px;"></i>Spicy
 </div>
+
+<script>
+    AOS.init();
+</script>

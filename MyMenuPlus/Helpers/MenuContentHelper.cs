@@ -201,8 +201,7 @@ namespace MyMenuPlus.Helpers
                                 ));
                             }
 
-                                //Convert.ToBoolean(sectionItems[si].isVegetarian),
-                                //Convert.ToBoolean(sectionItems[si].isSpicy)
+                               
                         }
 
 
@@ -535,7 +534,7 @@ namespace MyMenuPlus.Helpers
 
             string item = $@"
                 <tr data-itemID='{itemID}'>
-	                <td>
+                     <td>
 		                <div class='item-name'>{itemName}</div>
 		                <div class='item-description'>{itemDescription}</div>
                         {icons}

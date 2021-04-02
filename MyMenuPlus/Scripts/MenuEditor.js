@@ -118,8 +118,8 @@ const Tag = `
 //create a temp id used to keep track of sections when moving there items around
 var tempID = 1;
 $(".editor-section-items").each(function () {//this sets the starting temp id after the highest current temp id of the loaded in content
-    if (this.dataset.id >= tempID) {
-        tempID = this.dataset.id + 1;
+    if ($(this).prop("id") >= tempID) {
+        tempID = Number($(this).prop("id")) + 1;
     }
 });
 
