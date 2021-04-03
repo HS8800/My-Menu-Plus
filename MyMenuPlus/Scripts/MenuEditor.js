@@ -383,8 +383,10 @@ $("#toolbar-save").click(function(){
 
     //Build menu details
     menu["title"] = $("#menu-title").val();
-    //menu["bannerImage"] = bannerImageBase64;
+
     menu["tags"] = tags;
+
+    menu["footer"] = $("#footer-text").val();
 
     //Get menu items
     //Get all menu sections as array

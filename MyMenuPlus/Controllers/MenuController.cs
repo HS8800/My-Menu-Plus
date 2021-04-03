@@ -40,8 +40,8 @@ namespace MyMenuPlus.Controllers
             ViewData["menuSections"] = menuComponents.sections;
             ViewData["bannerImage"] = menuComponents.bannerImage;
             ViewData["menuNavigaton"] = menuComponents.menuNavigaton;
+            ViewData["footer"] = menuComponents.footer;
 
-            
 
             if (Session["id"] != null && AccountHelper.CanEditMenu(content, Convert.ToInt32(Session["id"]))) {
                 ViewData["editButton"] = $@"

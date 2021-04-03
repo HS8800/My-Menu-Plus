@@ -30,6 +30,8 @@ namespace MyMenuPlus.Helpers
             //Create ids for menu items
             dynamic menuDataJSON = JsonConvert.DeserializeObject(menuData);
             int itemID = 1;
+
+           
             //Loop through menu section
             dynamic sections = menuDataJSON.sections;
             for (int s = 0; s < sections.Count; s++)
@@ -48,6 +50,7 @@ namespace MyMenuPlus.Helpers
                 }
             }
 
+            
             //Replace old menu items with new items with ids 
             menuData = JsonConvert.SerializeObject(menuDataJSON);
 
@@ -96,7 +99,7 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-        internal static (bool success, string title, string tags, string sections, string bannerImage, string menuNavigaton) createMenuComponents(int menuID)
+        internal static (bool success, string title, string tags, string sections, string bannerImage, string menuNavigaton, string footer) createMenuComponents(int menuID)
         {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -114,6 +117,7 @@ namespace MyMenuPlus.Helpers
 
                 string title = "";
                 string menuImage = "";
+                string footer = "";
 
                 MySqlDataReader reader = command.ExecuteReader();
                 
@@ -140,10 +144,12 @@ namespace MyMenuPlus.Helpers
                                 #main-container{{width:100%}}
                             </style>
 
-                        ", "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg", "");
+                        ", "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg", "" , "");
                     }
 
                     dynamic menuData = JsonConvert.DeserializeObject(Convert.ToString(reader["menuData"]));
+
+                    footer = menuData.footer;
 
                     //Get menu title
                     title = menuData.title;
@@ -214,16 +220,16 @@ namespace MyMenuPlus.Helpers
                     }
                 }
                 connection.Close();
-                return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage, menuNavigaton.ToString());
+                return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage, menuNavigaton.ToString(), footer);
             }
             catch (MySqlException ex)
             {
-                return (false, "", "", "", "", "");
+                return (false, "", "", "", "", "","");
             }
         }
 
      
-        internal static (bool success, string title, string tags, string sections, string bannerImage) createMenuEditorComponents(int menuID, int accountID)
+        internal static (bool success, string title, string tags, string sections, string bannerImage, string footer) createMenuEditorComponents(int menuID)
         {
          
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -238,6 +244,7 @@ namespace MyMenuPlus.Helpers
                 StringBuilder sectionBuilder = new StringBuilder();
                 StringBuilder tagBuilder = new StringBuilder();
                 string title = "";
+                string footer = "";
                 string menuImage = "";
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -245,14 +252,23 @@ namespace MyMenuPlus.Helpers
                 while (reader.Read())
                 {
                     
+
                     if (Convert.ToString(reader["menuData"]) == "initial")
                     {
-                        return (true, "", "", "", "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg");
+                        return (true, "", "", "", "https://buckeyevillagemansfield.com/wp-content/uploads/2015/10/placeholder-pattern.jpg","");
                     }
+
+
+                    
+
 
 
                     int unquieID = 0;
                     dynamic menuData = JsonConvert.DeserializeObject(Convert.ToString(reader["menuData"]));
+
+                    //Footer
+                    footer = menuData.footer;
+
 
                     //Get menu title
                     title = menuData.title;
@@ -304,14 +320,15 @@ namespace MyMenuPlus.Helpers
                         ));
                         
                     }
+
                 }
                 connection.Close();
 
-                return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage);
+                return (true, title, tagBuilder.ToString(), sectionBuilder.ToString(), menuImage, footer);
             }
             catch (MySqlException ex)
             {
-                return (false, "", "", "", "");
+                return (false, "", "", "", "","");
             }
         }
 

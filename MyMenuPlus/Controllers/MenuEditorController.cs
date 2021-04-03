@@ -51,7 +51,7 @@ namespace MyMenuPlus.Controllers
         {
             if (Session["id"] != null)
             {
-                var menuComponents = MenuContentHelper.createMenuEditorComponents(content, Convert.ToInt32(Session["id"]));
+                var menuComponents = MenuContentHelper.createMenuEditorComponents(content);
 
                 if (menuComponents.success)
                 {
@@ -59,6 +59,8 @@ namespace MyMenuPlus.Controllers
                     ViewData["tags"] = menuComponents.tags;
                     ViewData["sections"] = menuComponents.sections;
                     ViewData["bannerImage"] = menuComponents.bannerImage;
+                    ViewData["footer"] = menuComponents.footer;
+                    
 
                     ViewData["menuID"] = content;
                     return View();
