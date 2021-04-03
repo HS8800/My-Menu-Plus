@@ -52,7 +52,7 @@ namespace MyMenuPlus.Controllers
 
 
             //Create braintree object
-            BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]), Convert.ToInt32(Session["id"]));
+            BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]));
 
 
             //Find menu prices

@@ -14,7 +14,7 @@ namespace MyMenuPlus.Controllers
 
         public ActionResult Index(int content = -1,int table = -1)
         {
-            BrainTree brain = new BrainTree(content, Convert.ToInt32(Session["id"]));
+            BrainTree brain = new BrainTree(content);
             
             if (content == -1) {
                 TempData["Error"] = "The menu you are looking for doesn't exist";

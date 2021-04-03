@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 
@@ -31,7 +32,6 @@ namespace MyMenuPlus.Helpers
             dynamic menuDataJSON = JsonConvert.DeserializeObject(menuData);
             int itemID = 1;
 
-           
             //Loop through menu section
             dynamic sections = menuDataJSON.sections;
             for (int s = 0; s < sections.Count; s++)
@@ -43,10 +43,13 @@ namespace MyMenuPlus.Helpers
 
                     try//In event where the price is "" or can't be a decimal this item will be skipped
                     {
-                        sectionItems[si].price = Convert.ToDecimal(sectionItems[si].price).ToString("C").Substring(1);//format money
+                        sectionItems[si].price = Convert.ToDecimal(Regex.Replace(Convert.ToString(sectionItems[si].price), "[^0-9.]", "")).ToString("C").Substring(1);//format money
                         sectionItems[si].id = itemID++;
                     }
-                    catch { }
+                    catch
+                    {
+                        sectionItems[si].price = "";
+                    }
                 }
             }
 
@@ -195,7 +198,7 @@ namespace MyMenuPlus.Helpers
                         {
              
 
-                            if (Convert.ToString(sectionItems[si].price) != "0.00")
+                            if (Convert.ToString(sectionItems[si].price) != "0.00" && Convert.ToString(sectionItems[si].price) != "" && Convert.ToString(sectionItems[si].name).Trim().Length != 0)
                             {
                                 sectionItemElements.Append(createMenuItem(
                                     Convert.ToString(sectionItems[si].name),
@@ -503,7 +506,7 @@ namespace MyMenuPlus.Helpers
                         <textarea class='item-description' value='' placeholder='Item Description' rows='4' cols='50' oninput='setAttValue(this)'>{description}</textarea>
                     </div>
                     <div>
-                        <input class='item-price' oninput='setAttValue(this)' placeholder='Price' onchange='this.value = currency.format(this.value).replace(/[£]/g, """")' value='{price}' type='number' min='0.01' step='0.01'>
+                        <input class='item-price' oninput='setAttValue(this)' placeholder='Price' min='0.00' onchange='this.value = currency.format(this.value).replace(/[£]/g, """")' value='{price}' type='number' min='0.01' step='0.01'>
                         Tags<br>
                         <input class='item-veg' oninput='setChkValue(this)' type='checkbox' value='Vegetarian' {(isVegetarian ? "checked" : "")}>
                         <label for='Vegetarian'>Vegetarian</label><br>

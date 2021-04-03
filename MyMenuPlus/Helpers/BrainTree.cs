@@ -15,9 +15,9 @@ namespace MyMenuPlus.Helpers
         public static BraintreeGateway gateway;
 
 
-        public BrainTree(int menuID, int accountID)
+        public BrainTree(int menuID)
         {
-            var braintreeKeys = BrainTreeHelper.getBraintreeKeys(menuID, accountID);
+            var braintreeKeys = BrainTreeHelper.getBraintreeKeys(menuID);
          
             BraintreeGateway _gateway = new BraintreeGateway
             {
@@ -52,17 +52,17 @@ namespace MyMenuPlus.Helpers
     public class BrainTreeHelper {
 
 
-        internal static (bool success, dynamic enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID, int accountID)
+        internal static (bool success, dynamic enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID)
         {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
            
             connection.Open();
-            string query = "CALL getBraintreeKeys(@menuID,@accountID)";
+            string query = "CALL getBraintreeKeys(@menuID)";
             MySqlCommand command = new MySqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@menuID", menuID);
-            command.Parameters.AddWithValue("@accountID", accountID);
+
 
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -113,10 +113,14 @@ namespace MyMenuPlus.Helpers
                         dynamic sectionItems = sections[sectionIndex].sectionItems;
                         for (int itemIndex = 0; itemIndex < sectionItems.Count; itemIndex++)
                         {
-                            PriceModel priceInfo = new PriceModel();
-                            priceInfo.name = Convert.ToString(sectionItems[itemIndex].name);
-                            priceInfo.price = Convert.ToDecimal(sectionItems[itemIndex].price);
-                            priceLookup.Add(Convert.ToInt32(sectionItems[itemIndex].id), priceInfo);
+
+                            if (Convert.ToDecimal(sectionItems[itemIndex].price) < 0.01)
+                            {
+                                PriceModel priceInfo = new PriceModel();
+                                priceInfo.name = Convert.ToString(sectionItems[itemIndex].name);
+                                priceInfo.price = Convert.ToDecimal(sectionItems[itemIndex].price);
+                                priceLookup.Add(Convert.ToInt32(sectionItems[itemIndex].id), priceInfo);
+                            }
                         }
                     }
 
