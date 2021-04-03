@@ -207,6 +207,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\KeysController.cs" />
     <Compile Include="Controllers\OrderDisplayController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\KeyHelper.cs" />
     <Compile Include="Hubs\OrderDisplayHub.cs" />
     <Compile Include="Models\OrderItemModel.cs" />
@@ -259,11 +260,16 @@
     <Content Include="Media\Arrow.svg" />
     <Content Include="Media\Burger-main.jpg" />
     <Content Include="Media\Cafe.jpg" />
+    <Content Include="Media\Editor.PNG" />
     <Content Include="Media\Loading.gif" />
     <Content Include="Media\Logo.png" />
     <Content Include="Media\logo.svg" />
+    <Content Include="Media\Menu.PNG" />
     <Content Include="Media\menu2.svg" />
     <Content Include="Media\Placeholder-pattern.jpg" />
+    <Content Include="Media\StepsCreate.PNG" />
+    <Content Include="Media\StepsKeys.PNG" />
+    <Content Include="Media\StepsMenu.PNG" />
     <Content Include="Scripts\Aos.js" />
     <Content Include="Scripts\Basket.js" />
     <Content Include="Scripts\Currency.js" />
@@ -316,6 +322,7 @@
     <Content Include="Views\Shared\EditorSiteLayout.cshtml" />
     <Content Include="Views\Keys\Index.cshtml" />
     <Content Include="Views\Braintree\Alert.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
