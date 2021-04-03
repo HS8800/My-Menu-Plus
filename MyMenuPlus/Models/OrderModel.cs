@@ -13,5 +13,6 @@ namespace MyMenuPlus.Models
         public int tableNumber { get; set; }
         public string itemsJSON { get; set; }
         public DateTime ordered { get; set; }
+        public string comment { get; set; }
     }
 }

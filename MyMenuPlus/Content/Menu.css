@@ -240,17 +240,35 @@ button {
     z-index: 40;
 }
 
-.basket-btn{
-  width: calc(100% - 50px) !important;
-  border-radius: 6px !important;
-  margin: 25px;
-  font-size: 15px;
-  background: rgb(248,169,38);
-  background: -moz-linear-gradient(180deg, rgba(248,169,38,1) 0%, rgba(251,233,124,1) 92%);
-  background: -webkit-linear-gradient(180deg, rgba(248,169,38,1) 0%, rgba(251,233,124,1) 92%);
-  background: linear-gradient(180deg, rgba(248,169,38,1) 0%, rgba(251,233,124,1) 92%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f8a926",endColorstr="#fbe97c",GradientType=1);
+#basket-notes {
+    width: calc(100% - 50px);
+    margin: 25px 25px -10px 25px;
+    height: 100px;
+    display:none;
 }
+
+.basket-custom > td {
+    font-size: 11px;
+    color: #3083c5;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .basket-custom > td:hover {
+        opacity:0.7;
+    }
+
+    .basket-btn {
+        width: calc(100% - 50px) !important;
+        border-radius: 6px !important;
+        margin: 25px;
+        font-size: 15px;
+        background: rgb(248,169,38);
+        background: -moz-linear-gradient(180deg, rgba(248,169,38,1) 0%, rgba(251,233,124,1) 92%);
+        background: -webkit-linear-gradient(180deg, rgba(248,169,38,1) 0%, rgba(251,233,124,1) 92%);
+        background: linear-gradient(180deg, rgba(248,169,38,1) 0%, rgba(251,233,124,1) 92%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f8a926",endColorstr="#fbe97c",GradientType=1);
+    }
 
 .basket-btn:not(:active){
   border-bottom: 0px;

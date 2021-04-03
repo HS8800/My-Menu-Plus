@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "Order Display";
+    ViewBag.Title = "Order Display";
+    Layout = "";
 }
 
 <!DOCTYPE html>
@@ -57,8 +57,9 @@
 
 
     
-        orderDisplay.client.order = function (id,transactionID,table, items) {
-            newOrder(id, transactionID, table, items)
+    orderDisplay.client.order = function (id, transactionID, table, items, comment) {
+            var d = new Date();
+            newOrder(id, transactionID, table, items, d,comment)
         };
 
         orderDisplay.client.orders = function (orderData) {
@@ -69,7 +70,11 @@
             for (let i = 0; i < orderDataJSON.length; i++) {
                
                 try {
-                    newOrder(orderDataJSON[i].id, orderDataJSON[i].transaction, orderDataJSON[i].tableNumber, orderDataJSON[i].itemsJSON, new Date(orderDataJSON[i].ordered))
+
+                    var d = new Date(orderDataJSON[i].ordered);
+                    d.setHours(d.getHours() + 1);
+
+                    newOrder(orderDataJSON[i].id, orderDataJSON[i].transaction, orderDataJSON[i].tableNumber, orderDataJSON[i].itemsJSON, d, orderDataJSON[i].comment)
                 } catch(e){ }
 
             }

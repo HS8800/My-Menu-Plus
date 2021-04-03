@@ -53,7 +53,8 @@ function timeConditionColor(minutes,color,timer){
         if($(order).css("border-color") != color){
             $(order).css({"border-color":color})
             $(order).find(".timer").css({"border-color":color})
-            $(order).find("tbody > tr:nth-child(1) > td").css({"border-color":color})
+            $(order).find("tbody > tr:nth-child(1) > td").css({ "border-color": color })
+            $(order).find(".comment").css({ "border-color": color })
         }
     }
 }
@@ -95,46 +96,16 @@ function htmlEncode(value) {
 
 
 
-function newOrder(id,transactionID,table,items) {
-
-    id = htmlEncode(id);
-    table = htmlEncode(table);
-    items = htmlEncode(items);
-    transactionID = htmlEncode(transactionID);
-
-    items = JSON.parse(items);
-    console.log(items)
-    var itemsHTML = "";
-    for (let i = 0; i < items.length; i++) {         
-        itemsHTML += "<tr><td>" + items[i]["qty"] + "</td><td>" + items[i]["name"] + "</td></tr>";          
-    }
-
-    var order = `
-        <div>
-            <div class="timer"><span>0</span>:<span>0</span>:<span>0</span></div>
-            <div class="order-content">
-                <h2>Order <span>`+ transactionID+`</span></h2>
-                <h4 class="table-number">Table <span>`+table+`</span></h4>
-            </div>
-            <table class="item-table">
-                <tbody>`+ itemsHTML +`</tbody>
-            </table>
-            <button onclick='completeOrder(this)' data-id="`+id+`" class="order-complete">Complete</button>
-        </div>
-    `
-    $("#order-container").append(order);
 
 
-}
-
-
-function newOrder(id, transactionID, table, items, orderedDateTime) {
+function newOrder(id, transactionID, table, items, orderedDateTime, comment) {
 
 
     id = htmlEncode(id);
     table = htmlEncode(table);
     items = htmlEncode(items);
     transactionID = htmlEncode(transactionID);
+    comment = htmlEncode(comment);
 
     items = JSON.parse(items);
     var itemsHTML = "";
@@ -170,6 +141,7 @@ function newOrder(id, transactionID, table, items, orderedDateTime) {
             <table class="item-table">
                 <tbody>`+ itemsHTML + `</tbody>
             </table>
+            <div class="comment">`+ comment +`</div>
             <button onclick='completeOrder(this)' data-id="`+ id + `" class="order-complete">Complete</button>
         </div>
     `

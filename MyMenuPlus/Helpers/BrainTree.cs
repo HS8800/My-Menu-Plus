@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -55,8 +56,7 @@ namespace MyMenuPlus.Helpers
         internal static (bool success, dynamic enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID)
         {
 
-            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
-           
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);   
             connection.Open();
             string query = "CALL getBraintreeKeys(@menuID)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -113,24 +113,29 @@ namespace MyMenuPlus.Helpers
                         dynamic sectionItems = sections[sectionIndex].sectionItems;
                         for (int itemIndex = 0; itemIndex < sectionItems.Count; itemIndex++)
                         {
-
-                            if (Convert.ToDecimal(sectionItems[itemIndex].price) < 0.01)
+                            try
                             {
-                                PriceModel priceInfo = new PriceModel();
-                                priceInfo.name = Convert.ToString(sectionItems[itemIndex].name);
-                                priceInfo.price = Convert.ToDecimal(sectionItems[itemIndex].price);
-                                priceLookup.Add(Convert.ToInt32(sectionItems[itemIndex].id), priceInfo);
+                                if (Convert.ToDecimal(sectionItems[itemIndex].price) > 0.01m)
+                                {
+                                    PriceModel priceInfo = new PriceModel();
+                                    priceInfo.name = Convert.ToString(sectionItems[itemIndex].name);
+                                    priceInfo.price = Convert.ToDecimal(sectionItems[itemIndex].price);
+                                    priceLookup.Add(Convert.ToInt32(sectionItems[itemIndex].id), priceInfo);
+                                }
                             }
+                            catch { }
                         }
                     }
 
-                    return (true, priceLookup);//return dictionary
+                   
                 }
 
-                return (false, null);//if no rows returned 
+                connection.Close();
+                return (true, priceLookup);//return dictionary                            
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 return (false, null);
             }
         

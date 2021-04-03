@@ -9,6 +9,11 @@ body{
     overflow-y: hidden;
 }
 
+.comment {
+    width: calc(100% - 40px);
+    border: 1px solid;
+    padding: 0px 20px;
+}
 
 
 #order-container{

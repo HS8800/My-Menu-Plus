@@ -18,13 +18,7 @@ namespace MyMenuPlus
     {
         
 
-        public void OrderComplete(string orderID)//Needs Security
-        {
-            Debug.WriteLine(orderID);
-
-            
-            //Clients.All.order(1,3,"Items Example");
-        }
+     
 
 
         public void CompleteOrder(int orderID,string connectionID) {
@@ -37,7 +31,6 @@ namespace MyMenuPlus
 
             MenuContentHelper.updateOrderStatus(orderID, 1, OrderDisplayClients.WebSocketClients[ConnectionIndex].menuID);
             
-
         }
 
 

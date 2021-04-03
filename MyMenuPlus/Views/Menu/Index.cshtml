@@ -127,7 +127,9 @@
             </div>
             <h3 id="basket-total">Total: <span id="basket-total-value"></span"></h3>
             <h3 id="basket-table-number">Table: <span id="basket-table-number-value"></span> <span id="basket-table-update" class="btn-table">Change</span></h3>
-       
+
+            <textarea id="basket-notes" maxlength="30" placeholder="Order Notes"></textarea>
+
 
             <button class="item-btn basket-btn">Checkout</button>
 
@@ -141,6 +143,7 @@
                 @Html.AntiForgeryToken()
 
                 <input type="hidden" value="@ViewData["menuID"]" name="menu-id" />
+                <input type="hidden" name="basket-notes" id="basket-notes-field" />
                 <input type="hidden" id="basket-items" name="basket-items" />
                 <input type="hidden" id="table-number" name="table-number" />
                 <input type="hidden" id="nonce" name="payment_method_nonce" />
@@ -164,7 +167,8 @@
                                 $("#nonce").val(payload.nonce);
                                 $("#table-number").val(table);
                                 $("#basket-items").val(JSON.stringify(basket));
- 
+                                $("#basket-notes-field").val($("#basket-notes").val());
+
                                 form.submit();
                             });
                         });
@@ -172,7 +176,7 @@
 
                 });
 
-                </script>
+            </script>
 
         </div>
     </div>

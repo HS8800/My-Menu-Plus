@@ -146,11 +146,14 @@ namespace MyMenuPlus.Helpers
                 command.Parameters.AddWithValue("@menuID", menuID);
                 command.Parameters.AddWithValue("@accountID", accountID);
 
-                return Convert.ToBoolean(command.ExecuteScalar());
+
+                Boolean canEdit = Convert.ToBoolean(command.ExecuteScalar());
+                connection.Close();
+                return canEdit;
             }
             catch (MySqlException ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex);
+            {               
+                connection.Close();
                 return false;
             }
 

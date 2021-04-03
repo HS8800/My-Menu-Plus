@@ -12,7 +12,7 @@ function basketAdd(id,name,qty,price) {
         }
      
     } else {
-        basket.push({ id: id, name: name, qty: qty, price: price})
+        basket.push({ id: id, name: name, qty: qty, price: price })      
     } 
 
     refreshBasketTable()
@@ -79,6 +79,8 @@ function refreshBasketTable() {
                     <td>` + createSeletion(basket[i].qty) + `</td>
                     <td>` + currency.format(totalOfItem) + `</td>
                 </tr>`);
+
+           
         }
 
         $("#menu-basket-count").text(basketCount);
@@ -94,11 +96,22 @@ function refreshBasketTable() {
     }
 }
 
-$(".item-add").click(function () {    
+$(".item-add").click(function (e) {    
+    if (e.target !== this)
+        return;
+
     var item = this.parentNode.parentNode;
     basketAdd(item.dataset.itemid, $(item).find(".item-name").text(), 1, $(item).find(".item-price").text())
 });
 
+$(".item-add").parent().parent().parent().click(function (e) {
+
+    if (e.target.classList.contains("item-btn"))
+        return;
+
+    var item = this;
+    basketAdd(item.dataset.itemid, $(item).find(".item-name").text(), 1, $(item).find(".item-price").text())
+});
 
 
 
@@ -118,16 +131,22 @@ $(".basket-btn,#btn-basket-menu").click(function () {
         if (basket.length > 0) {
             if ($("#shop-more-container").css("display") != "flex") {//First step confirm order
                 $("#main-menu").hide();
+                $("#basket-total").css({ "padding-top": "20px" })
+                $("#basket-table").hide();
                 $("#basket-container").css({ "max-width": "initial" });
                 $("#shop-more-container").css({ "display": "flex" });
                 $("#basket-container").show();
+                $("#basket-notes").show();
+                $("#basket-table-number").show();
 
             } else {//Second step collect payment    
-
+                $("#basket-total").hide();
                 $("#basket-table-number-value").text(table);
-                $("#basket-table-number").show();
+                $("#basket-table-number").hide();
                 $("#payment-form").css({ "display": "block" });
-                $("#basket-list").css({ "display": "none" });
+                $("#basket-notes").hide();
+                $("#btn-shop-more").hide();
+                
                 $(".basket-btn").css({ "display": "none" });
                 $("#btn-shop-back").css({ "display": "block" });
             }
@@ -142,17 +161,27 @@ $("#btn-shop-more").click(function () {
     $("#shop-more-container").css({ "display": "none" });
     $("#payment-form").css({ "display": "none" });  
     $("#basket-container").attr("style", "");
-
-    
+    $("#basket-total").css({ "padding-top": "0px" })
+    $("#basket-notes").hide();
+    $("#basket-table-number").hide();
+    $("#basket-list").css({ "display": "block" });  
+    $("#basket-notes").hide();
+    $("#basket-table").show();
+   
+ 
 });
 
 $("#btn-shop-back").click(function () {
     $("#payment-form").css({ "display": "none" });  
     $("#btn-shop-back").css({ "display": "none" });   
-    $("#basket-list").css({ "display": "block" });  
+
     $("#shop-more-container").css({ "display": "flex" });
     $(".basket-btn").css({ "display": "block" });  
-    $("#basket-table-number").hide();
+
+    $("#basket-notes").show();
+    $("#basket-total").show();
+    $("#basket-table-number").show();
+    $("#btn-shop-more").show();
 
 });
 

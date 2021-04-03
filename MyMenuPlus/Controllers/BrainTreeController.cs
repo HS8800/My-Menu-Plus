@@ -25,6 +25,7 @@ namespace MyMenuPlus.Controllers
             int menuID;
             dynamic basketItems;
             int tableNumber;
+            string comment = "";
 
             //Validate Parameters 
             try
@@ -34,6 +35,7 @@ namespace MyMenuPlus.Controllers
                 menuID = Convert.ToInt32(collection["menu-id"]);
                 basketItems = JsonConvert.DeserializeObject(collection["basket-items"]);             
                 tableNumber = Convert.ToInt32(collection["table-number"]);
+                comment = Convert.ToString(collection["basket-notes"]);
             }
             catch {
                 TempData["Error"] = "Missing Parameters";
@@ -51,8 +53,15 @@ namespace MyMenuPlus.Controllers
             }
 
 
-            //Create braintree object
-            BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]));
+            if (comment.Length > 30)
+            {
+                comment = comment.Substring(0, 30);
+            }
+
+
+
+                //Create braintree object
+                BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]));
 
 
             //Find menu prices
@@ -142,12 +151,13 @@ namespace MyMenuPlus.Controllers
                     try//retry
                     {
                         connection.Open();
-                        string query = "CALL createOrder(@transactionID,@menuID,@tableNumber,@itemsJSON)";
+                        string query = "CALL createOrder(@transactionID,@menuID,@tableNumber,@itemsJSON,@comment)";
                         MySqlCommand command = new MySqlCommand(query, connection);
                         command.Parameters.AddWithValue("@transactionID", result.Target.Id);
                         command.Parameters.AddWithValue("@menuID", menuID);
                         command.Parameters.AddWithValue("@tableNumber", tableNumber);
                         command.Parameters.AddWithValue("@itemsJSON", JsonConvert.SerializeObject(trustedOrderItems));
+                        command.Parameters.AddWithValue("@comment", comment);                        
                         newOrderID = Convert.ToInt32(command.ExecuteScalar());
                         connection.Close();
                     }
@@ -166,7 +176,7 @@ namespace MyMenuPlus.Controllers
                     foreach (WebSocketClientModel client in OrderDisplayClients.WebSocketClients)
                     {
                         if (client.menuID == menuID) {//Only sent to displays of the same menuID
-                            OrderDisplayHub.Clients.Client(client.connectionID).order(newOrderID, result.Target.Id, tableNumber, JsonConvert.SerializeObject(trustedOrderItems));
+                            OrderDisplayHub.Clients.Client(client.connectionID).order(newOrderID, result.Target.Id, tableNumber, JsonConvert.SerializeObject(trustedOrderItems),comment);
                         }
                                              
                     }

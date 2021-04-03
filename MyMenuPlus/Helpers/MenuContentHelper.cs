@@ -98,6 +98,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 return (false, "an internal error occured");
             }
         }
@@ -227,6 +228,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 return (false, "", "", "", "", "","");
             }
         }
@@ -331,6 +333,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 return (false, "", "", "", "","");
             }
         }
@@ -352,6 +355,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 return (false, "an internal error occured");
             }
         }
@@ -398,6 +402,7 @@ namespace MyMenuPlus.Helpers
             }
             catch (MySqlException ex)
             {
+                connection.Close();
                 System.Diagnostics.Debug.WriteLine(ex);
                 return "<h3>Your menus could not be loaded at this time<h3>";
             }
@@ -440,6 +445,7 @@ namespace MyMenuPlus.Helpers
                     orderItem.tableNumber = Convert.ToInt32(reader["tableNumber"]);
                     orderItem.itemsJSON = Convert.ToString(reader["itemsJSON"]);
                     orderItem.ordered = Convert.ToDateTime(reader["ordered"]);
+                    orderItem.comment = Convert.ToString(reader["comment"]);
                     orderItems.Add(orderItem);
                 }
 
