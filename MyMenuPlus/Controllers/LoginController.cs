@@ -37,6 +37,16 @@ namespace MyMenuPlus.Controllers
             return JsonConvert.SerializeObject(response);
         }
 
+
+        
+        
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public string Register(string firstname, string secondname, string email, string password)

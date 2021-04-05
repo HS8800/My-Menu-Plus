@@ -19,8 +19,6 @@ namespace MyMenuPlus.Controllers
 
         public ActionResult Index()
         {
-            
-
             return View();
         }
 
