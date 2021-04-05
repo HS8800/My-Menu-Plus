@@ -20,7 +20,8 @@ namespace MyMenuPlus.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreatePurchase(FormCollection collection)
-        {         
+        {
+
             string nonceFromTheClient;
             int menuID;
             dynamic basketItems;
@@ -58,10 +59,18 @@ namespace MyMenuPlus.Controllers
                 comment = comment.Substring(0, 30);
             }
 
+            //Is menu open
+            var menuTimes = Helpers.MenuContentHelper.menuTimes(menuID);
+            if (!menuTimes.isOpen)
+            {
+                TempData["Error"] = "We could not take your order because we are closed";
+                return RedirectToAction("Error");
+            }
 
 
-                //Create braintree object
-                BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]));
+
+            //Create braintree object
+            BrainTree brain = new BrainTree(Convert.ToInt32(collection["menu-id"]));
 
 
             //Find menu prices

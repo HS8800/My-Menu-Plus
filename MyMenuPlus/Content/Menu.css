@@ -109,7 +109,6 @@ input, textarea {
 /* ----------------------------------Main Menu------------------------------------------- */
 
 
-
 @keyframes tableSelection {
     0% {
         transform: translate(-50%,-70%);
@@ -208,17 +207,15 @@ background-color: white;
   margin-right: 10px;
 }
 
-
-.item-right{
-  float: right;
+.item-right {
+    float: right;
 }
 
 button {
-    -webkit-touch-callout: none; 
-    -webkit-user-select: none; 
-    -khtml-user-select: none
-    -moz-user-select: none; 
-    -ms-user-select: none; 
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -408,4 +405,24 @@ select {
     line-height: 16px;
     border-radius: 200px;
     transform: translate(10px, 2px);
+}
+
+/*is open*/
+
+#notOpen-background {
+    background-color: rgba(200,200,200,0.4);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+
+    z-index: 99;
+}
+
+#notOpen-icon {
+    font-size: 62px;
+    color: #4385bf;
+}
+
+#btn-notOpen-close {
+    margin-top: 10px
 }

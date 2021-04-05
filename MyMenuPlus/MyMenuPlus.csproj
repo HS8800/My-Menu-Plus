@@ -205,11 +205,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\JqueryUI.css" />
+    <Content Include="Content\OpenTimes.css" />
     <Compile Include="Controllers\KeysController.cs" />
+    <Compile Include="Controllers\OpenTimesController.cs" />
     <Compile Include="Controllers\OrderDisplayController.cs" />
+    <Compile Include="Controllers\SharedErrorController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\KeyHelper.cs" />
     <Compile Include="Hubs\OrderDisplayHub.cs" />
+    <Compile Include="Models\MenuTimeModel.cs" />
     <Compile Include="Models\OrderItemModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\WebSocketClientModel.cs" />
@@ -323,6 +328,7 @@
     <Content Include="Views\Keys\Index.cshtml" />
     <Content Include="Views\Braintree\Alert.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\OpenTimes\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

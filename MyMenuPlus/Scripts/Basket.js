@@ -104,7 +104,7 @@ $(".item-add").click(function (e) {
     basketAdd(item.dataset.itemid, $(item).find(".item-name").text(), 1, $(item).find(".item-price").text())
 });
 
-$(".item-add").parent().parent().parent().click(function (e) {
+$(".item-add").parent().parent().click(function (e) {
 
     if (e.target.classList.contains("item-btn"))
         return;

@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/EditorSiteLayout.cshtml";
+}
+
+@Styles.Render("~/bundles/OpenTimesStyles")
+
+<div class="section-banner">
+    <div>
+        <div class="section-title title-bold title-banner">Open Times</div>
+        <div class="section-title title-small">Manage when your menu can take orders</div>
+    </div>
+</div>
+
+<div class="menu-section aos-init aos-animate" data-aos="fade-up">
+
+    <div id="key-header">
+        <div style="width:100%">Open Times</div>
+
+    </div>
+
+
+
+    <form id="uploadBraintreeKeys">
+        <table id="key-table">
+            <tbody>
+
+
+                <tr>
+                    <td>
+                        Monday
+                        <span id="monday-date-start" class="date-start"></span>-<span id="monday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="monday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Tuesday
+                        <span id="tuesday-date-start" class="date-start"></span>-<span id="tuesday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="tuesday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Wednesday
+                        <span id="wednesday-date-start" class="date-start"></span>-<span id="wednesday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="wednesday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Thursday
+                        <span id="thursday-date-start" class="date-start"></span>-<span id="thursday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="thursday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Friday
+                        <span id="friday-date-start" class="date-start"></span>-<span id="friday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="friday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Saturday
+                        <span id="saturday-date-start" class="date-start"></span>-<span id="saturday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="saturday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Sunday
+                        <span id="sunday-date-start" class="date-start"></span>-<span id="sunday-date-close" class="date-close"></span>
+                    </td>
+                    <td class="slider-td">
+                        <div id="sunday-slider" class="slider-range"></div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <input id="OpenTimesSubmit" type="submit" value="Save Open Times">
+
+    </form>
+
+</div>
+
+
+@Scripts.Render("~/bundles/OpenTimesScripts");
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+
+
+    $(function () {
+        $(".slider-range").slider({
+            range: true,
+            min: 0,
+            max: 95,
+            values: [48, 84],
+            slide: function (event, ui) {
+                var start = sliderToTime(ui.values[0]);
+                var close = sliderToTime(ui.values[1]);
+
+                if (start == close) {
+                    $(event.target.parentNode.parentNode).find(".date-start").text("Closed");
+                    $(event.target.parentNode.parentNode).find(".date-close").text("Closed");
+                } else {
+                    $(event.target.parentNode.parentNode).find(".date-start").text(start);
+                    $(event.target.parentNode.parentNode).find(".date-close").text(close);
+                }
+            }
+        });
+
+
+        //Set sliders
+        $("#monday-slider").slider('values', 0, TimeToSlider("@ViewData["MondayOpen"]"));
+        $("#monday-slider").slider('values', 1, TimeToSlider("@ViewData["MondayClose"]"));
+
+        $("#tuesday-slider").slider('values', 0, TimeToSlider("@ViewData["TuesdayOpen"]"));
+        $("#tuesday-slider").slider('values', 1, TimeToSlider("@ViewData["TuesdayClose"]"));
+
+        $("#wednesday-slider").slider('values', 0, TimeToSlider("@ViewData["WednesdayOpen"]"));
+        $("#wednesday-slider").slider('values', 1, TimeToSlider("@ViewData["WednesdayClose"]"));
+
+        $("#thursday-slider").slider('values', 0, TimeToSlider("@ViewData["ThursdayOpen"]"));
+        $("#thursday-slider").slider('values', 1, TimeToSlider("@ViewData["ThursdayClose"]"));
+
+        $("#friday-slider").slider('values', 0, TimeToSlider("@ViewData["FridayOpen"]"));
+        $("#friday-slider").slider('values', 1, TimeToSlider("@ViewData["FridayClose"]"));
+
+        $("#saturday-slider").slider('values', 0, TimeToSlider("@ViewData["SaturdayOpen"]"));
+        $("#saturday-slider").slider('values', 1, TimeToSlider("@ViewData["SaturdayClose"]"));
+
+        $("#sunday-slider").slider('values', 0, TimeToSlider("@ViewData["SundayOpen"]"));
+        $("#sunday-slider").slider('values', 1, TimeToSlider("@ViewData["SundayClose"]"));
+
+
+        //set slider display
+        $("#monday-date-start").text(timeFormat("@ViewData["MondayOpen"]"));
+        $("#monday-date-close").text(timeFormat("@ViewData["MondayClose"]"));
+
+        $("#tuesday-date-start").text(timeFormat("@ViewData["TuesdayOpen"]"));
+        $("#tuesday-date-close").text(timeFormat("@ViewData["TuesdayClose"]"));
+
+        $("#wednesday-date-start").text(timeFormat("@ViewData["WednesdayOpen"]"));
+        $("#wednesday-date-close").text(timeFormat("@ViewData["WednesdayClose"]"));
+
+        $("#thursday-date-start").text(timeFormat("@ViewData["ThursdayOpen"]"));
+        $("#thursday-date-close").text(timeFormat("@ViewData["ThursdayClose"]"));
+
+        $("#friday-date-start").text(timeFormat("@ViewData["FridayOpen"]"));
+        $("#friday-date-close").text(timeFormat("@ViewData["FridayClose"]"));
+
+        $("#saturday-date-start").text(timeFormat("@ViewData["SaturdayOpen"]"));
+        $("#saturday-date-close").text(timeFormat("@ViewData["SaturdayClose"]"));
+
+        $("#sunday-date-start").text(timeFormat("@ViewData["SundayOpen"]"));
+        $("#sunday-date-close").text(timeFormat("@ViewData["SundayClose"]"));
+
+    });
+
+    $("#uploadBraintreeKeys").submit(function (e) {
+        e.preventDefault();
+
+        $("#loading-background").show();
+         $.post('/OpenTimes/updateMenuTime', {
+            content: @ViewData["menuID"],
+            MondayOpen: sliderToTime($("#monday-slider").slider("values")[0]),
+            TuesdayOpen: sliderToTime($("#tuesday-slider").slider("values")[0]),
+            WednesdayOpen: sliderToTime($("#wednesday-slider").slider("values")[0]),
+            ThursdayOpen: sliderToTime($("#thursday-slider").slider("values")[0]),
+            FridayOpen: sliderToTime($("#friday-slider").slider("values")[0]),
+            SaturdayOpen: sliderToTime($("#saturday-slider").slider("values")[0]),
+            SundayOpen: sliderToTime($("#sunday-slider").slider("values")[0]),
+            MondayClose: sliderToTime($("#monday-slider").slider("values")[1]),
+            TuesdayClose: sliderToTime($("#tuesday-slider").slider("values")[1]),
+            WednesdayClose: sliderToTime($("#wednesday-slider").slider("values")[1]),
+            ThursdayClose: sliderToTime($("#thursday-slider").slider("values")[1]),
+            FridayClose: sliderToTime($("#friday-slider").slider("values")[1]),
+            SaturdayClose: sliderToTime($("#saturday-slider").slider("values")[1]),
+            SundayClose: sliderToTime($("#sunday-slider").slider("values")[1]),
+            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+        }).done(function (response) {
+            response = JSON.parse(response);
+            if (response.response == "success") {
+
+            } else if (response.response == "failed") {
+                alert(response.error);
+            }
+        }).always(function () {
+            $("#loading-background").hide();
+        });
+    });
+
+
+
+    function sliderToTime(mins) {
+        var total = mins * 15;
+        var hours = Math.floor(total / 60);
+        total -= (hours * 60);
+        if (total == 0) { total = "00"}
+        return hours + ":" + total;
+    }
+
+    function TimeToSlider(time) {
+        console.log(time)
+        var timeSplit = time.split(":");
+
+        console.log(((Number(timeSplit[0]) * 60) + Number(timeSplit[1])) / 15)
+        return ((Number(timeSplit[0]) * 60) + Number(timeSplit[1])) / 15;
+    }
+
+    function timeFormat(time) {
+        time = time.split(":");
+        return time[0] + ":" + time[1]
+    }
+
+</script>

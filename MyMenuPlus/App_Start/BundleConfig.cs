@@ -10,9 +10,23 @@ namespace MyMenuPlus
         {
 
 
+            //Open Times
+            bundles.Add(new ScriptBundle("~/bundles/OpenTimesScripts").Include(
+                 "~/Scripts/jquery-3.5.1.min.js"));
+
+
+            bundles.Add(new StyleBundle("~/bundles/OpenTimesStyles").Include(
+               "~/Scripts/jquery-3.5.1.min.js",
+               "~/Content/Home.css",
+                "~/Content/MenuSelection.css",
+                "~/Content/Keys.css",
+                "~/Content/OpenTimes.css",
+                "~/Content/JqueryUI.css"
+                ));
 
             //Keys Page
             bundles.Add(new StyleBundle("~/bundles/KeysPageStyles").Include(
+                "~/Scripts/jquery-3.5.1.min.js",
                 "~/Content/Home.css",
                  "~/Content/MenuSelection.css",
                  "~/Content/keys.css",

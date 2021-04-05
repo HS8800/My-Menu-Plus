@@ -51,7 +51,7 @@ $("#table-container").submit(function (e) {
 $(document).ready(function () {
     var table = getParam("table");
 
-    if (table == null) {
+    if (table == null && $("#notOpen-background").css("display") != "block") {
         $("#table-background").css({ "display": "block" });
     } else {
         $("#table-background").css({ "display": "none" });

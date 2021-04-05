@@ -1,0 +1,19 @@
+﻿.slider-td{
+    width: 60%;
+}
+
+#OpenTimesSubmit {
+    border: #cc3333 1px solid;
+    background-color: white;
+    color: #cc3333;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-weight: 200;
+    margin: auto;
+    height: 37px;
+    width: 176px;
+    outline: none;
+    display: block;
+    cursor: pointer;
+}

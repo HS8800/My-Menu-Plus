@@ -169,15 +169,14 @@ namespace MyMenuPlus.Helpers
                     dynamic tags = menuData.tags;
                     for (int i = 0; i < tags.Count; i++)
                     {
-
-                        if (i % 2 != 0)
-                        {//if odd add dot in-between tag
-                            tagBuilder.Append("<span>•</span>");
-                        }
-
                         tagBuilder.Append("<span>");
                         tagBuilder.Append(tags[i]);
                         tagBuilder.Append("</span>");
+
+                        if ((i+1) != tags.Count) {
+                            tagBuilder.Append("<span>•</span>");
+                        }
+
                     }
 
 
@@ -360,6 +359,106 @@ namespace MyMenuPlus.Helpers
             }
         }
 
+
+        internal static (bool success, MenuTimeModel menuTime, bool isOpen) menuTimes(int menuID)
+        {
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "CALL getOpenTimes(@menuID)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@menuID", menuID);
+                MySqlDataReader reader = command.ExecuteReader();
+
+
+                MenuTimeModel menuTime = new MenuTimeModel();
+
+                while (reader.Read())
+                {
+                    menuTime.MondayOpen = TimeSpan.Parse(Convert.ToString(reader["MondayOpen"]));
+                    menuTime.TuesdayOpen = TimeSpan.Parse(Convert.ToString(reader["TuesdayOpen"])); 
+                    menuTime.WednesdayOpen = TimeSpan.Parse(Convert.ToString(reader["WednesdayOpen"]));
+                    menuTime.ThursdayOpen = TimeSpan.Parse(Convert.ToString(reader["ThursdayOpen"])); 
+                    menuTime.FridayOpen = TimeSpan.Parse(Convert.ToString(reader["FridayOpen"])); 
+                    menuTime.SaturdayOpen = TimeSpan.Parse(Convert.ToString(reader["SaturdayOpen"])); 
+                    menuTime.SundayOpen = TimeSpan.Parse(Convert.ToString(reader["SundayOpen"]));
+
+                    menuTime.MondayClose = TimeSpan.Parse(Convert.ToString(reader["MondayClose"]));
+                    menuTime.TuesdayClose = TimeSpan.Parse(Convert.ToString(reader["TuesdayClose"]));
+                    menuTime.WednesdayClose = TimeSpan.Parse(Convert.ToString(reader["WednesdayClose"]));
+                    menuTime.ThursdayClose = TimeSpan.Parse(Convert.ToString(reader["ThursdayClose"]));
+                    menuTime.FridayClose = TimeSpan.Parse(Convert.ToString(reader["FridayClose"]));
+                    menuTime.SaturdayClose = TimeSpan.Parse(Convert.ToString(reader["SaturdayClose"]));
+                    menuTime.SundayClose = TimeSpan.Parse(Convert.ToString(reader["SundayClose"]));
+
+                }
+
+
+                connection.Close();
+
+
+                //is menu open
+                bool isOpen = false;
+
+                DateTime now = DateTime.Now;
+                TimeSpan nowTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Millisecond, 0);
+
+                if (now.DayOfWeek == DayOfWeek.Monday)
+                {
+                    if (menuTime.MondayOpen < nowTimeSpan && menuTime.MondayClose < nowTimeSpan) {
+                        isOpen = true;
+                    }
+                } else if (now.DayOfWeek == DayOfWeek.Tuesday) {
+                    if (menuTime.TuesdayOpen < nowTimeSpan && menuTime.TuesdayClose < nowTimeSpan)
+                    {
+                        isOpen = true;
+                    }
+                }
+                else if (now.DayOfWeek == DayOfWeek.Wednesday)
+                {
+                    if (menuTime.WednesdayOpen < nowTimeSpan && menuTime.WednesdayClose < nowTimeSpan)
+                    {
+                        isOpen = true;
+                    }
+                }
+                else if (now.DayOfWeek == DayOfWeek.Thursday)
+                {
+                    if (menuTime.ThursdayOpen < nowTimeSpan && menuTime.ThursdayClose < nowTimeSpan)
+                    {
+                        isOpen = true;
+                    }
+                }
+                else if (now.DayOfWeek == DayOfWeek.Friday)
+                {
+                    if (menuTime.FridayOpen < nowTimeSpan && menuTime.FridayClose < nowTimeSpan)
+                    {
+                        isOpen = true;
+                    }
+                }
+                else if (now.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    if (menuTime.SaturdayOpen < nowTimeSpan && menuTime.SaturdayClose < nowTimeSpan)
+                    {
+                        isOpen = true;
+                    }
+                }
+                else if (now.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    if (menuTime.SundayOpen < nowTimeSpan && menuTime.SundayClose < nowTimeSpan)
+                    {
+                        isOpen = true;
+                    }
+                }
+
+                return (true, menuTime, isOpen);
+            }
+            catch (MySqlException ex)
+            {
+                connection.Close();
+                return (false, null, false);
+            }
+        }
 
         internal static string MenuThumbnails(int accountID)
         {

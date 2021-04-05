@@ -64,7 +64,14 @@
 @media only screen and (max-width: 320px) {
   .item-btn {
     display: none;
-  }
+  }   
+}
+
+@media only screen and (min-width: 321px) {
+    .item-right {
+        margin-left: 28px;
+        min-width: 129px;
+    }
 }
 
 /*----------------- Scale Main Top ---------------*/

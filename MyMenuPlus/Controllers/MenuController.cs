@@ -14,6 +14,8 @@ namespace MyMenuPlus.Controllers
 
         public ActionResult Index(int content = -1,int table = -1)
         {
+
+            //payment controls
             BrainTree brain = new BrainTree(content);
             
             if (content == -1) {
@@ -32,6 +34,8 @@ namespace MyMenuPlus.Controllers
             ViewData["ClientToken"] = brainToken.token;
 
 
+
+            //menu componets
             ViewData["menuID"] = content;
             var menuComponents = MenuContentHelper.createMenuComponents(content);
 
@@ -43,6 +47,7 @@ namespace MyMenuPlus.Controllers
             ViewData["footer"] = menuComponents.footer;
 
 
+            //editor button
             if (Session["id"] != null && AccountHelper.CanEditMenu(content, Convert.ToInt32(Session["id"]))) {
                 ViewData["editButton"] = $@"
                     <div class='nav-button btn-effect' id='btn-edit-menu' data-id='{content}'>
@@ -51,7 +56,28 @@ namespace MyMenuPlus.Controllers
                     </div>
                 ";                   
             }
-           
+
+
+            //is menu taking orders
+            var menuTimes = Helpers.MenuContentHelper.menuTimes(content);
+            if (!menuTimes.isOpen)
+            {
+                ViewData["notOpenDisplay"] = "block";
+            }
+            else {
+                ViewData["notOpenDisplay"] = "none";
+            }
+
+            ViewData["openMonday"] = menuTimes.menuTime.MondayOpen + "-" + menuTimes.menuTime.MondayClose;
+            ViewData["openTuesday"] = menuTimes.menuTime.TuesdayOpen + "-" + menuTimes.menuTime.TuesdayClose;
+            ViewData["openWednesday"] = menuTimes.menuTime.WednesdayOpen + "-" + menuTimes.menuTime.WednesdayClose;
+            ViewData["openThursday"] = menuTimes.menuTime.ThursdayOpen + "-" + menuTimes.menuTime.ThursdayClose;
+            ViewData["openFriday"] = menuTimes.menuTime.FridayOpen + "-" + menuTimes.menuTime.FridayClose;
+            ViewData["openSaturday"] = menuTimes.menuTime.SaturdayOpen + "-" + menuTimes.menuTime.SaturdayClose;
+            ViewData["openSunday"] = menuTimes.menuTime.SundayOpen + "-" + menuTimes.menuTime.SundayClose;
+
+
+
             return View();
         }
 
