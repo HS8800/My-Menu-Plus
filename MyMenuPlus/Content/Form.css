@@ -10,7 +10,7 @@
 	display:none;
 }
 
-#login-form, #register-form {
+#login-form, #register-form, #reset-password-form {
 	margin: auto;
 	width: 80%;
 	max-width: 600px;
@@ -26,6 +26,14 @@
 	text-align: center;
 	padding: 40px 0px 60px 0px;
 	animation: formShow 1s normal forwards ease-in-out;
+}
+
+#reset-password-form {
+display:none;
+}
+
+#forget-password-back {
+	cursor:pointer;
 }
 
 .formDuelField > input, .loginControls > input[type=text], .loginControls > input[type=password], .loginControls > input[type=email], #menu-create > form > input[type=text] {

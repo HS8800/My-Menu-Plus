@@ -50,6 +50,41 @@ namespace MyMenuPlus.Helpers
 
         }
 
+
+  
+
+
+        internal static (bool exists, string code) generatePasswordResetCode(string email)
+        {
+
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
+            try
+            {
+                connection.Open();
+                string query = "Call generatePasswordResetCode(@email)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@email", email);
+
+
+                string response = Convert.ToString(command.ExecuteScalar());
+
+                if (response != "")
+                {
+                    return (true, response);                 
+                }
+                else
+                {
+                    return (false, "");
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                return (false, "");
+            }
+
+        }
+
         /// <summary>
         /// Attempt to login with supplied credentials
         /// </summary>

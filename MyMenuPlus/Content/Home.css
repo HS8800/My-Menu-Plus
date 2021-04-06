@@ -378,7 +378,7 @@
 
 #example-editor {
     background-image: url(../Media/Editor.PNG);
-    background-size: contain;
+    background-size: cover;
 }
 
 .managment-icon {

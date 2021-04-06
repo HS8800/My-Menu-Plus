@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,9 +38,39 @@ namespace MyMenuPlus.Controllers
             return JsonConvert.SerializeObject(response);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<string> ResetPassword(string email)
+        {
+
+            ResponseModel response = new ResponseModel();
+            response.operation = "attempting to reset password";
+
+            var ResetCode = AccountHelper.generatePasswordResetCode(email);
+
+            if (ResetCode.exists)
+            {
+                await Task.Run(() => {
+                    MailHelper.resetPassword(email, ResetCode.code);
+                });
+            
+                response.response = "success";
+            }
+            else {
+                response.response = "failed";
+                response.error = "The users password can not be reset at this time";                
+            }
+
+            return JsonConvert.SerializeObject(response);
+        }
 
         
-        
+        public ActionResult PasswordReset(string email, string code)
+        {
+
+            return View();
+        }
+
         public ActionResult Logout()
         {
             Session.Abandon();
@@ -58,17 +89,8 @@ namespace MyMenuPlus.Controllers
             //Attempt to register account
             var RegisterAttempt = AccountHelper.Register(firstname, secondname, email, password);
             if (RegisterAttempt.success)
-            {
-                ////Attempt to send welcome email
-                //var MailAttempt = Helpers.MailHelper.welcomeEmail(email);
-                //if (!MailAttempt.success) {
-                //    response.response = "failed";
-                //    response.error = MailAttempt.details;
-                //}
-                //else
-                //{
-                    response.response = "success";
-                //}
+            {              
+                response.response = "success";             
             }
             else {
                 response.response = "failed";

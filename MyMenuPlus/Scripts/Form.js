@@ -3,7 +3,7 @@
 //Login Menu Open & Close Controls
 $(".login-close").click(function () {
     $("#login-popup").css({ "display": "none" });
-
+    $("#reset-password-form").css({ "display": "none" });
     $("#register-form").css({ "display": "none" });
     $("#login-form").css({ "display": "block" });
     $(".errorDisplay").text("");
@@ -29,6 +29,37 @@ $(".form-message").click(function () {
         $("#login-form").css({ "display": "block" });
         $(".errorDisplay").text("");
     }
+});
+
+
+
+//Forget Password
+$("#login-forgot").click(function () {
+    $("#login-form").hide();
+    $("#reset-password-form").show();
+});
+
+$("#forget-password-back").click(function () {
+    $("#reset-password-form").hide();
+    $("#login-form").show();
+});
+
+$("#reset-password-form").submit(function (e) {
+    e.preventDefault();
+
+    $("#loading-background").css({ "display": "flex" })
+    $.post('/Login/ResetPassword', { email: $("#forget-password-email").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
+        response = JSON.parse(response);
+        if (response.response == "success") {
+            alert("Email Sent");         
+        } else if (response.response == "failed") {
+            $(".errorDisplay").text(response.error)
+        }
+    }).always(function () {
+        $(".loading").css({ "display": "none" })
+        $("#loading-background").css({ "display": "none" })
+    });
+
 });
 
 
