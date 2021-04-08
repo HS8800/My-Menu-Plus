@@ -53,7 +53,7 @@ namespace MyMenuPlus.Helpers
     public class BrainTreeHelper {
 
 
-        internal static (bool success, dynamic enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID)
+        internal static (bool success, Braintree.Environment enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID)
         {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);   
@@ -85,7 +85,7 @@ namespace MyMenuPlus.Helpers
                 connection.Close();
 
                 
-            return (false, "", "", "", "");
+            return (false, Braintree.Environment.SANDBOX, "", "", "");
 
         }
 

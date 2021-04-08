@@ -43,9 +43,12 @@ if (getParam("table") != null) {
     table = getParam("table");
 }
 
-$("#table-container").submit(function (e) {  
+$(".table-container").submit(function (e) {  
     e.preventDefault();
-    insertParam("table", $("#input-table-number").val());
+
+    table = $("#input-table-number").val();
+    //insertParam("table", $("#input-table-number").val());
+    $("#table-background").hide();
 });
 
 $(document).ready(function () {
