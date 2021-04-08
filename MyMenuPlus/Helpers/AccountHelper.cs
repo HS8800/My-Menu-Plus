@@ -64,9 +64,8 @@ namespace MyMenuPlus.Helpers
                 string query = "Call generatePasswordResetCode(@email)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@email", email);
-
-
                 string response = Convert.ToString(command.ExecuteScalar());
+                connection.Close();
 
                 if (response != "")
                 {
@@ -82,6 +81,23 @@ namespace MyMenuPlus.Helpers
             {
                 return (false, "");
             }
+
+        }
+
+
+
+        internal static void resetPassword(string email,string password,string code)
+        {
+            
+            MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);         
+            connection.Open();
+            string query = "Call resetPassword(@email,@code,@passwordHash)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@code", code);
+            command.Parameters.AddWithValue("@passwordHash", Cryptography.Hash(password));
+            command.ExecuteNonQuery();
+            connection.Close();
 
         }
 

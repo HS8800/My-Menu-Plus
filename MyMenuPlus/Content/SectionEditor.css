@@ -216,6 +216,30 @@ textarea {
     background-position: center;
 }
 
+.item-image-upload {
+    width: 100px !important;
+    height: 100px !important;
+    padding-left: 98px;
+    cursor: pointer;
+    margin-top: 10px;
+    background: url("../Media/UploadIcon.png");
+    background-size: 64px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item-image-remove {
+    display: none;
+    font-size: 12px;
+    color: #03a9f4;
+    width: 100px;
+    text-align: center;
+    margin-top: -8px;
+    cursor:pointer;
+}
+.item-image-remove:hover {
+    opacity:0.7;
+}
 
 /*Toolbar*/
 #toolbar {

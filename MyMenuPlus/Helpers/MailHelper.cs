@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web;
+
 
 
 namespace MyMenuPlus.Helpers
@@ -15,16 +14,38 @@ namespace MyMenuPlus.Helpers
 
         public static void resetPassword(string toEmail, string resetCode)
         {
-            
-                
-                string passwordResetLink = HttpUtility.UrlEncode("www.mymenuplus.com/Login/PasswordReset?email="+ toEmail + "&code="+Regex.Replace(resetCode, @"<[^>]+>| ", "").Trim());
 
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress("noreply@mymenuplus.com");
-                message.To.Add(new MailAddress(toEmail));
-                message.Subject = "MyMenuPlus Password Reset";
-                message.IsBodyHtml = true;
-                message.Body = $@"
+
+
+            //MailMessage message = new MailMessage();
+            //message.From = new MailAddress("noreply@mymenuplus.com");
+            //message.To.Add(new MailAddress("harrismith988@yahoo.co.uk"));
+            //message.Subject = "MyMenuPlus Password Reset";
+            //message.IsBodyHtml = true;
+            //message.Body = "hello 2";
+
+            //using (SmtpClient smtp = new SmtpClient("mail.mymenuplus.com", 25))
+            //{
+
+            //    smtp.Credentials = new System.Net.NetworkCredential("noreply@mymenuplus.com", "~7o4j9Vx");
+            //    smtp.SendCompleted += (s, e) =>
+            //    {
+            //        smtp.Dispose();
+            //        message.Dispose();
+            //    };
+            //    smtp.EnableSsl = false;
+            //    smtp.Send(message);
+            //}
+
+
+            string passwordResetLink = "https://www.mymenuplus.com/Login/NewPassword?email=" + toEmail + "&code=" + Regex.Replace(resetCode, @"<[^>]+>| ", "").Trim();
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("noreply@mymenuplus.com");
+            message.To.Add(new MailAddress(toEmail));
+            message.Subject = "MyMenuPlus Password Reset";
+            message.IsBodyHtml = true;
+            message.Body = $@"
 
                 <!DOCTYPE html>
                 <html lang='en'>
@@ -42,8 +63,8 @@ namespace MyMenuPlus.Helpers
                         <div class='section-title title-small'>Reset Password</div>
                         <div class='section-title title-bold' style='padding:0px 50px'>You have requested to reset your password</div>
                         <i class='fas fa-lock-open'></i>
-                        <a class='btn' id='btn-reset'  href='{passwordResetLink}'>Reset Password</a>
-                        <a id='link' href='{passwordResetLink}'>{passwordResetLink}</a>
+                        <a class='btn' id='btn-reset' rel='nofollow noopener noreferrer' target='_blank' href='{HttpUtility.UrlEncode(passwordResetLink)}'>Reset Password</a>
+                        < a id='link' rel='nofollow noopener noreferrer' target='_blank' href='{HttpUtility.UrlEncode(passwordResetLink)}'>{passwordResetLink}</a>
                     </div>
 
 
@@ -137,29 +158,24 @@ namespace MyMenuPlus.Helpers
             ";
 
 
+            using (SmtpClient smtp = new SmtpClient("mail.mymenuplus.com", 25))
+            {
 
-
-                try
+                smtp.Credentials = new System.Net.NetworkCredential("noreply@mymenuplus.com", "~7o4j9Vx");
+                smtp.SendCompleted += (s, e) =>
                 {
-                    using (SmtpClient smtp = new SmtpClient("mail.mymenuplus.com", 25))
-                    {
+                    smtp.Dispose();
+                    message.Dispose();
+                };
+                smtp.EnableSsl = false;
+                smtp.Send(message);
+            }
+         
 
-                        smtp.Credentials = new System.Net.NetworkCredential(ConfigHelper.emailClientUsername, ConfigHelper.emailClientPassword);
-                        smtp.SendCompleted += (s, e) =>
-                        {
-                            smtp.Dispose();
-                            message.Dispose();
-                        };
-                        smtp.EnableSsl = false;
-                        smtp.Send(message);
-                    }
-                }
-                catch { }
 
-          
 
         }
-        
+
 
 
     }

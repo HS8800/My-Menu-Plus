@@ -10,13 +10,24 @@ namespace MyMenuPlus
         {
 
 
+            //Password Reset
+            bundles.Add(new StyleBundle("~/bundles/PasswordResetStyles").Include(
+                "~/Content/Home.css",
+                "~/Content/MenuSelection.css",
+                "~/Content/Keys.css",
+                "~/Content/PasswordReset.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/PasswordResetScripts").Include(
+                 "~/Scripts/jquery-3.5.1.min.js",
+                 "~/Scripts/PasswordReset.js"));
+
             //Open Times
             bundles.Add(new ScriptBundle("~/bundles/OpenTimesScripts").Include(
                  "~/Scripts/jquery-3.5.1.min.js"));
 
 
             bundles.Add(new StyleBundle("~/bundles/OpenTimesStyles").Include(
-               "~/Scripts/jquery-3.5.1.min.js",
                "~/Content/Home.css",
                 "~/Content/MenuSelection.css",
                 "~/Content/Keys.css",

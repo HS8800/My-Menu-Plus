@@ -100,15 +100,18 @@ input, textarea {
   position: sticky !important;
   position: -webkit-sticky !important;
   top: 0;
-
   z-index: 30;
+}
 
+.menu-item-img {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png');
+    width: 100px;
+    background-size: cover;
 }
 
 
+
 /* ----------------------------------Main Menu------------------------------------------- */
-
-
 @keyframes tableSelection {
     0% {
         transform: translate(-50%,-70%);
@@ -219,10 +222,17 @@ button {
     user-select: none;
 }
 
-.fa-pepper-hot, .fa-apple-alt {
+.fa-pepper-hot, .fa-apple-alt, .fa-cookie-bite, .fa-coffee {
     color: #778e8e;
 }
 
+tr[data-itemid] > td > i {
+    margin-right:5px;
+}
+
+.fa-coffee {
+    transform: translateY(2px);
+}
 
 /* ----------------------------------Basket----------------------------------------- */
 #basket-container {

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -40,7 +41,7 @@ namespace MyMenuPlus.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<string> ResetPassword(string email)
+        public string ResetPassword(string email)
         {
 
             ResponseModel response = new ResponseModel();
@@ -50,10 +51,9 @@ namespace MyMenuPlus.Controllers
 
             if (ResetCode.exists)
             {
-                await Task.Run(() => {
-                    MailHelper.resetPassword(email, ResetCode.code);
-                });
-            
+               
+                MailHelper.resetPassword(email, ResetCode.code);
+                
                 response.response = "success";
             }
             else {
@@ -65,10 +65,39 @@ namespace MyMenuPlus.Controllers
         }
 
         
-        public ActionResult PasswordReset(string email, string code)
+        public ActionResult NewPassword(string email, string code)
         {
-
+            ViewData["email"] = email;
+            ViewData["code"] = code;
             return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public string NewPassword(string email, string code, string password)
+        {
+            ResponseModel response = new ResponseModel();
+            response.operation = "attempting to assign new password";
+
+            if (password.Length < 10)
+            {
+                response.response = "failed";
+                response.error = "Password must be at least 10 characters";
+                return JsonConvert.SerializeObject(response);
+            }
+
+            try
+            {
+                AccountHelper.resetPassword(email, password, code);
+                response.response = "success";
+            }
+            catch {
+                response.response = "failed";
+                response.error = "internal error";
+            }
+            
+            return JsonConvert.SerializeObject(response);
         }
 
         public ActionResult Logout()
@@ -85,6 +114,13 @@ namespace MyMenuPlus.Controllers
             //Define response model
             ResponseModel response = new ResponseModel();
             response.operation = "attempting to register a new account";
+
+
+            if (password.Length < 10) {
+                response.response = "failed";
+                response.error = "Password must be at least 10 characters";
+                return JsonConvert.SerializeObject(response);
+            }
 
             //Attempt to register account
             var RegisterAttempt = AccountHelper.Register(firstname, secondname, email, password);

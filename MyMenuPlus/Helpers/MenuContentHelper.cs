@@ -21,8 +21,8 @@ namespace MyMenuPlus.Helpers
 
 
             //Check image is valid
-            if (menuImage.Length > 800000) {
-                return (false, "Image is to large, please use an image less than 600kbs");
+            if (menuImage.Length > 1600000) {
+                return (false, "Image is to large, please use an image less than 1.2mbs");
             } else if (menuData.Length > 16777215) {
                 return (false, "Your menu is to large, please reduce the number of items to save");
             }
@@ -200,13 +200,24 @@ namespace MyMenuPlus.Helpers
 
                             if (Convert.ToString(sectionItems[si].price) != "0.00" && Convert.ToString(sectionItems[si].price) != "" && Convert.ToString(sectionItems[si].name).Trim().Length != 0)
                             {
+                                string itemImage = "";
+
+                                try {
+                                    itemImage = Convert.ToString(sectionItems[si].image);
+                                }
+                                catch { }
+                                
+
                                 sectionItemElements.Append(createMenuItem(
                                     Convert.ToString(sectionItems[si].name),
                                     Convert.ToString(sectionItems[si].description),
                                     Convert.ToString(sectionItems[si].price),
                                     Convert.ToInt32(sectionItems[si].id),
                                     Convert.ToBoolean(sectionItems[si].isVegetarian),
-                                    Convert.ToBoolean(sectionItems[si].isSpicy)
+                                    Convert.ToBoolean(sectionItems[si].isSpicy),
+                                    Convert.ToBoolean(sectionItems[si].isSnack),
+                                    Convert.ToBoolean(sectionItems[si].isDrink),
+                                    itemImage
                                 ));
                             }
 
@@ -312,7 +323,9 @@ namespace MyMenuPlus.Helpers
                                 Convert.ToString(sectionItems[si].description),
                                 Convert.ToString(sectionItems[si].price),
                                 Convert.ToBoolean(sectionItems[si].isVegetarian),
-                                Convert.ToBoolean(sectionItems[si].isSpicy)
+                                Convert.ToBoolean(sectionItems[si].isSpicy),
+                                Convert.ToBoolean(sectionItems[si].isSnack),
+                                Convert.ToBoolean(sectionItems[si].isDrink)
                              ));
 
                         }
@@ -592,7 +605,7 @@ namespace MyMenuPlus.Helpers
         }
 
 
-        internal static string createEditorItem(string name,string description, string price, bool isVegetarian, bool isSpicy) {
+        internal static string createEditorItem(string name,string description, string price, bool isVegetarian, bool isSpicy, bool isSnack, bool isDrink) {
 
             string item = $@"
             <div draggable = 'true' class='editor-section section-item ui-sortable-handle'>
@@ -609,14 +622,20 @@ namespace MyMenuPlus.Helpers
                     <div>
                         <input class='item-name' value='{name}' oninput='setAttValue(this)' placeholder='Item Name'>
                         <textarea class='item-description' value='' placeholder='Item Description' rows='4' cols='50' oninput='setAttValue(this)'>{description}</textarea>
+                        <input class='item-image-upload' type='file'>
+                        <span class='item-image-remove'>Remove</span>
                     </div>
                     <div>
                         <input class='item-price' oninput='setAttValue(this)' placeholder='Price' min='0.00' onchange='this.value = currency.format(this.value).replace(/[£]/g, """")' value='{price}' type='number' min='0.01' step='0.01'>
                         Tags<br>
                         <input class='item-veg' oninput='setChkValue(this)' type='checkbox' value='Vegetarian' {(isVegetarian ? "checked" : "")}>
-                        <label for='Vegetarian'>Vegetarian</label><br>
+                        <label>Vegetarian</label><br>
                         <input class='item-spicy' oninput='setChkValue(this)' type='checkbox' value='Spicy' {(isSpicy ? "checked" : "")}>
-                        <label for='Vegetarian'>Spicy</label><br>
+                        <label>Spicy</label><br>
+                        <input class='item-snack' oninput='setChkValue(this)' type='checkbox' value='Snack' {(isSnack ? "checked" : "")}>
+                        <label>Snack</label><br>
+                        <input class='item-drink' oninput='setChkValue(this)' type='checkbox' value='Drink' {(isDrink ? "checked" : "")}>
+                        <label>Drink</label><br>
                     </div>
                 </div>
             </div>";
@@ -643,7 +662,7 @@ namespace MyMenuPlus.Helpers
 
         }
 
-        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice, int itemID, bool isVeg, bool isSpicy)
+        internal static string createMenuItem(string itemName, string itemDescription, string itemPrice, int itemID, bool isVeg, bool isSpicy, bool isSnack, bool isDrink, string itemImage)
         {
 
 
@@ -657,6 +676,15 @@ namespace MyMenuPlus.Helpers
                 icons += "<i class='fas fa-pepper-hot'></i>";
             }
 
+            if (isSnack) {
+                icons += "<i class='fas fa-cookie-bite'></i>";
+            }
+
+            if (isDrink) {
+                icons += "<i class='fas fa-coffee'></i>";
+            }
+
+           
             string item = $@"
                 <tr data-itemID='{itemID}'>
                      <td>
@@ -664,6 +692,7 @@ namespace MyMenuPlus.Helpers
 		                <div class='item-description'>{itemDescription}</div>
                         {icons}
 	                </td>
+                    <td>{(itemImage != null ? $@"<div class='menu-item-img' style='height: 100px;background-image:url(\'{itemImage}\')'></div>" : "")}</td>
 	                <td class='item-right'>
 		                <span class='item-price'>£{itemPrice}</span><button class='item-btn item-add'>+</button>
 	                </td>
@@ -679,7 +708,7 @@ namespace MyMenuPlus.Helpers
 
             string item = $@"
                 <h1>{sectionName}</h1>
-                <table>
+                <table cellspacing='0'>
                 <tbody>
                     {itemDescription}
                 </tbody>

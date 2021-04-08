@@ -51,7 +51,13 @@ $("#reset-password-form").submit(function (e) {
     $.post('/Login/ResetPassword', { email: $("#forget-password-email").val(), __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() }).done(function (response) {
         response = JSON.parse(response);
         if (response.response == "success") {
-            alert("Email Sent");         
+            //close menu
+            $("#login-popup").css({ "display": "none" });
+            $("#reset-password-form").css({ "display": "none" });
+            $("#register-form").css({ "display": "none" });
+            $("#login-form").css({ "display": "block" });
+            $(".errorDisplay").text("");
+            alert("Email Sent, it might take a few minutes to receive the email");         
         } else if (response.response == "failed") {
             $(".errorDisplay").text(response.error)
         }

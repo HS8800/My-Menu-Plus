@@ -222,6 +222,7 @@
     <Content Include="Content\Keys.css" />
     <Content Include="Content\LoadingPage.css" />
     <Content Include="Content\Orders.css" />
+    <Content Include="Content\PasswordReset.css" />
     <Content Include="Content\Response.css" />
     <Compile Include="Controllers\BrainTreeController.cs" />
     <Compile Include="Controllers\MenuSelectionController.cs" />
@@ -275,6 +276,7 @@
     <Content Include="Media\StepsCreate.PNG" />
     <Content Include="Media\StepsKeys.PNG" />
     <Content Include="Media\StepsMenu.PNG" />
+    <Content Include="Media\UploadIcon.png" />
     <Content Include="Scripts\Aos.js" />
     <Content Include="Scripts\Basket.js" />
     <Content Include="Scripts\Currency.js" />
@@ -289,6 +291,7 @@
     <Content Include="Scripts\MenuSelection.js" />
     <Content Include="Scripts\Notifications.js" />
     <Content Include="Scripts\Orders.js" />
+    <Content Include="Scripts\PasswordReset.js" />
     <Content Include="Scripts\qr-scanner-worker.min.js" />
     <Content Include="Scripts\qr-scanner.min.js" />
     <Content Include="Scripts\Scroll.js" />
@@ -329,6 +332,7 @@
     <Content Include="Views\Braintree\Alert.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\OpenTimes\Index.cshtml" />
+    <Content Include="Views\Login\NewPassword.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
