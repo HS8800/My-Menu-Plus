@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/EditorSiteLayout.cshtml";
+}
+
+@Styles.Render("~/bundles/QRStyles")
+
+<div class="section-banner">
+    <div>
+        <div class="section-title title-bold title-banner">Generate QR Codes</div>
+        <div class="section-title title-small">Create QR codes that link to your menu</div>
+    </div>
+</div>
+
+<div class="menu-section" data-aos="fade-up">
+
+    <div id="key-header">
+        <div style="width:100%">Generate QR Codes</div>
+    </div>
+
+    <input id="input-table-number" type="number" min="1" max="999">
+    <button class="btn" id="QR-generate">Generate QR From Table Number</button>
+
+</div>
+
+<div id="qr-container"></div>
+
+
+@Scripts.Render("~/bundles/QRScripts")
+

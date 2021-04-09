@@ -210,6 +210,7 @@
     <Compile Include="Controllers\KeysController.cs" />
     <Compile Include="Controllers\OpenTimesController.cs" />
     <Compile Include="Controllers\OrderDisplayController.cs" />
+    <Compile Include="Controllers\QRController.cs" />
     <Compile Include="Controllers\SharedErrorController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\KeyHelper.cs" />
@@ -223,6 +224,7 @@
     <Content Include="Content\LoadingPage.css" />
     <Content Include="Content\Orders.css" />
     <Content Include="Content\PasswordReset.css" />
+    <Content Include="Content\QR.css" />
     <Content Include="Content\Response.css" />
     <Compile Include="Controllers\BrainTreeController.cs" />
     <Compile Include="Controllers\MenuSelectionController.cs" />
@@ -294,6 +296,8 @@
     <Content Include="Scripts\PasswordReset.js" />
     <Content Include="Scripts\qr-scanner-worker.min.js" />
     <Content Include="Scripts\qr-scanner.min.js" />
+    <Content Include="Scripts\QR.js" />
+    <Content Include="Scripts\Qrious.js" />
     <Content Include="Scripts\Recommendations.js" />
     <Content Include="Scripts\Scroll.js" />
     <Content Include="Scripts\TableSelection.js" />
@@ -334,6 +338,7 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\OpenTimes\Index.cshtml" />
     <Content Include="Views\Login\NewPassword.cshtml" />
+    <Content Include="Views\QR\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -22,6 +22,19 @@ namespace MyMenuPlus
                  "~/Scripts/jquery-3.5.1.min.js",
                  "~/Scripts/PasswordReset.js"));
 
+            //QR
+            bundles.Add(new ScriptBundle("~/bundles/QRScripts").Include(
+            "~/Scripts/jquery-3.5.1.min.js",
+            "~/Scripts/Qrious.js",
+            "~/Scripts/QR.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/QRStyles").Include(
+               "~/Content/Home.css",
+                "~/Content/MenuSelection.css",
+                "~/Content/Keys.css",
+                "~/Content/QR.css"
+                ));
+
             //Open Times
             bundles.Add(new ScriptBundle("~/bundles/OpenTimesScripts").Include(
                  "~/Scripts/jquery-3.5.1.min.js"));
