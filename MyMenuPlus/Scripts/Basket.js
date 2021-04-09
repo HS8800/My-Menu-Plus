@@ -104,6 +104,10 @@ $(".item-add").click(function (e) {
     basketAdd(item.dataset.itemid, $(item).find(".item-name").text(), 1, $(item).find(".item-price").text())
 });
 
+$(".item-add-rec").click(function () {
+    basketAdd(this.dataset.itemid, $(this).find(".rec-item-name").text(), 1, $(this).find(".item-price").text())
+});
+
 $(".item-add").parent().parent().click(function (e) {
 
     if (e.target.classList.contains("item-btn"))
@@ -138,8 +142,12 @@ $(".basket-btn,#btn-basket-menu").click(function () {
                 $("#basket-container").show();
                 $("#basket-notes").show();
                 $("#basket-table-number").show();
+                $("#basket-table-number-value").text(table);
 
-            } else {//Second step collect payment    
+                recommendationBuild();
+
+            } else {//Second step collect payment  
+                $(".rec > div").hide()
                 $("#basket-total").hide();
                 $("#basket-table-number-value").text(table);
                 $("#basket-table-number").hide();
@@ -167,7 +175,7 @@ $("#btn-shop-more").click(function () {
     $("#basket-list").css({ "display": "block" });  
     $("#basket-notes").hide();
     $("#basket-table").show();
-   
+    $(".rec > div").hide();
  
 });
 
@@ -182,6 +190,8 @@ $("#btn-shop-back").click(function () {
     $("#basket-total").show();
     $("#basket-table-number").show();
     $("#btn-shop-more").show();
+
+    $(".rec > div").show()
 
 });
 

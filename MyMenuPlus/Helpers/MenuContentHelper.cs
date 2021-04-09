@@ -409,50 +409,50 @@ namespace MyMenuPlus.Helpers
                 bool isOpen = false;
 
                 DateTime now = DateTime.Now;
-                TimeSpan nowTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Millisecond, 0);
+                TimeSpan nowTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
                 if (now.DayOfWeek == DayOfWeek.Monday)
                 {
-                    if (menuTime.MondayOpen < nowTimeSpan && menuTime.MondayClose < nowTimeSpan) {
+                    if (menuTime.MondayOpen < nowTimeSpan && menuTime.MondayClose > nowTimeSpan) {
                         isOpen = true;
                     }
                 } else if (now.DayOfWeek == DayOfWeek.Tuesday) {
-                    if (menuTime.TuesdayOpen < nowTimeSpan && menuTime.TuesdayClose < nowTimeSpan)
+                    if (menuTime.TuesdayOpen < nowTimeSpan && menuTime.TuesdayClose > nowTimeSpan)
                     {
                         isOpen = true;
                     }
                 }
                 else if (now.DayOfWeek == DayOfWeek.Wednesday)
                 {
-                    if (menuTime.WednesdayOpen < nowTimeSpan && menuTime.WednesdayClose < nowTimeSpan)
+                    if (menuTime.WednesdayOpen < nowTimeSpan && menuTime.WednesdayClose > nowTimeSpan)
                     {
                         isOpen = true;
                     }
                 }
                 else if (now.DayOfWeek == DayOfWeek.Thursday)
                 {
-                    if (menuTime.ThursdayOpen < nowTimeSpan && menuTime.ThursdayClose < nowTimeSpan)
+                    if (menuTime.ThursdayOpen < nowTimeSpan && menuTime.ThursdayClose > nowTimeSpan)
                     {
                         isOpen = true;
                     }
                 }
                 else if (now.DayOfWeek == DayOfWeek.Friday)
                 {
-                    if (menuTime.FridayOpen < nowTimeSpan && menuTime.FridayClose < nowTimeSpan)
+                    if (menuTime.FridayOpen < nowTimeSpan && menuTime.FridayClose > nowTimeSpan)
                     {
                         isOpen = true;
                     }
                 }
                 else if (now.DayOfWeek == DayOfWeek.Saturday)
                 {
-                    if (menuTime.SaturdayOpen < nowTimeSpan && menuTime.SaturdayClose < nowTimeSpan)
+                    if (menuTime.SaturdayOpen < nowTimeSpan && menuTime.SaturdayClose > nowTimeSpan)
                     {
                         isOpen = true;
                     }
                 }
                 else if (now.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    if (menuTime.SundayOpen < nowTimeSpan && menuTime.SundayClose < nowTimeSpan)
+                    if (menuTime.SundayOpen < nowTimeSpan && menuTime.SundayClose > nowTimeSpan)
                     {
                         isOpen = true;
                     }
@@ -604,7 +604,7 @@ namespace MyMenuPlus.Helpers
 
             var imageRemoveStyle = "";
             if (image != null) {
-                image = $"style='background-image:url({image});background-size:cover'";
+                image = $"data-image='{image}' style='background-image:url({image});background-size:cover'";
                 imageRemoveStyle = "style='display:block'";
             }
 

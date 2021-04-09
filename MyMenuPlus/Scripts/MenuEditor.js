@@ -90,8 +90,8 @@ $(".editor-add:not(.add-section)").click(function () {
                 img.src = reader.result;//pass the base64 data inside the img
                 img.onload = function () {
                     //workout new dimensions
-                    var maxWidth = 100;
-                    var maxHeight = 100;
+                    var maxWidth = 120;
+                    var maxHeight = 120;
                     var width = this.width;
                     var height = this.height;
 
@@ -543,8 +543,8 @@ $(".item-image-upload").change(function (e) {
             img.src = reader.result;//pass the base64 data inside the img
             img.onload = function () {
                 //workout new dimensions
-                var maxWidth = 100;
-                var maxHeight = 100;
+                var maxWidth = 120;
+                var maxHeight = 120;
                 var width = this.width;
                 var height = this.height;
 

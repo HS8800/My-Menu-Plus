@@ -95,7 +95,8 @@ namespace MyMenuPlus
                  "~/Scripts/Menu.js",
                  "~/Scripts/Currency.js",
                  "~/Scripts/Basket.js",
-                 "~/Scripts/TableSelection.js"
+                 "~/Scripts/TableSelection.js",
+                 "~/Scripts/Recommendations.js"
             ));
 
 

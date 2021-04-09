@@ -25,10 +25,10 @@
 
 /* ----------------Scale Menu------------------- */
 @media only screen and (max-width: 1400px) {
-  #main-container {
-    width: 100%;
-    padding: 0px;
-  }
+    #main-container, .ad {
+        width: 100%;
+        padding: 0px;
+    }
 }
 
 @media only screen and (max-width: 1060px) {
@@ -43,10 +43,10 @@
         width: 100%;
     }
 
-  #main-container {
-    width: 100%;
-    padding: 0px;
-  }
+    #main-container, .ad {
+        width: 100%;
+        padding: 0px;
+    }
 }
 
 @media only screen and (max-width: 425px) {

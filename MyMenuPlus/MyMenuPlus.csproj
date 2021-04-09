@@ -294,6 +294,7 @@
     <Content Include="Scripts\PasswordReset.js" />
     <Content Include="Scripts\qr-scanner-worker.min.js" />
     <Content Include="Scripts\qr-scanner.min.js" />
+    <Content Include="Scripts\Recommendations.js" />
     <Content Include="Scripts\Scroll.js" />
     <Content Include="Scripts\TableSelection.js" />
     <Content Include="Web.config" />

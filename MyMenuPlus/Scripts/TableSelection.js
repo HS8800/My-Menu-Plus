@@ -47,6 +47,9 @@ $(".table-container").submit(function (e) {
     e.preventDefault();
 
     table = $("#input-table-number").val();
+    $("#basket-table-number-value").text(table);
+
+
     //insertParam("table", $("#input-table-number").val());
     $("#table-background").hide();
 });
