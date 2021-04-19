@@ -26,8 +26,8 @@ namespace MyMenuPlus.Controllers
             var brainToken = brain.CreateClientToken();
 
             if (!brainToken.success) {
-                @TempData["Alert"] = "You just need to connect your BrainTree Account to your menu to take payments";
-                @TempData["Redirect"] = "/Keys?content="+content;
+                TempData["Alert"] = "You just need to connect your BrainTree Account to your menu to take payments";
+                TempData["Redirect"] = "/Keys?content="+content; 
                 return RedirectToAction("Alert", "Braintree");
             }
 
