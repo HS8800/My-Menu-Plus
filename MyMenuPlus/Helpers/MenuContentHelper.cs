@@ -15,7 +15,10 @@ namespace MyMenuPlus.Helpers
 {
     internal sealed class MenuContentHelper
     {
-
+        /// <summary>
+        /// Save changes to menu
+        /// </summary>
+        /// <returns>returns if operation was successful</returns>
         internal static (bool success, string details) updateMenu(int menuID, int accountID, string menuData, string menuImage)
         {
 
@@ -80,7 +83,10 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-
+        /// <summary>
+        /// PERMANENTLY DELETE A MENU
+        /// </summary>
+        /// <returns>returns if operation was successful</returns>
         internal static (bool success, string details) deleteMenu(int menuID, int accountID)
         {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -103,8 +109,14 @@ namespace MyMenuPlus.Helpers
             }
         }
 
+        /// <summary>
+        /// Create the dynamic menu items for a menu from saved menu data
+        /// </summary>
+        /// <returns>returns menu components</returns>
         internal static (bool success, string title, string tags, string sections, string bannerImage, string menuNavigaton, string footer) createMenuComponents(int menuID)
         {
+
+            
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
             try
@@ -236,7 +248,10 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-     
+        /// <summary>
+        /// Create the dynamic menu items for the menu editor from saved menu data
+        /// </summary>
+        /// <returns>returns menu editor components</returns>
         internal static (bool success, string title, string tags, string sections, string bannerImage, string footer) createMenuEditorComponents(int menuID)
         {
          
@@ -344,7 +359,10 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-
+        /// <summary>
+        /// Create a new empty menu
+        /// </summary>
+        /// <returns>returns if operation was successful</returns>
         internal static (bool success, string details) CreateMenu(string menuName, int accountID) {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
             try
@@ -366,7 +384,10 @@ namespace MyMenuPlus.Helpers
             }
         }
 
-
+        /// <summary>
+        /// Gets open times of a menu
+        /// </summary>
+        /// <returns>returns open time object and whether or not the menu is currently open</returns>
         internal static (bool success, MenuTimeModel menuTime, bool isOpen) menuTimes(int menuID)
         {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -467,6 +488,10 @@ namespace MyMenuPlus.Helpers
             }
         }
 
+        /// <summary>
+        /// Generate menu selection component to view all menus created by a user
+        /// </summary>
+        /// <returns>returns menu selection component</returns>
         internal static string MenuThumbnails(int accountID)
         {
            
@@ -515,6 +540,9 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        /// <summary>
+        /// Change the status code of an order
+        /// </summary>       
         internal static void updateOrderStatus(int orderID,int statusCode,int menuID) {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
            
@@ -529,6 +557,10 @@ namespace MyMenuPlus.Helpers
             connection.Close();
         }
 
+        /// <summary>
+        /// Get all unfulfilled orders as JSON
+        /// </summary>
+        /// <returns>returns all unfulfilled orders as JSON</returns>
         internal static string LoadOrders(int menuID)
         {
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -568,6 +600,10 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        /// <summary>
+        /// Navbar componet that brings user to a the current menu editor
+        /// </summary>
+        /// <returns>return navbar buttons for menu editor if permissions allow it</returns>
         internal static string createEditorSection(string title,string sectionItems,int unquieID) {
 
             string editorSection = $@"
@@ -598,7 +634,10 @@ namespace MyMenuPlus.Helpers
 
         }
 
-
+        /// <summary>
+        /// Create menu editor item component
+        /// </summary>
+        /// <returns>return a single menu item component</returns>
         internal static string createEditorItem(string name,string description, string price, bool isVegetarian, bool isSpicy, bool isDrink, bool isSnack, string image) {
 
 
@@ -643,6 +682,10 @@ namespace MyMenuPlus.Helpers
             return item;
         }
 
+        /// <summary>
+        /// Create menu tag components
+        /// </summary>
+        /// <returns>return menu tag components</returns>
         internal static string createEditorTag(string tagName) { 
         
             string tag = $@"
@@ -663,6 +706,10 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        /// <summary>
+        /// Create a single menu item component
+        /// </summary>
+        /// <returns>return a single menu item component</returns>
         internal static string createMenuItem(string itemName, string itemDescription, string itemPrice, int itemID, bool isVeg, bool isSpicy, bool isSnack, bool isDrink, string image)
         {
 
@@ -704,6 +751,10 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        /// <summary>
+        /// Create a menu section component to hold menu items
+        /// </summary>
+        /// <returns>returns a menu section component to hold menu items</returns>
         internal static string createMenuSection(string sectionName, string itemDescription)
         {
 

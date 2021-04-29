@@ -11,32 +11,11 @@ namespace MyMenuPlus.Helpers
 {
     public class MailHelper
     {
-
+        /// <summary>
+        /// Send password reset email
+        /// </summary>        
         public static void resetPassword(string toEmail, string resetCode)
         {
-
-
-
-            //MailMessage message = new MailMessage();
-            //message.From = new MailAddress("noreply@mymenuplus.com");
-            //message.To.Add(new MailAddress("harrismith988@yahoo.co.uk"));
-            //message.Subject = "MyMenuPlus Password Reset";
-            //message.IsBodyHtml = true;
-            //message.Body = "hello 2";
-
-            //using (SmtpClient smtp = new SmtpClient("mail.mymenuplus.com", 25))
-            //{
-
-            //    smtp.Credentials = new System.Net.NetworkCredential("noreply@mymenuplus.com", "~7o4j9Vx");
-            //    smtp.SendCompleted += (s, e) =>
-            //    {
-            //        smtp.Dispose();
-            //        message.Dispose();
-            //    };
-            //    smtp.EnableSsl = false;
-            //    smtp.Send(message);
-            //}
-
 
             string passwordResetLink = "https://www.mymenuplus.com/Login/NewPassword?email=" + toEmail + "&code=" + Regex.Replace(resetCode, @"<[^>]+>| ", "").Trim();
 

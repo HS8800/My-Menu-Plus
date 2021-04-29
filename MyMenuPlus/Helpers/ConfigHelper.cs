@@ -5,6 +5,9 @@ using System.Web;
 
 namespace MyMenuPlus.Helpers
 {
+    /// <summary>
+    /// Stores private credentials for application
+    /// </summary>
     public class ConfigHelper
     {
         public static string connectionString = "server=mymenuplus.com;database=mymenlus_main;uid=mymen_admin8800;password=5%3epk9W5%3epk9W";//"server=localhost:3306,mymenuplus.com;database=mymenlus_main;uid=mymen_admin8800;password=5%3epk9W5%3epk9W";

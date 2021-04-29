@@ -51,9 +51,13 @@ namespace MyMenuPlus.Helpers
         }
 
 
-  
 
 
+        /// <summary>
+        /// Generates a secret code attached to a user account used to reset their password
+        /// </summary>
+        /// <param name="email">email as plain text</param>
+        /// <returns>Returns a secret code to reset password</returns>
         internal static (bool exists, string code) generatePasswordResetCode(string email)
         {
 
@@ -85,7 +89,13 @@ namespace MyMenuPlus.Helpers
         }
 
 
-
+        /// <summary>
+        /// Use the secret code from generatePasswordResetCode(string email) to reset a users password
+        /// </summary>
+        /// <param name="email">email as plain text</param>
+        /// <param name="passwprd">password as plain text</param>
+        /// <param name="code">secret code from generatePasswordResetCode(string email)</param>
+        /// <returns>Returns a secret code to reset password</returns>
         internal static void resetPassword(string email,string password,string code)
         {
             
@@ -148,7 +158,11 @@ namespace MyMenuPlus.Helpers
 
         }
 
-
+        /// <summary>
+        /// Used to connect a kitchen order display to a menu using its private key
+        /// </summary>
+        /// <param name="displaykey">plain text private key found in the keys section of all menus</param>   
+        /// <returns>If operation was successful</returns>
         internal static (bool success,int menuID) displayLogin(string displaykey) {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
@@ -183,7 +197,12 @@ namespace MyMenuPlus.Helpers
         }
 
 
-
+        /// <summary>
+        /// Checks user permissions for a menu
+        /// </summary>
+        /// <param name="menuID">An int32 menu identifier</param>   
+        /// <param name="accountID">An int32 account identifier</param>   
+        /// <returns>If user can edit menu</returns>
         internal static bool CanEditMenu(int menuID, int accountID)
         {
 

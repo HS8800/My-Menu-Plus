@@ -9,7 +9,10 @@ namespace MyMenuPlus.Helpers
     public class KeyHelper
     {
 
-
+        /// <summary>
+        /// Generate secret key used to connect kitchen order displays to a menu
+        /// </summary>
+        /// <returns>secret key</returns>
         internal static (bool success, string key) generateDisplayKey(int menuID, int accountID)
         {
 
@@ -41,6 +44,10 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        /// <summary>
+        /// Load secret display key from database
+        /// </summary>
+        /// <returns>returns last secret display key</returns>
         internal static string getDisplayKey(int menuID, int accountID)
         {
 

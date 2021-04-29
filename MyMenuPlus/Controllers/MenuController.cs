@@ -11,7 +11,7 @@ namespace MyMenuPlus.Controllers
     public class MenuController : Controller
     {
 
-
+        [OutputCache(Duration = 30, VaryByParam = "content")]
         public ActionResult Index(int content = -1,int table = -1)
         {
 
@@ -32,7 +32,6 @@ namespace MyMenuPlus.Controllers
             }
 
             ViewData["ClientToken"] = brainToken.token;
-
 
 
             //menu componets

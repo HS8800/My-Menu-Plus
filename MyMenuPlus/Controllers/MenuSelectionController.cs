@@ -7,13 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace MyMenuPlus.Controllers
 {
     public class MenuSelectionController : Controller
     {
+      
         public ActionResult Index()
         {
-
             if (Session["id"] != null)
             {
                 ViewData["menuThumbnails"] = MenuContentHelper.MenuThumbnails(Convert.ToInt32(Session["id"]));
@@ -22,7 +23,6 @@ namespace MyMenuPlus.Controllers
                 return RedirectToAction("Index","Home");
             }
             
-
             return View();
         }
 

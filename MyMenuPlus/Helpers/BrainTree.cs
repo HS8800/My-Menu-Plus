@@ -16,6 +16,10 @@ namespace MyMenuPlus.Helpers
         public static BraintreeGateway gateway;
 
 
+        /// <summary>
+        /// Set braintree payment gateway credentials
+        /// </summary>
+        /// <param name="menuID">An int32 menu identifier</param>   
         public BrainTree(int menuID)
         {
             var braintreeKeys = BrainTreeHelper.getBraintreeKeys(menuID);
@@ -32,7 +36,10 @@ namespace MyMenuPlus.Helpers
             
         }
 
-
+        /// <summary>
+        /// Generate a client token for a braintree client
+        /// </summary>
+        /// <returns>Braintree token used for authentication</returns>
         public (bool success,string token) CreateClientToken() {
             try
             {
@@ -43,6 +50,11 @@ namespace MyMenuPlus.Helpers
             }
         }
 
+
+        /// <summary>
+        /// Create braintree payment gateway
+        /// </summary>       
+        /// <returns>Braintree gateway object</returns>
         public IBraintreeGateway CreateGateway()
         {
             return new BraintreeGateway(gateway.Environment, gateway.MerchantId, gateway.PublicKey, gateway.PrivateKey);
@@ -50,9 +62,17 @@ namespace MyMenuPlus.Helpers
 
     }
 
+
+    /// <summary>
+    /// Utility class for braintree transactions
+    /// </summary>       
     public class BrainTreeHelper {
 
 
+        /// <summary>
+        /// Get braintree credentials from database
+        /// </summary>
+        /// <returns>Braintree API keys</returns>
         internal static (bool success, Braintree.Environment enviroment, string merchantID, string publicKey, string privateKey) getBraintreeKeys(int menuID)
         {
 
@@ -89,6 +109,10 @@ namespace MyMenuPlus.Helpers
 
         }
 
+        /// <summary>
+        /// Build dictionary of pricing for a menu
+        /// </summary>
+        /// <returns>Dictionary of pricing for a menu</returns>
         public static (bool Success, Dictionary<int, PriceModel> PriceDictionary) getPriceDictionary(int menuID) {
 
             MySqlConnection connection = new MySqlConnection(Helpers.ConfigHelper.connectionString);
