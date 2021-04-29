@@ -43,7 +43,7 @@ namespace MyMenuPlus.Helpers
                         <div class='section-title title-bold' style='padding:0px 50px'>You have requested to reset your password</div>
                         <i class='fas fa-lock-open'></i>
                         <a class='btn' id='btn-reset' rel='nofollow noopener noreferrer' target='_blank' href='{HttpUtility.UrlEncode(passwordResetLink)}'>Reset Password</a>
-                        < a id='link' rel='nofollow noopener noreferrer' target='_blank' href='{HttpUtility.UrlEncode(passwordResetLink)}'>{passwordResetLink}</a>
+                        <a id='link' rel='nofollow noopener noreferrer' target='_blank' href='{HttpUtility.UrlEncode(passwordResetLink)}'>{passwordResetLink}</a>
                     </div>
 
 

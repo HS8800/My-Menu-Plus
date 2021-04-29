@@ -212,7 +212,6 @@
     <Compile Include="Controllers\OrderDisplayController.cs" />
     <Compile Include="Controllers\QRController.cs" />
     <Compile Include="Controllers\SharedErrorController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\KeyHelper.cs" />
     <Compile Include="Hubs\OrderDisplayHub.cs" />
     <Compile Include="Models\MenuTimeModel.cs" />
