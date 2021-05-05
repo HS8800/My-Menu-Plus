@@ -15,7 +15,6 @@ namespace MyMenuPlus.Helpers
 
         public static BraintreeGateway gateway;
 
-
         /// <summary>
         /// Set braintree payment gateway credentials
         /// </summary>
@@ -23,7 +22,6 @@ namespace MyMenuPlus.Helpers
         public BrainTree(int menuID)
         {
             var braintreeKeys = BrainTreeHelper.getBraintreeKeys(menuID);
-         
             BraintreeGateway _gateway = new BraintreeGateway
             {
                 Environment = braintreeKeys.enviroment,
@@ -32,8 +30,10 @@ namespace MyMenuPlus.Helpers
                 PrivateKey = braintreeKeys.privateKey
             };
 
+            _gateway.Configuration.Timeout = 4000;
+
             gateway = _gateway;
-            
+
         }
 
         /// <summary>
@@ -45,7 +45,8 @@ namespace MyMenuPlus.Helpers
             {
                 return (true, gateway.ClientToken.Generate());
             }
-            catch {
+            catch
+            {
                 return (false, "");
             }
         }

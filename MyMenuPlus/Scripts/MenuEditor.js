@@ -60,6 +60,10 @@ const itemSection = `<div draggable="true" class="editor-section section-item">
             <label for="Vegetarian">Vegetarian</label><br>
             <input  class="item-spicy" oninput="setChkValue(this)" type="checkbox" value="Spicy">
             <label for="Vegetarian">Spicy</label><br>
+            <input class="item-snack" oninput="setChkValue(this)" type="checkbox" value="Snack">
+            <label>Snack</label><br>
+            <input class="item-drink" oninput="setChkValue(this)" type="checkbox" value="Drink">
+            <label>Drink</label><br>
         </div>
     </div>
 </div>`

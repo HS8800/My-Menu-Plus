@@ -14,24 +14,28 @@ namespace MyMenuPlus.Controllers
         [OutputCache(Duration = 30, VaryByParam = "content")]
         public ActionResult Index(int content = -1,int table = -1)
         {
-
             //payment controls
             BrainTree brain = new BrainTree(content);
-            
-            if (content == -1) {
+
+            if (content == -1)
+            {
                 TempData["Error"] = "The menu you are looking for doesn't exist";
                 return View("MenuNotFound");
             }
 
+          
             var brainToken = brain.CreateClientToken();
 
-            if (!brainToken.success) {
+            if (!brainToken.success)
+            {
                 TempData["Alert"] = "You just need to connect your BrainTree Account to your menu to take payments";
-                TempData["Redirect"] = "/Keys?content="+content; 
+                TempData["Redirect"] = "/Keys?content=" + content;
                 return RedirectToAction("Alert", "Braintree");
             }
 
+
             ViewData["ClientToken"] = brainToken.token;
+           
 
 
             //menu componets
@@ -44,6 +48,8 @@ namespace MyMenuPlus.Controllers
             ViewData["bannerImage"] = menuComponents.bannerImage;
             ViewData["menuNavigaton"] = menuComponents.menuNavigaton;
             ViewData["footer"] = menuComponents.footer;
+        
+
 
 
             //editor button
