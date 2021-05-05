@@ -69,9 +69,9 @@ const itemSection = `<div draggable="true" class="editor-section section-item">
 </div>`
 
 //detect changes to items when dragged
+
 $(".editor-add:not(.add-section)").click(function () {
     $(this.parentElement.children[1]).append(itemSection);
-
 
     $(this.parentElement.children[1]).last().find(".item-image-remove").click(function () {
         var itemImage = $(this).parent().find(".item-image-upload");
@@ -81,9 +81,8 @@ $(".editor-add:not(.add-section)").click(function () {
         EditorChanges()
     });
 
-
     $(this.parentElement.children[1]).last().find(".item-image-upload").change(function (e) {
-
+ 
         if (e.target.files[0].type == "image/jpeg" || e.target.files[0].type == "image/png") {
             var reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
@@ -212,6 +211,70 @@ $(".add-section").click(function () {
             }
         });
         $(".editor-section-items").disableSelection();  
+
+        $(this.parentElement.children[1]).last().find(".item-image-remove").click(function () {
+            var itemImage = $(this).parent().find(".item-image-upload");
+            itemImage.removeAttr("data-image");
+            itemImage.css({ "background-image": "url('../Media/UploadIcon.png')", "background-size": "64px" });
+            $(this).hide();
+            EditorChanges()
+        });
+
+        $(this.parentElement.children[1]).last().find(".item-image-upload").change(function (e) {
+
+            if (e.target.files[0].type == "image/jpeg" || e.target.files[0].type == "image/png") {
+                var reader = new FileReader();
+                reader.readAsDataURL(e.target.files[0]);
+
+                reader.onload = function () {
+                    //resize the uploaded images
+                    var img = new Image;//create a virtual img
+                    img.src = reader.result;//pass the base64 data inside the img
+                    img.onload = function () {
+                        //workout new dimensions
+                        var maxWidth = 120;
+                        var maxHeight = 120;
+                        var width = this.width;
+                        var height = this.height;
+
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height *= maxWidth / width;
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width *= maxHeight / height;
+                                height = maxHeight;
+                            }
+                        }
+
+                        //scale to new size
+                        var canvas = document.createElement('canvas'),
+                            ctx = canvas.getContext('2d');
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(this, 0, 0, width, height);
+
+                        //output new img
+                        $(e.target).css({ "background-image": "url('" + canvas.toDataURL() + "')", "background-size": "cover" })
+                        e.target.dataset.image = canvas.toDataURL();
+                        $(e.target).parent().find(".item-image-remove").css({ "display": "block" })
+                        EditorChanges()
+
+                    }
+                };
+                reader.onerror = function (error) {
+                    console.log("Error: ", error);
+                    alert("Oh no looks like something went wrong.");
+                };
+
+            } else {
+                alert("Image must be jpeg/jpg/png");
+                return;
+            }
+        });
+
     });
   
     EditorChanges();
