@@ -13,7 +13,7 @@ The project uses a custom content management system allowing users to create dig
 A client side recommendation script is used to provide dynamic recommendation based on what is present in the users basket at run time.
 
 ## Taking Payments
-This project includes a Braintree integration that allows users to connect thier own braintree account to thier menus allows purchases to be processed.
+This project includes a Braintree integration that allows users to connect their own braintree account to thier menus allows purchases to be processed.
 
 ## QR Codes
-The project offers QR code generation allowing users to navigate to a menu by scanning the generate QR code on thier chosen portable device.
+The project offers QR code generation allowing users to navigate to a menu by scanning the generated QR code on their chosen portable device.
