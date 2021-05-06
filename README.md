@@ -4,7 +4,7 @@ My project is called My Menu Plus and takes inspiration from the sudden appearan
 
 The project is written in ASP.net with a MySQL database. Controllers are used to populate pre created views with razor which are then cached to improve load times.
 
-[![Video of project](https://lh3.googleusercontent.com/A2sY7YUfjYH3HF7r6qO1U2Q3H9tmWcKtqHMNlAzqoUkrvY3OEp-ICpR7UU-dpxyiw9hQ=s151)](https://www.youtube.com/watch?v=nqotZ1aR97o&ab_channel=Entry%27sScriptsES)
+[![Video of project](https://silicondales.com/wp-content/uploads/2018/11/youtube-play-button.png)](https://www.youtube.com/watch?v=nqotZ1aR97o&ab_channel=Entry%27sScriptsES)
 
 ## Content Managment System
 The project uses a custom content management system allowing users to create digital menus without a single line of code.
